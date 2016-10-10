@@ -11,30 +11,26 @@ tagarray: []
 
 collections:
   project:
-    output: true
+    output: false
     permalink: /project/:path/
 
 social:
     - icon: fa-facebook
-      link: "#"
-    - icon: fa-skype
-      link: "#"
+      link: "https://www.facebook.com/simhongsup"
     - icon: fa-twitter
       link: "https://twitter.com/chopokmado"
     - icon: fa-linkedin
-      link: "#"
+      link: "https://www.linkedin.com/in/홍섭-심-aa315331"
     - icon: fa-stack-exchange
-      link: "#"
+      link: "https://stackexchange.com/users/9363458/hongsup-sim"
 
 share:
-  twitter_username: agusmakmun6
+  twitter_username: chopokmado
   fb_appid: 1749788565247320
 
 urls:
     - text: About Me
       url: /about/
-    - text: Projects
-      url: /projects/
     - text: Github
       url: https://github.com/simongs
     - text: XML Feed
