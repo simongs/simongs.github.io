@@ -1,11 +1,9 @@
 ---
 layout: post
-title:  "Intrudure myself"
+title:  "Introduce myself"
 date:   2016-10-09 17:45:49 +0900
-categories: myself intruduce
+categories: etc
 ---
-
-# Simongs 
 
 ### Introduce
 - Name : Sim Hong Sup 

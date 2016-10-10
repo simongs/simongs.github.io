@@ -1,0 +1,92 @@
+---
+layout: post
+title: "MAC 및 XCODE 단축키"
+date:   2016-10-02 17:45:49 +0900
+categories: swift
+---
+# MAC 및 XCODE 단축키
+
+## Question List
+#### NSObject는 무엇일까?
+```
+ㅁㄴㅇ
+```
+
+#### XCODE에서 Clean
+```
+Press ⌘ + SHIFT + K to clean your project, and then first error should go away.
+```
+ 
+#### XCODE에서 Build
+```
+If the error isn’t immediately showing, hit ⌘ + SHIFT + U to build the app, and the error should appear
+```
+
+#### Test Execution 방법
+```
+Now we don’t have any errors standing in our way, let run our test! (⌘ + U).
+```
+
+#### Open Quickly
+```
+⌘ + SHIFT + O
+```
+
+#### Class Move (implementation)
+```
+option + Mouse left click
+```
+
+#### 타 블로그 정리 글
+출처 : http://geekcoders.tistory.com/entry/Max-OS-X-XCode-기본-단축키-맥-단축키
+```
+XCode 
+
+ - 커맨드 + Shift + K  : 프로젝트 클린
+ - 커맨드 + B  : 프로젝트 빌드
+ - 커맨드 + R  : 프로젝트 실행
+ - 커맨드 + I  : 프로젝트 프로파일링 빌드
+ - 커맨드 + . : 실행중인 앱 강제 종료
+ - 커맨드 + , : XCode 프로퍼티창 열기
+ # 해당 창에 Key Bindings 탭에서 모든 단축키를 변경할 수 있습니다. 단, 꼬이면 답이 없습니다..
+
+ - 커맨드 + Shift + O : 프로젝트 내 파일 / 클래스 / 함수 검색 ( 매우 유용 )
+ - 커맨드 + Shift + F : 파인드 창으로 캐럿 강제 이동
+ - 커맨드 + F : 현재 창 검색
+ - 커맨드 + E : 현재 선택된 텍스트 블럭을 모든 텍스트에디트에 복사 ( ?.. 설명을 잘 못하겠네요... )
+ - 커맨드 + G : 현재 페이지에 텍스트에디트에 적힌 문구 순차 검색 ( 위 커맨드 + E 와 활용도 매우 높습니다 )
+ - 커맨드 + Shift + G : 현재 페이지에 텍스트에디트에 적힌 문구 역순차 검색
+ - 커맨드 + alt + Enter : 현재창 이중 분할
+ - 커맨드 + Enter : 현재창을 단일창으로 변경
+
+ - 커맨드 + 0 : 왼쪽에 프로젝트 파인더 및 검색 등등 윈도우 숨기기 & 열기
+ - 커맨드 + 1 : 프로젝트 파인더 열기
+ - 커맨드 + 2 : 프로젝트 하이라키 창 열기
+ - 커맨드 + 3 : 프로젝트 검색 창 열기
+ - 커맨드 + 4 : 프로젝트 워닝 및 에러 창 열기
+ - 커맨드 + 5 : 테스트 타겟창 열기
+ - 커맨드 + 6 : 디버그 세션 창 열기
+ - 커맨드 + 7 : 프로젝트에 걸려있는 모든 브레이크 포인트를 보여주는 창 열기
+ - 커맨드 + 8 : 빌드 관련 히스토리 ?
+
+ - 커맨드 + \ : 브레이크 포인트 걸기
+ - 커맨드 + Y : 브레이크 포인트 비활성화 / 활성화
+ - 커맨드 + Shift + Y : 하단 디버그 세션 창 열기 / 닫기 
+ - 커맨드 + / : 해당라인 주석 걸기 ( 다중 라인도 가능 )
+ - 컨트롤 + 커맨드 + 좌우 화살표 : 이전/이후 페이지 이동
+ - 커맨드 + [ ] : 해당 방향으로 들여쓰기
+ - 컨트롤 + I : 선택된 텍스트블록의 들여쓰기 올바르게(?) 적용
+
+디버깅 관련
+ - F6 : 다음 라인 ( Step Over )
+ - F7 : 현재 라인 내부 진입 ( Step Into )
+ - F8 : 현재 함수에서 나가기 ( Step Out )
+ - 커맨드 + Shift + Y : 실행 중 멈춤 ( Pause ) & 멈춤 상태에서 재 진행
+
+소스 컨트롤 관련
+ - 커맨드 + Shift + C : 커밋창 열기
+ - 커맨드 + Shift + X : 업데이트 하기
+
+iOS Simulator
+ - 커맨드 + S : 현재 시뮬레이터에 뜬 화면 캡쳐
+```

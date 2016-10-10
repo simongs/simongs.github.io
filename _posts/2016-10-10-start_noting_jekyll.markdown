@@ -2,7 +2,7 @@
 layout: post
 title:  "Github + Jekyll + Theme"
 date:   2016-10-10 17:45:49 +0900
-categories: jekyll github 
+categories: git etc 
 ---
 
 {% highlight ruby %}
