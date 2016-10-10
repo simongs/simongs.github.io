@@ -4,6 +4,21 @@ title: About
 permalink: /about/
 ---
 
-I am freelance developer. Currently doing more in backend, actually in Python and Django.
+### Introduce
+- Name : Sim Hong Sup 
+- I like Back-End Programming
+- I like to play a guitar.
+- I like to sing s song. especially R&B and Ballad
 
-email: agus[at]python.web.id
+### Programming Skill
+- JAVA
+- SPRING FRAMEWORK
+- JAVASCRIPT
+
+### Experience
+- NHN Technology Service - WEB Programmer (2010.08 ~ 2013.09)
+- NHN Entertainment - WEB Programmer (2013.10 ~ )
+
+### PAGE
+- [GITHUB](https://github.com/simongs)
+- [LINKEDIN](https://www.linkedin.com/in/홍섭-심-aa315331)
