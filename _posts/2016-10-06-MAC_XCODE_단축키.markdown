@@ -5,11 +5,6 @@ date:   2016-10-02 17:45:49 +0900
 categories: swift
 ---
 
-#### NSObject는 무엇일까
-~~~
-
-~~~
-
 #### XCODE에서 Clean
 ~~~
 Press ⌘ + SHIFT + K to clean your project, and then first error should go away.
