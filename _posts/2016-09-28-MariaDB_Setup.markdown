@@ -5,7 +5,6 @@ date:   2016-09-28 17:45:49 +0900
 categories: database config 
 ---
 
-# Maria DB 설치
 ## Version Info
 ~~~
 [mysql]$ cat /etc/redhat-release
