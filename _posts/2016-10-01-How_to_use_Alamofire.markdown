@@ -5,8 +5,6 @@ date:   2016-10-01 17:45:49 +0900
 categories: swift 
 ---
 
-# Alamofire 사용하기 
-
 ## What is Alamofire
 ```
 iOS와 OS X에서 사용하기 위한 Swift 기반의 네트워킹 라이브러리입니다.
@@ -31,7 +29,7 @@ sudo gem install cocoapods
 ```
 
 ## Reference
-[Alamofire Github](https://github.com/Alamofire/Alamofire)
-[Raywenderlich - iOS/Swift Alamofire 사용하기](http://rhammer.tistory.com/115)
-[Alamofire 라이브러리 연결](https://outofbedlam.github.io/swift/2016/02/04/Alamofire/)
-[Alamofire 테스트 케이스](http://stackoverflow.com/questions/39894064/how-to-write-unit-test-for-alamofire-request-function)
+ - [Alamofire Github](https://github.com/Alamofire/Alamofire)
+ - [Raywenderlich - iOS/Swift Alamofire 사용하기](http://rhammer.tistory.com/115)
+ - [Alamofire 라이브러리 연결](https://outofbedlam.github.io/swift/2016/02/04/Alamofire/)
+ - [Alamofire 테스트 케이스](http://stackoverflow.com/questions/39894064/how-to-write-unit-test-for-alamofire-request-function)
