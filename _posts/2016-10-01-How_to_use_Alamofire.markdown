@@ -19,14 +19,12 @@ CocoaPods는 필수적으로 설치가 되어 있어야 한다.
 ```
 ## What is CocoaPods
 ```
-CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. It has over 23 thousand libraries and is used in over 1.2 million apps. CocoaPods can help you scale your projects elegantly.
+CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. 
+It has over 23 thousand libraries and is used in over 1.2 million apps.
+ CocoaPods can help you scale your projects elegantly.
 ```
 
-link : https://cocoapods.org
-```
-sudo gem install activesupport -v 4.2.6 (ruby 버젼 2.0.0 호환되게)
-sudo gem install cocoapods
-```
+ - [CocoaPods link](https://cocoapods.org)
 
 ## Reference
  - [Alamofire Github](https://github.com/Alamofire/Alamofire)
