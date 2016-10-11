@@ -5,8 +5,7 @@ date:   2016-10-02 17:45:49 +0900
 categories: swift
 ---
 
-## Question List
-#### NSObject는 무엇일까?
+#### NSObject는 무엇일까
 ~~~
 
 ~~~
