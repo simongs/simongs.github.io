@@ -10,12 +10,12 @@ categories: spring-boot
 ## 2 ways to configure eacch profile constants
 #### 1. application-{phase}.properties
 JVM 옵션인 spring.profiles.active 의 정보를 {phase}에 대입하여 파일을 구성한다.
-```
+~~~
 ex. application-local.properties
 logging.level.org.springframework=DEBUG
-```
+~~~
 
-```
+~~~
 @Component
 public class ApplicationConstants {
 
@@ -26,10 +26,11 @@ public class ApplicationConstants {
         return loggingLevel;
     }
 }
-```
+~~~
+
 #### 2. {keyword}.yml (Editing...)
 이 부분은 조금더 확인이 필요하다.
-```
+~~~
 ex. fixtures.yml
 fixtures:
   articles:
@@ -37,9 +38,9 @@ fixtures:
       id: 1
       title: title1
       content: content1
-```
+~~~
 
-```
+~~~
 @Component
 @EnableConfigurationProperties
 @ConfigurationProperties(locations = {"fixtures.yml"}, prefix = "fixtures")
@@ -51,7 +52,7 @@ public class FixturesProperty {
         return articles;
     }
 }
-```
+~~~
 
 
 ## Reference
@@ -62,8 +63,8 @@ public class FixturesProperty {
 
 ### 
 Add VMOptions Parameter
-```
+~~~
 -Dspring.profiles.active=local
-```
+~~~
 
 ![2016-10-05 09;26;13.PNG](https://s3-ap-northeast-1.amazonaws.com/torchpad-production/wikis/5790/m1MNdCh1R3iTmUY7POZV_2016-10-05%2009;26;13.PNG)
