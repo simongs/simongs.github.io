@@ -4,42 +4,42 @@ title: "MAC 및 XCODE 단축키"
 date:   2016-10-02 17:45:49 +0900
 categories: swift
 ---
-# MAC 및 XCODE 단축키
 
 ## Question List
 #### NSObject는 무엇일까?
-```
-ㅁㄴㅇ
-```
+~~~
+
+~~~
 
 #### XCODE에서 Clean
-```
+~~~
 Press ⌘ + SHIFT + K to clean your project, and then first error should go away.
-```
+~~~
  
 #### XCODE에서 Build
-```
+~~~
 If the error isn’t immediately showing, hit ⌘ + SHIFT + U to build the app, and the error should appear
-```
+~~~
 
 #### Test Execution 방법
-```
+~~~
 Now we don’t have any errors standing in our way, let run our test! (⌘ + U).
-```
+~~~
 
 #### Open Quickly
-```
+~~~
 ⌘ + SHIFT + O
-```
+~~~
 
 #### Class Move (implementation)
-```
+~~~
 option + Mouse left click
-```
+~~~
 
 #### 타 블로그 정리 글
 출처 : http://geekcoders.tistory.com/entry/Max-OS-X-XCode-기본-단축키-맥-단축키
-```
+
+~~~
 XCode 
 
  - 커맨드 + Shift + K  : 프로젝트 클린
@@ -89,4 +89,4 @@ XCode
 
 iOS Simulator
  - 커맨드 + S : 현재 시뮬레이터에 뜬 화면 캡쳐
-```
+~~~
