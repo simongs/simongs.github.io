@@ -56,4 +56,12 @@ target 'FizzBuzz' do
 end
 ~~~
 
+#### REFERENCE
+
+- [swift 에서 URLRequest, JSON 파싱 (REST API 클라이언트 개발)](http://mtsparrow.blogspot.kr/2016/04/swift-urlrequest-json-rest-api.html)
+- [cocoapods 이용하기](http://mtsparrow.blogspot.kr/2016/03/cocoapod.html)
+- [Alamofire JSON 응답결과 -> Object 로 변환](https://github.com/tristanhimmelman/AlamofireObjectMapper)
+- [JSON library comparison in Swift](
+http://yannickloriot.com/2016/02/json-library-comparison-in-swift/)
+
 
