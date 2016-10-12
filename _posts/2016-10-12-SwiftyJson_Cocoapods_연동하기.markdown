@@ -6,24 +6,24 @@ categories: swift
 ---
 
 ### cocoapods install And Project setting
-Anywhere
+#### Anywhere
 ~~~
 sudo gem install cocoapods
 pod setup
 ~~~
 
-Project Location
+#### Project Location
 ~~~
 cd project_location
 pod init (created PodFile ...)
 ~~~
 
-edit PodFile
+#### edit PodFile
 ~~~
 vim Podfile
 ~~~
 
-add library (sample)
+#### add library (sample)
 ~~~
 
 ~~~
