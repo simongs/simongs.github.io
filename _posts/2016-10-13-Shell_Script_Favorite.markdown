@@ -89,12 +89,13 @@ rcp account@server-host:/home/.../file .
 ~~~
 
 ### MONITORING
-##### Memory
+
+#### Memory
 ~~~
 SAR -R
 ~~~
 
-##### DISK
+#### DISK
 ~~~
 [전체용량]
 df -h
@@ -107,7 +108,8 @@ du -sh *
 ~~~
 
 ### Execute
-##### xargs
+
+#### xargs
 ~~~
 ps -ef | grep java | awk {print $2} | xargs kill -9
 ~~~
@@ -115,7 +117,8 @@ ps -ef | grep java | awk {print $2} | xargs kill -9
 ## Shell Script
 
 ### Date
-##### make "yyyyMMdd" Date String
+
+#### make "yyyyMMdd" Date String
 ~~~
 THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
 ~~~
