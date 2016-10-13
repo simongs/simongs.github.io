@@ -5,6 +5,9 @@ date:   2016-10-01 17:45:49 +0900
 categories: etc  
 ---
 
+- TOC
+{:toc}
+
 # ONLINE STUDY SITE
 
 ### CODE CADEMY 
@@ -22,3 +25,6 @@ https://algospot.com
 ### COURSERA
 https://www.coursera.org
 
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/NoFLJLJ7abE" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
