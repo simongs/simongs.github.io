@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "자주사용하는 리눅스 명령어 및 쉘 스크립트"
-date:   2016-10-13 09:00:00 +0900
+date: 2016-10-13 09:00:00 +0900
 categories: linux
 ---
 
 ## Linux Command
+
 ### NETWORK
 #### traceroute 
 ~~~
@@ -34,6 +35,7 @@ cat 파일명 | grep "^2011-03-08 10:20:[0-9][0-9]" >> bbb.txt
 ~~~
 :e ++enc=UTF-8
 ~~~
+
 ### 압축
 #### command
 ~~~
@@ -58,6 +60,7 @@ v : verbose 압축과정을 출력
 p : 소유권등 퍼미션을 그대로 유지
 f : 내가 지정한 파일명으로 압축
 ~~~
+
 ### FIND
 #### Search Keyword
 ~~~
@@ -72,6 +75,7 @@ find . -name "*.sh" | xargs grep JAVA
 /usr/bin/find -mtime +6 > deleteFile.txt
 /bin/cat deleteFile.txt | /usr/bin/xargs /bin/rm -f
 ~~~
+
 #### Remote Copy
 ~~~
 rcp account@server-host:/home/.../file .
@@ -82,6 +86,7 @@ rcp account@server-host:/home/.../file .
 ~~~
 SAR -R
 ~~~
+
 #### DISK
 ~~~
 [전체용량]
@@ -101,6 +106,7 @@ ps -ef | grep java | awk {print $2} | xargs kill -9
 ~~~
 
 ## Shell Script
+
 ### Date
 #### make "yyyyMMdd" Date String
 ~~~
