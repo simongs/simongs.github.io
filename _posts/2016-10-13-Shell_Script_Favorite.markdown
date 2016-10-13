@@ -75,14 +75,15 @@ find . -name "*.sh" | xargs grep JAVA
 ~~~
 
 ### File
-##### File Delete
+
+#### File Delete
 ~~~
 [6일 이전 파일 삭제 방법]
 /usr/bin/find -mtime +6 > deleteFile.txt
 /bin/cat deleteFile.txt | /usr/bin/xargs /bin/rm -f
 ~~~
 
-##### Remote Copy
+#### Remote Copy
 ~~~
 rcp account@server-host:/home/.../file .
 ~~~
