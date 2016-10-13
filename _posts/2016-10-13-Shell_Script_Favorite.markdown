@@ -123,3 +123,40 @@ ps -ef | grep java | awk {print $2} | xargs kill -9
 THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
 ~~~
 
+#### using while loop
+~~~
+while [ $THIS_DATE -le $ED_DATE ]; do
+    
+	echo "=======target Date : $THIS_DATE ==========="
+
+	sleep 0.5
+
+    THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
+done
+~~~
+### String
+
+#### String cut
+~~~
+ST_DATE="20160801"
+
+THIS_DATE=$ST_DATE
+
+YEAR=${THIS_DATE:0:4} 0 index 부터 4자리
+MONTH=${THIS_DATE:4:2}
+DATE=${THIS_DATE:6:2}
+~~~
+
+#### Argument Check
+~~~
+if [ $# -eq 0 ];
+then
+	echo "usage : ./grep.sh searchKeyword yyyyMMdd  or ./grep.sh searchKeyword"
+    exit;
+fi
+
+if [ $# -eq 2 ];
+then
+    LOG_DATE=$2
+fi
+~~~
