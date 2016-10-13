@@ -15,7 +15,7 @@ sudo traceroute  10.24.143.95  -T -p 10003
 ~~~
 
 ### view Log File
-#### cat
+##### cat
 ~~~
 cat /etc/shadow | wc -l
 - option        
@@ -25,20 +25,20 @@ cat /etc/shadow | wc -l
     -w : 단어수만 보여줌
     -L : 가장 긴줄 한줄만 보여줌
 ~~~
-#### grep
+##### grep
 ~~~
 용량이 큰 로그 파일에서 2011-03-08 10:20:XX 가 들어있는 부분까지만 bbb.txt로 내보내기
 cat 파일명 | grep "^2011-03-08 10:20:[0-9][0-9]" >> bbb.txt
 ~~~
 
 ### vim
-#### 이미 읽은 파일 인코딩 변경
+##### 이미 읽은 파일 인코딩 변경
 ~~~
 :e ++enc=UTF-8
 ~~~
 
 ### 압축
-#### command
+##### command
 ~~~
 [압축하기]
 tar -cvf 압축파일명.tar 압축파일
@@ -63,32 +63,32 @@ f : 내가 지정한 파일명으로 압축
 ~~~
 
 ### FIND
-#### Search Keyword
+##### Search Keyword
 ~~~
 현재 디렉토리(하위포함) 에서 JAVA라는 문구가 들어간 파일을 알고 싶어용
 find . -name "*.sh" | xargs grep JAVA
 ~~~
 
 ### File
-#### File Delete
+##### File Delete
 ~~~
 [6일 이전 파일 삭제 방법]
 /usr/bin/find -mtime +6 > deleteFile.txt
 /bin/cat deleteFile.txt | /usr/bin/xargs /bin/rm -f
 ~~~
 
-#### Remote Copy
+##### Remote Copy
 ~~~
 rcp account@server-host:/home/.../file .
 ~~~
 
 ### MONITORING
-#### Memory
+##### Memory
 ~~~
 SAR -R
 ~~~
 
-#### DISK
+##### DISK
 ~~~
 [전체용량]
 df -h
@@ -101,7 +101,7 @@ du -sh *
 ~~~
 
 ### Execute
-#### xargs
+##### xargs
 ~~~
 ps -ef | grep java | awk {print $2} | xargs kill -9
 ~~~
@@ -109,7 +109,7 @@ ps -ef | grep java | awk {print $2} | xargs kill -9
 ## Shell Script
 
 ### Date
-#### make "yyyyMMdd" Date String
+##### make "yyyyMMdd" Date String
 ~~~
 THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
 ~~~
