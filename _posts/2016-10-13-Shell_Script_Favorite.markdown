@@ -12,7 +12,8 @@ categories: linux
 
 #### traceroute 
 ~~~
-sudo traceroute  10.24.143.95  -T -p 10003
+sudo traceroute  10.24.143.95  -T -p 10003 (linux)
+tracert -d 10.161.221.136 (window)
 ~~~
 
 ### view Log File
