@@ -14,12 +14,14 @@ Press ⌘ + SHIFT + K to clean your project, and then first error should go away
  
 #### XCODE에서 Build
 ~~~
-If the error isn’t immediately showing, hit ⌘ + SHIFT + U to build the app, and the error should appear
+If the error isn’t immediately showing, 
+hit ⌘ + SHIFT + U to build the app, and the error should appear
 ~~~
 
 #### Test Execution 방법
 ~~~
-Now we don’t have any errors standing in our way, let run our test! (⌘ + U).
+Now we don’t have any errors standing in our way, 
+let run our test! (⌘ + U).
 ~~~
 
 #### Open Quickly
@@ -93,4 +95,9 @@ iOS Simulator
 ~~~
 트랙패드에서 두 손가락으로 드래그하는 동안 Control(^) 키를 눌러 확대하십시오.
 트랙패드에서 두 손가락으로 아래로 드래그하는 동안 Control 키를 눌러 축소하십시오.
+~~~
+
+### safari address 창
+~~~
+Command + L
 ~~~
