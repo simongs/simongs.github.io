@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MAC 및 XCODE 단축키"
+title: "MAC 사용팁과 XCODE 단축키"
 date:   2016-10-02 17:45:49 +0900
 categories: swift
 ---
@@ -89,22 +89,105 @@ iOS Simulator
  - 커맨드 + S : 현재 시뮬레이터에 뜬 화면 캡쳐
 ~~~
 
-## MAC
+## MAC 사용팁
 
-### screen Zoon in-out
+#### screen Zoon in-out
 ~~~
 트랙패드에서 두 손가락으로 드래그하는 동안 Control(^) 키를 눌러 확대하십시오.
 트랙패드에서 두 손가락으로 아래로 드래그하는 동안 Control 키를 눌러 축소하십시오.
 ~~~
 
-### safari address 창
+#### safari address 창
 ~~~
 Command + L
 ~~~
 
-### mac Mission Control
+#### mac Mission Control
 ~~~
+How to Use Multi Desktop 
 http://zosolution.com/166
 http://zosolution.com/191
+~~~
+
+#### Finder
+ - Command + Delete = File 삭제
+
+## MAC Application
+
+#### Jumpcut
+clip board (copy history)
+
+#### Spectacle
+Window move & arrange Program
+window Key + allow key 
+
+#### alfred 3
+hot key
+
+#### BetterTouchTool (BTT)
+한영전환 , 유료구매 필요
+
+#### TextMate
+Text Editor
+
+#### OneNote 
+shared Note
+
+#### MacDown
+MarkDown Editor
+
+#### Skitch
+화면 캡쳐 프로그램 (Command + Shift + 5)
+
+#### Iterm2
+advanced terminal program (with another setting)
+
+ - zsh
+ - solarized
+ - oh-my-zsh
+ 
+##### Reference
+ - [[MAC] 명령행 작업 좀더 편리하게 하기!](http://redgolems.tistory.com/30)
+
+## MAC Evironment Setting
+
+#### setting .vimrc
+ - [변정훈님 블로그 참고](https://blog.outsider.ne.kr/518)
 
 ~~~
+set nocompatible " 오리지날 VI와 호환하지 않음
+set autoindent  " 자동 들여쓰기
+set cindent " C 프로그래밍용 자동 들여쓰기
+set smartindent " 스마트한 들여쓰기
+set wrap
+set nowrapscan " 검색할 때 문서의 끝에서 처음으로 안돌아감
+set nobackup " 백업 파일을 안만듬
+set visualbell " 키를 잘못눌렀을 때 화면 프레시
+set ruler " 화면 우측 하단에 현재 커서의 위치(줄,칸) 표시
+set shiftwidth=4 " 자동 들여쓰기 4칸
+set number " 행번호 표시, set nu 도 가능
+set fencs=ucs-bom,utf-8,euc-kr.latin1 " 한글 파일은 euc-kr로, 유니코드는 유니코드로
+set fileencoding=utf-8 " 파일저장인코딩
+set tenc=utf-8      " 터미널 인코딩
+set expandtab " 탭대신 스페이스
+set hlsearch " 검색어 강조, set hls 도 가능
+set ignorecase " 검색시 대소문자 무시, set ic 도 가능
+set tabstop=4 "  탭을 4칸으로
+set lbr
+set incsearch "  키워드 입력시 점진적 검색
+syntax on "  구문강조 사용
+filetype indent on "  파일 종류에 따른 구문강조
+set background=dark " 하이라이팅 lihgt / dark
+colorscheme desert  "  vi 색상 테마 설정
+set backspace=eol,start,indent "  줄의 끝, 시작, 들여쓰기에서 백스페이스시 이전줄로
+set history=1000 "  vi 편집기록 기억갯수 .viminfo에 기록
+
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+\ if ! exists("g:leave_my_cursor_position_alone") |
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\ exe "normal g'\"" |
+\ endif |
+\ endif
+~~~
+
