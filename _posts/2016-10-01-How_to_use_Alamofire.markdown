@@ -100,7 +100,7 @@ UserInfo=0x78fc41e0 {
 응답이 오기 전에 호출한 sessionManager객체의 instanc가 사라지는 현상. 별도의 HttpClient를 클래스를 생성한다.
 (약식 HttpClient입니다.)
 
-~~~
+~~~ swift
 import Foundation
 import Alamofire
 
@@ -135,7 +135,7 @@ class HttpClient {
 #### 2. Testcase 만들기
 waitExpectations 를 활용하여 응답을 받을 수 있도록 한다.
 
-~~~
+~~~ swift
 func testExample() {
         
         let ex = expectation(description: "Expecting a JSON data not nil")
