@@ -8,23 +8,17 @@ categories: etc
 - TOC
 {:toc}
 
-# ONLINE STUDY SITE
-
-### CODE CADEMY 
+#### CODE CADEMY 
 https://www.codecademy.com
 
-### UDACITY
+#### UDACITY
 https://www.udacity
 
-### TRY HELLOWORLD
+#### TRY HELLOWORLD
 http://tryhelloworld.co.kr/challenges
 
-### ALGOSPOT
+#### ALGOSPOT
 https://algospot.com
 
-### COURSERA
+#### COURSERA
 https://www.coursera.org
-
-<figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/NoFLJLJ7abE" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
