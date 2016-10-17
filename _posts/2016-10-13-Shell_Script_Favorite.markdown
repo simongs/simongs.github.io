@@ -144,10 +144,11 @@ while [ $THIS_DATE -le $ED_DATE ]; do
     THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
 done
 ~~~
+
 ### String
 
 #### String cut
-~~~
+~~~ shell
 ST_DATE="20160801"
 
 THIS_DATE=$ST_DATE
