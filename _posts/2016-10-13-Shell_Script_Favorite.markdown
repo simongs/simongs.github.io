@@ -157,7 +157,8 @@ ST_DATE="20160801"
 
 THIS_DATE=$ST_DATE
 
-YEAR=${THIS_DATE:0:4} 0 index 부터 4자리
+# 0 index 부터 4자리
+YEAR=${THIS_DATE:0:4} 
 MONTH=${THIS_DATE:4:2}
 DATE=${THIS_DATE:6:2}
 ### ===============================================
