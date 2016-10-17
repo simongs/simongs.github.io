@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Alamofire 사용하기"
+title: "Alamofire With Xcode8 + Swift 3 + SwiftyJSON"
 date:   2016-10-01 17:45:49 +0900
 categories: swift 
 ---
@@ -60,7 +60,8 @@ pod install
 #### 2.1. (CocoaPods) swift 3.0 을 사용하기 위한 방법
 
  - Build Option 을 3.0으로 세팅
- ~~~
+ 
+~~~
   post_install do |installer|
   	installer.pods_project.targets.each do |target|
     	target.build_configurations.each do |config|
@@ -69,19 +70,29 @@ pod install
   	end
   end
 end
- ~~~
+~~~
  
  - 위의 설정 없는 경우는 Xcode의 옵션을 조정
- ~~~
+
+~~~
  	pod install
  	workspace open
  	LATER, LATER 선택 (swift Version 2.3 -> 3.0 호환 관련)
  	(in Alamofire Build Option) Use Legacy Swift Laguage Version -> NO 선택
- ~~~
+~~~
  
  <figure class="video_container">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FjsxG07haJI" frameborder="0" allowfullscreen></iframe>
 </figure>
+
+## JSON Parser
+
+### SwiftyJSON
+
+~~~
+  # Pods for FizzBuzz
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+~~~
 
 ## Problem Solve
 
@@ -167,3 +178,8 @@ func testExample() {
  - [Raywenderlich - iOS/Swift Alamofire 사용하기](http://rhammer.tistory.com/115)
  - [Alamofire 라이브러리 연결](https://outofbedlam.github.io/swift/2016/02/04/Alamofire/)
  - [Alamofire 테스트 케이스](http://stackoverflow.com/questions/39894064/how-to-write-unit-test-for-alamofire-request-function)
+ - [swift 에서 URLRequest, JSON 파싱 (REST API 클라이언트 개발)](http://mtsparrow.blogspot.kr/2016/04/swift-urlrequest-json-rest-api.html)
+- [cocoapods 이용하기](http://mtsparrow.blogspot.kr/2016/03/cocoapod.html)
+- [Alamofire JSON 응답결과 -> Object 로 변환](https://github.com/tristanhimmelman/AlamofireObjectMapper)
+- [JSON library comparison in Swift](
+http://yannickloriot.com/2016/02/json-library-comparison-in-swift/)
