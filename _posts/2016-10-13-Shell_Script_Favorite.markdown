@@ -148,7 +148,11 @@ done
 ### String
 
 #### String cut
-~~~ shell
+{% highlight ruby %}
+### ===============================================
+### Simple bash scripting for String cut
+### Credit: simongs
+### ===============================================
 ST_DATE="20160801"
 
 THIS_DATE=$ST_DATE
@@ -156,10 +160,13 @@ THIS_DATE=$ST_DATE
 YEAR=${THIS_DATE:0:4} 0 index 부터 4자리
 MONTH=${THIS_DATE:4:2}
 DATE=${THIS_DATE:6:2}
-~~~
+### ===============================================
+### END
+### ===============================================
+{% endhighlight %}
 
 #### Argument Check
-~~~ script
+~~~ ruby
 if [ $# -eq 0 ];
 then
 	echo "usage : ./grep.sh searchKeyword yyyyMMdd  or ./grep.sh searchKeyword"
