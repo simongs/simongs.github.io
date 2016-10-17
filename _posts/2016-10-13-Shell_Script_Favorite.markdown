@@ -10,10 +10,17 @@ categories: linux
 
 ### NETWORK
 
-#### traceroute 
+#### traceroute (Linux)
 ~~~
-sudo traceroute  10.24.143.95  -T -p 10003 (linux)
+sudo traceroute  10.24.143.95  -T -p 10003
+
+~~~
+
+#### tracert, tracetcp
+[Tracetcp 사용법 - 별도프로그램 download 필](http://byungsalta.tistory.com/194)
+~~~
 tracert -d 10.161.221.136 (window)
+tracetcp 10.161.221.136:3306 -n
 ~~~
 
 ### view Log File
