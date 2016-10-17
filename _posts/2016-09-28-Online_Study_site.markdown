@@ -5,9 +5,6 @@ date:   2016-10-01 17:45:49 +0900
 categories: etc  
 ---
 
-- TOC
-{:toc}
-
 #### CODE CADEMY 
 https://www.codecademy.com
 
