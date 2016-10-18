@@ -132,7 +132,7 @@ class HttpClient {
             let configuration = URLSessionConfiguration.default
             configuration.httpAdditionalHeaders = defaultHeaders
             configuration.timeoutIntervalForRequest = 40
-	    configuration.timeoutIntervalForResource = 40
+            configuration.timeoutIntervalForResource = 40
 
             let tempmanager = Alamofire.SessionManager(configuration: configuration)
             
