@@ -144,7 +144,9 @@ class HttpClient {
 
 
 #### 2. Testcase 만들기
-waitExpectations 를 활용하여 응답을 받을 수 있도록 한다.
+
+ - waitExpectations 를 활용하여 응답을 받을 수 있도록 한다.
+ - 테스트케이스의 method명은 반드시 "test"로 시작해야 한다.
 
 ~~~ swift
 func testExample() {
