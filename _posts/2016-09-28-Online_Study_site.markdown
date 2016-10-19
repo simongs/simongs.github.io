@@ -8,24 +8,24 @@ categories: etc
 ## STUDY SITE
 
 #### CODE CADEMY 
-https://www.codecademy.com
+[https://www.codecademy.com](https://www.codecademy.com)
 
 #### UDACITY
-https://www.udacity
+[https://www.udacity](https://www.udacity)
 
 #### TRY HELLOWORLD
-http://tryhelloworld.co.kr/challenges
+[http://tryhelloworld.co.kr/challenges](http://tryhelloworld.co.kr/challenges)
 
 #### COURSERA
-https://www.coursera.org
+[https://www.coursera.org](https://www.coursera.org)
 
 ## Algorithm Problem Solve
 
 #### Codility
-https://codility.com/
+[https://codility.com/](https://codility.com/)
 
 #### ALGOSPOT
-https://algospot.com
+[https://algospot.com](https://algospot.com)
 
 #### codingdojang
-http://codingdojang.com/
+[http://codingdojang.com/](http://codingdojang.com/)
