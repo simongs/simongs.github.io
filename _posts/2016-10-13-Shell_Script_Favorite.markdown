@@ -13,7 +13,6 @@ categories: linux
 #### traceroute (Linux)
 ~~~
 sudo traceroute  10.24.143.95  -T -p 10003
-
 ~~~
 
 #### tracert, tracetcp
@@ -23,6 +22,14 @@ sudo traceroute  10.24.143.95  -T -p 10003
 tracert -d 10.161.221.136 (window)
 tracetcp 10.161.221.136:3306 -n
 ~~~
+
+#### connection Log 확인
+~~~
+netstat -an | grep "연동서버 IP"
+~~~
+* ESTABLISHED
+* TIME_WAIT
+
 
 ### view Log File
 
