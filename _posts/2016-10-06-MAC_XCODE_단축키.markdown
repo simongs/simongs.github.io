@@ -91,6 +91,9 @@ iOS Simulator
 
 ## MAC 사용팁
 
+#### MAC Symbols
+![mac symbols](http://www.mfk.co.kr/media/kunena/attachments/legacy/images/201009_MacOSX_Symbol.jpg)
+
 #### screen Zoon in-out
 ~~~
 트랙패드에서 두 손가락으로 드래그하는 동안 Control(^) 키를 눌러 확대하십시오.
