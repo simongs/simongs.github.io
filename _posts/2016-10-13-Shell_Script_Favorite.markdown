@@ -31,7 +31,7 @@ netstat -an | grep "연동서버 IP"
 * TIME_WAIT
 
 
-### view Log File
+### About Log
 
 #### cat
 ~~~
@@ -48,6 +48,28 @@ cat /etc/shadow | wc -l
 ~~~
 용량이 큰 로그 파일에서 2011-03-08 10:20:XX 가 들어있는 부분까지만 bbb.txt로 내보내기
 cat 파일명 | grep "^2011-03-08 10:20:[0-9][0-9]" >> bbb.txt
+
+대소문자 구분하지 않고 검색하기
+> grep -i 'content_id' umon.log  
+
+앞에 줄번호 붙이기
+> grep -n "content"
+
+바이너리 파일 grep
+> grep -a 'test' binary.log
+
+~~~
+
+#### sed
+~~~
+start - end 까지 로그 자르기
+> sed -n '100,200p' catalina.log > temp
+~~~
+
+#### head
+~~~
+특정 파일 앞의 3바이트만 확인하기
+> head -n 3 lib_monitor_cmn.js | xxd -p
 ~~~
 
 ### vim
@@ -91,6 +113,18 @@ f : 내가 지정한 파일명으로 압축
 find . -name "*.sh" | xargs grep JAVA
 ~~~
 
+#### 마지막 수정일이 1일 이내의 파일을 찾고 싶은 경우
+~~~
+[localhost /home/user]# find ./* -mtime -1
+./bloc_10850.out
+./bloc_10850.out.2014.03.05
+~~~
+
+#### 마지막 수정일이 7일 이상된의 파일을 찾아서 지우고 싶다.
+~~~
+[localhost /home/user]# find ./* -mtime +7 -exec rm -rf {} \;
+~~~
+
 ### File
 
 #### File Delete
@@ -103,6 +137,12 @@ find . -name "*.sh" | xargs grep JAVA
 #### Remote Copy
 ~~~
 rcp account@server-host:/home/.../file .
+~~~
+
+#### diff
+~~~
+특정 두 디렉토리 비교 명령어
+diff -r org_dir chg_dir
 ~~~
 
 ### MONITORING

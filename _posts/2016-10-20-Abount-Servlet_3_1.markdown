@@ -119,39 +119,59 @@ If the included servlet was obtained by using the getNamedDispatcher method,
 these attributes must not be set.
 ~~~
 
-## 작업 공간 (작업 중인 영문)
-
-~~~
-
-To allow RequestDispatcher objects to be obtained using relative paths that are
-relative to the path of the current request (not relative to the root of the
-ServletContext), the getRequestDispatcher method is provided in the
-ServletRequest interface.
-
-The behavior of this method is similar to the method of the same name in the
-ServletContext. The servlet container uses information in the request object to
-transform the given relative path against the current servlet to a complete path. For
-example, in a context rooted at ’/’ and a request to /garden/tools.html, a request
-dispatcher obtained via ServletRequest.getRequestDispatcher("header.html")
-will behave exactly like a call to
-ServletContext.getRequestDispatcher("/garden/header.html").
-~~~
-
 ## 작업중인 공간 (한글 번역본)
 
 ### 9.1 RequestDispatcher 가져오기
-`RequestDispatcher` 인터페이스를 구현한 객체는 `ServletContext` 의 다음 메소드 들로 부터 얻을 수 있다.
+RequestDispatcher 인터페이스를 구현한 객체는 ServletContext 의 다음 메소드 들로 부터 얻을 수 있다.
 
- - `getRequestDispatcher`
- - `getNamedDispatcher`
+ - getRequestDispatcher
+ - getNamedDispatcher
 
- `getRequestDispatcher` 메소드는 `ServletContext`의 scope을 포함하는 path인 String형 매개변수를 가진다. 이 path는 `ServletContext`의 root를 나타내는 상대경로여야만 하고, `/` 으로 시작하거나 혹은 비어 있어야 한다. 해당 메소드는 path 정보를 servlet을 찾는데 사용하고 `RequestDispatcher` 객체를 감싸서 결과 객체(resulting Object) 로 return한다. (Chapter 12, `Mapping Requests to Servlets` 에 소개하는 Rule에 의해 찾는다). 만약 주어진 path 기반으로 resolved 되는 servelt이 없다면 a
+ getRequestDispatcher 메소드는 ServletContext의 scope을 포함하는 path인 문자열 매개변수를 가진다. 이 path는 `ServletContext`의 root를 나타내는 상대경로여야만 하고, `/` 으로 시작하거나 혹은 비어 있어야 한다. 해당 메소드는 path 정보를 servlet을 찾는데 사용하고 `RequestDispatcher` 객체를 감싸서 결과 객체(resulting Object) 로 return한다. (Chapter 12, `Mapping Requests to Servlets` 에 소개하는 Rule에 의해 찾는다). 만약 주어진 path 기반으로 resolved 되는 servelt이 없다면 a
 RequestDispatcher is provided that returns the content for that path.
 
-`getNamedDispatcher` 메소드는 `ServletContext` 에서 알고 있는 servlet 이름을 나타내는 String형 매개변수를 가진다. 만약 servlet을 찾으면, 메소드에서는 `RequestDispatcher` 객체를 wrapping 하고  해당 객체를 반환한다. 해당 매개변수의 servelt을 찾지 못한다면 메소드는 반드시 `null`을 반환한다.
+`getNamedDispatcher` 메소드는 `ServletContext` 에서 알고 있는 servlet 이름을 나타내는 문자열 매개변수를 가진다. 만약 servlet을 찾으면, 메소드에서는 `RequestDispatcher` 객체를 wrapping 하고  해당 객체를 반환한다. 해당 매개변수의 servelt을 찾지 못한다면 메소드는 반드시 `null`을 반환한다.
 
+(ServletContext 의 root 기준이 아닌) 현재 요청에 상대적인 path를 이용해서 RequestDispatcher 객체를 가져오는 것을 허락하기 위해서 getRequestDispatcher 메소드는 ServletRequest 인터페이스에서 제공된다.
 
+이 메소드의 내용은 ServletContext 인터페이스의 같은 이름의 메소드와 비슷하다. 
 
+#### 9.1.1 Query Strings in Request Dispatcher Paths
+
+path 정보를 사용하여 RequestDispatcher 객체를 만드는 ServeltContext와 ServletRequest 의 메소드는 path 정보에 추가적인 Query String 정보를 붙이는 것을 허용한다. 예를 들어 개발자는 아래와 같은 Code를 사용하여 RequestDispatcher 객체를 가져올 수 있다.
+
+~~~
+String path = “/raisins.jsp?orderno=5”;
+RequestDispatcher rd = context.getRequestDispatcher(path);
+rd.include(request, response);
+~~~
+
+Query String에 정의된 파라미터 들은 RequestDispatcher를 만드는 과정에서 동일한 이름의 다른 파라미터들 보다 우선권을 가진다. 해당 파라미터들은 include, forward 호출이 진행되는 동안에 파라미터들은 유효 scope을 가진다.
+
+### 9.2 Using a Request Dispatcher
+
+RequestDispatcher를 사용하기위해, servlet은 RequestDispatcher 인터페이스의 include()나 forward()를 호출합니다. 이 메소드들의 파라미터로는 javax.servlet.Servlet 인터페이스의 service()를 통해 전달된 request, response 이거나 또는 Servlet Version 2.3에 소개된 request, response의 subclass들의 인스턴스가 될 수 있습니다. 후자의 경우에는 wrapper 인스턴스는 컨테이너가 service()에 전달한 request, response 객체를 반드시 wrapping해야한다.
+
+컨테이너 제공자는 대상 서블릿으로의 request 전송이 original request로써 동일한 JVM의 동일한 스레드에서 나타나도록 보장해야한다.
+
+### 9.3 The Include Method
+RequestDispatcher 인터페이스의 include()는 언제든지 호출될 수 있다. include()의 타겟 서블릿은 request 객체의 모든 양상을 접근할 수 있을 수 있는 방면 response 객체의 사용은 좀 더 제한적이다.
+
+It can only write information to the ServletOutputStream or Writer of the response
+object and commit a response by writing content past the end of the response buffer,
+or by explicitly calling the flushBuffer method of the ServletResponse interface. It
+cannot set headers or call any method that affects the headers of the response, with
+the exception of the HttpServletRequest.getSession() and
+HttpServletRequest.getSession(boolean) methods. Any attempt to set the
+headers must be ignored, and any call to HttpServletRequest.getSession()
+or HttpServletRequest.getSession(boolean) that would require adding a
+Cookie response header must throw an IllegalStateException if the response
+has been committed.
+
+response 객체의 Writer 객체나, ServletOutputStream 객체를 통해서 정보를 쓰거나 response를 커밋할 수 있다. response 버퍼의 끝을 지나 content를 writing 하거나, ServletResponse 인터페이스의 flushBuffer()를 명시적으로 호출하는 방법으로 정보를 쓸 수 있다. 
+
+ 
+ 
  
  
  
