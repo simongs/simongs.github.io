@@ -9,5 +9,5 @@ categories: etc netty
 
 #### Reference
  - [User guide for 5.x - eng](http://netty.io/wiki/user-guide-for-5.x.html)
- - [User guide for 4.x - kor](Netty User guide for 4.x 한글 번역)
+ - [User guide for 4.x - kor](http://ikpil.com/1338)
  - [김대현(hatemogi)님 강의자료](https://github.com/hatemogi) 
