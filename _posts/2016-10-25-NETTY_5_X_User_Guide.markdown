@@ -8,6 +8,11 @@ categories: etc netty
 ## Netty란
 
 ### 1강
+channel
+
+### 2강
+
+
 
 
 #### Reference
