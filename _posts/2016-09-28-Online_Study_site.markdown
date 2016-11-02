@@ -22,6 +22,9 @@ categories: etc
 #### Khan Academy
 [khanacademy](https://www.khanacademy.org/welcome)
 
+#### ETC
+ - [리눅스커맨드라인완벽입문서 영문판](http://linuxcommand.org/tlcl.php)
+
 ## Algorithm Problem Solve
 
 #### Codility
