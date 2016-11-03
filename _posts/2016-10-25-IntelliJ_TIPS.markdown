@@ -48,3 +48,11 @@ Go to File -> Settings -> Editor -> General -> Code Folding
 Uncheck Show code folding outline
 ~~~
 
+#### Live Template 관련
+[참고할만한 블로그 - Intellij Live Template 등록하기](http://uncle-bae.blogspot.kr/2015/09/intellij-live-template.html)
+
+~~~
+환경설정에서 Live Template을 등록한다. 
+하단에 보이는 context 지정을 통해서 어떤 환경에서 
+해당 Live Template을 사용할 지 결정해야 한다.
+~~~

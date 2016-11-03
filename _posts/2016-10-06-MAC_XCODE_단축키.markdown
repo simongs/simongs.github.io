@@ -113,7 +113,14 @@ http://zosolution.com/191
 ~~~
 
 #### Finder
- - Command + Delete = File 삭제
+
+##### Command + Delete = File 삭제
+
+##### 숨김파일 표시 방법
+~~~
+defaults write com.apple.finder AppleShowAllFiles -bool true
+killall Finder
+~~~
 
 ## MAC Application
 
