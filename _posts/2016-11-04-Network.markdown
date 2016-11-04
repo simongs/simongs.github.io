@@ -6,6 +6,7 @@ categories: network
 ---
 
 #### Encapsulation
+
 [joinc.co.kr 네트워크 관련](http://www.joinc.co.kr/w/Site/Network_Programing/Documents/IntroTCPIP3)
 
 ~~~
