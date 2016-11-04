@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Network "
+date:   2016-10-31 09:00:00 +0900
+categories: network
+---
+
+#### Encapsulation
+[joinc.co.kr 네트워크 관련](http://www.joinc.co.kr/w/Site/Network_Programing/Documents/IntroTCPIP3)
+
+~~~
+AH     : Application Header
+TCPH   : TCP Header
+IPH    : IP  Header
+EtherH : Ethernet Header
+EtherT : Ethernet Trailer
+                               +-----------+
+                               | user data |
+                               +-----------+
+                              ↓          ↓ 
+                        +------+-----------+            +-------------+
+                        |  AH  | user data |            | application |
+                        +------+-----------+            +-------------+
+                       ↓                 ↓                  ↓
+                 +------+------------------+            +-------------+
+                 | TCPH | application data |            | TCP         |
+                 +------+------------------+            +-------------+
+                ↓                        ↓                  ↓
+          +------+------+------------------+            +-------------+
+          | IPH  | TCPH | application data |            | IP          |
+          +------+------+------------------+            +-------------+
+         ↓                               ↓                  ↓
+ +--------+------+------+------------------+--------+   +-------------+
+ | EtherH | IPH  | TCPH | application data | EtherT |   | Ethernet    | 
+ +--------+------+------+------------------+--------+   +-------------+ 
+ ~~~
