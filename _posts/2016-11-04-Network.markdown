@@ -9,8 +9,6 @@ categories: network
 
 [joinc.co.kr 네트워크 관련](http://www.joinc.co.kr/w/Site/Network_Programing/Documents/IntroTCPIP3)
 
-~~~
-
 AH     : Application Header
 TCPH   : TCP Header
 IPH    : IP  Header
@@ -35,5 +33,5 @@ EtherT : Ethernet Trailer
  +--------+------+------+------------------+--------+   +-------------+
  | EtherH | IPH  | TCPH | application data | EtherT |   | Ethernet    | 
  +--------+------+------+------------------+--------+   +-------------+ 
- 
- ~~~
+
+
