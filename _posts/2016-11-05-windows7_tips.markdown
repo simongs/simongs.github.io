@@ -30,4 +30,18 @@ Sublime, Atom, VSC(Visual Studio Code) 주로 3개가 언급되고
 취향에 따라 택일하면 된다.
 ~~~
 
+#### APACHE 서비스 등록
+
+~~~
+Apache Monitoring에 등록하는 방법
+httpd.exe -k install
+~~~
+
+#### command 대체 프로그램
+
+conemu 를 wrapping 하여 만든 프로젝트
+[cmder](https://github.com/cmderdev/cmder)
+~~~
+링크주소 : https://github.com/cmderdev/cmder
+~~~
 
