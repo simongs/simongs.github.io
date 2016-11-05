@@ -37,6 +37,17 @@ ctrl + alt + h	|ctrl + alt + h |(same!)	show call hierarchy
 ctrl + shift + i|	alt + f8 |	evaluate expression (in debugger)
 F3	|ctrl + b	|go to declaration (e.g. go to method)
 
+### Plug-in
+
+#### MoreUnit
+Ctrl+J 로 TDD 시 테스트 클래스와 원 클래스의 이동 호흡을 빠르게 가져간다. 
+
+#### Grep Console
+Console 로그의 시각화
+
+#### Eclipse Fommater Plug-in
+기존에 사용하던 이클립스의 포맷터 파일을 임포트한다.
+
 ### TIPS
 
 #### class, method 명 is never used 경고 없애기
@@ -47,10 +58,17 @@ http://blog.woniper.net/205
 #### Code Folding 
 ~~~
 Go to File -> Settings -> Editor -> General -> Code Folding
+
+아래 체크 해제 (개인취향)
+
 Uncheck Show code folding outline
+imports
+One-line methods
 ~~~
 
-#### Live Template 
+#### Live Template 관련
+main, sysout 등 이클립스에서 사용하던 축약 템플릿 관련 설정
+
 [To Register Intellij Live Template](http://uncle-bae.blogspot.kr/2015/09/intellij-live-template.html)
 
 ~~~
@@ -106,3 +124,10 @@ idea.no.launcher=false
 sun.java2d.d3d=false
 apple.laf.useScreenMenuBar=true
 ~~~
+
+#### static import 관련 설정
+
+#### windowed 모드
+듀얼모니터를 사용하는 경우 현재 실행되고 있는 window를 별도의 창으로 확장한다.
+각 창의 우상단에 있는 환경설정 마크를 통해서 windowed Mode를 선택하도록 한다.
+
