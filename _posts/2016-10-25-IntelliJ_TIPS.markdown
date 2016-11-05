@@ -5,9 +5,11 @@ date:   2016-10-25 09:00:00 +0900
 categories: etc 
 ---
 
+ - 본 문서는 MAC 기준으로 작성한 문서입니다. 
+
 ### SHORTCUT
 
-#### Eclipse 단축키 비교
+#### Compare with Eclipse Shortcut
 아래 이름을 참고로 intellij에서 단축키 정보를 변경합니다.
 
 Eclipse	| IntelliJ IDEA | Description
@@ -42,17 +44,65 @@ F3	|ctrl + b	|go to declaration (e.g. go to method)
 http://blog.woniper.net/205
 ~~~
 
-#### code Folding 관련
+#### Code Folding 
 ~~~
 Go to File -> Settings -> Editor -> General -> Code Folding
 Uncheck Show code folding outline
 ~~~
 
-#### Live Template 관련
-[참고할만한 블로그 - Intellij Live Template 등록하기](http://uncle-bae.blogspot.kr/2015/09/intellij-live-template.html)
+#### Live Template 
+[To Register Intellij Live Template](http://uncle-bae.blogspot.kr/2015/09/intellij-live-template.html)
 
 ~~~
 환경설정에서 Live Template을 등록한다. 
 하단에 보이는 context 지정을 통해서 어떤 환경에서 
 해당 Live Template을 사용할 지 결정해야 한다.
+~~~
+
+#### JavaDoc Comment
+- install JavaDoc Plug-in in Preference
+- keyMap에서 `Plug-ins | JavaDoc | Create JavaDocs for the selected element` 의 단축키를 변경한다.
+- 해당 단축키로 잘 사용한다. (command + shift + j 로 사용중)
+
+#### static import configuration
+ - Preference > Code Style > JAVA > Import TAB 선택
+ - Package to Use Import with '*'
+ - add import string 
+
+~~~
+import static ch.lambdaj.Lambda.*;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+~~~
+
+#### increase console buffer size 
+- config file location
+
+	Applications/IntelliJ IDEA.app/Contents/bin/idea.properties
+
+- in idea.properties
+	- fix idea.cycle.buffer.size
+	
+~~~
+idea.popup.weight=heavy
+idea.dynamic.classpath=false
+swing.bufferPerWindow=false
+CVS_PASSFILE=~/.cvspass
+idea.smooth.progress=false
+idea.max.intellisense.filesize=2500
+idea.xdebug.key=-Xdebug
+idea.jre.check=true
+apple.awt.fullscreencapturealldisplays=false
+idea.cycle.buffer.size=10240
+com.apple.mrj.application.live-resize=false
+java.endorsed.dirs=
+sun.java2d.noddraw=true
+sun.java2d.pmoffscreen=false
+idea.use.default.antialiasing.in.editor=false
+idea.fatal.error.notification=disabled
+apple.awt.graphics.UseQuartz=true
+idea.no.launcher=false
+sun.java2d.d3d=false
+apple.laf.useScreenMenuBar=true
 ~~~

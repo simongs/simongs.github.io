@@ -138,6 +138,11 @@ RequestDispatcher is provided that returns the content for that path.
 
 #### 9.1.1 Query Strings in Request Dispatcher Paths
 
+The ServletContext and ServletRequest methods that create RequestDispatcher
+objects using path information allow the optional attachment of query string
+information to the path. For example, a Developer may obtain a RequestDispatcher
+by using the following code:
+
 path 정보를 사용하여 RequestDispatcher 객체를 만드는 ServeltContext와 ServletRequest 의 메소드는 path 정보에 추가적인 Query String 정보를 붙이는 것을 허용한다. 예를 들어 개발자는 아래와 같은 Code를 사용하여 RequestDispatcher 객체를 가져올 수 있다.
 
 ~~~
@@ -146,17 +151,47 @@ RequestDispatcher rd = context.getRequestDispatcher(path);
 rd.include(request, response);
 ~~~
 
+
+Parameters specified in the query string used to create the RequestDispatcher take
+precedence over other parameters of the same name passed to the included servlet.
+The parameters associated with a RequestDispatcher are scoped to apply only for
+the duration of the include or forward call. 
+
+
 Query String에 정의된 파라미터 들은 RequestDispatcher를 만드는 과정에서 동일한 이름의 다른 파라미터들 보다 우선권을 가진다. 해당 파라미터들은 include, forward 호출이 진행되는 동안에 파라미터들은 유효 scope을 가진다.
 
 ### 9.2 Using a Request Dispatcher
+~~~
+To use a request dispatcher, a servlet calls either the include method or forward
+method of the RequestDispatcher interface. The parameters to these methods can
+be either the request and response arguments that were passed in via the service
+method of the javax.servlet.Servlet interface, or instances of subclasses of the
+request and response wrapper classes that were introduced for version 2.3 of the
+specification. In the latter case, the wrapper instances must wrap the request or
+response objects that the container passed into the service method.
+~~~
 
-RequestDispatcher를 사용하기위해, servlet은 RequestDispatcher 인터페이스의 include()나 forward()를 호출합니다. 이 메소드들의 파라미터로는 javax.servlet.Servlet 인터페이스의 service()를 통해 전달된 request, response 이거나 또는 Servlet Version 2.3에 소개된 request, response의 subclass들의 인스턴스가 될 수 있습니다. 후자의 경우에는 wrapper 인스턴스는 컨테이너가 service()에 전달한 request, response 객체를 반드시 wrapping해야한다.
+RequestDispatcher를 사용하기위해, servlet은 RequestDispatcher 인터페이스의 include()나 forward()를 호출합니다. 이 메소드들의 파라미터로는 javax.servlet.Servlet 인터페이스의 service()를 통해 전달된 request, response 이거나 또는 Servlet 2.3 Ver에 소개된 request, response의 subclass들의 인스턴스가 될 수 있습니다. 후자의 경우에는 그 wrapper 인스턴스는 컨테이너가 service()에 전달한 request, response 객체를 반드시 wrapping해야한다.
+
+~~~
+The Container Provider should ensure that the dispatch of the request to a target
+servlet occurs in the same thread of the same JVM as the original request.
+~~~
 
 컨테이너 제공자는 대상 서블릿으로의 request 전송이 original request로써 동일한 JVM의 동일한 스레드에서 나타나도록 보장해야한다.
 
 ### 9.3 The Include Method
-RequestDispatcher 인터페이스의 include()는 언제든지 호출될 수 있다. include()의 타겟 서블릿은 request 객체의 모든 양상을 접근할 수 있을 수 있는 방면 response 객체의 사용은 좀 더 제한적이다.
+~~~
+The include method of the RequestDispatcher interface may be called at any time.
+The target servlet of the include method has access to all aspects of the request
+object, but its use of the response object is more limited.
+~~~
 
+RequestDispatcher 인터페이스의 include()는 언제든지 호출될 수 있다. 
+include()의 타겟 서블릿은 request 객체의 모든 양상을 접근할 수 있는 반면 
+response 객체의 사용에는 좀 더 제한적이다.
+
+~~~
 It can only write information to the ServletOutputStream or Writer of the response
 object and commit a response by writing content past the end of the response buffer,
 or by explicitly calling the flushBuffer method of the ServletResponse interface. It
@@ -167,6 +202,8 @@ headers must be ignored, and any call to HttpServletRequest.getSession()
 or HttpServletRequest.getSession(boolean) that would require adding a
 Cookie response header must throw an IllegalStateException if the response
 has been committed.
+~~~
+
 
 response 객체의 Writer 객체나, ServletOutputStream 객체를 통해서 정보를 쓰거나 response를 커밋할 수 있다. response 버퍼의 끝을 지나 content를 writing 하거나, ServletResponse 인터페이스의 flushBuffer()를 명시적으로 호출하는 방법으로 정보를 쓸 수 있다. 
 
