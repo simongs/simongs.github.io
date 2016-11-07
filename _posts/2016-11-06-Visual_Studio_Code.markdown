@@ -6,8 +6,8 @@ categories: etc windows
 ---
 
 #### Reference
-[Visual Site Code](https://code.visualstudio.com) 
-[공식 키보드 단축키 리스트-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+ - [Visual Site Code](https://code.visualstudio.com) 
+ - [공식 키보드 단축키 리스트-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
 #### 자주쓰는 단축키
 
