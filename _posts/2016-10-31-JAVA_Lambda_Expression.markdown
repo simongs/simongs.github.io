@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lambda Expression"
+title: "Java 8 Lambda Expression"
 date:   2016-10-31 09:00:00 +0900
 categories: java
 ---

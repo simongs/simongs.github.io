@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Visual Studio Code TIPSk"
+title: "Visual Studio Code TIPS"
 date:   2016-11-06 09:00:00 +0900
 categories: etc windows
 ---
