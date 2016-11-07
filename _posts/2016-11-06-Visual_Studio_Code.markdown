@@ -1,16 +1,15 @@
 ---
 layout: post
-title: "Visual Studio Code"
+title: "Visual Studio Code TIPSk"
 date:   2016-11-06 09:00:00 +0900
 categories: etc windows
 ---
 
-## Homepage
+#### Reference
 [Visual Site Code](https://code.visualstudio.com) 
+[공식 키보드 단축키 리스트-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
-## 자주쓰는 단축키
-
-[공식 키보드 단축키 리스트-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) 
+#### 자주쓰는 단축키
 
 주로 쓰는 단축키는 아래와 같이 정리합니다.
 
@@ -23,14 +22,10 @@ Action | ShortCut | Description
 TAB 이동 (in 윈도우 내) | Ctrl + Tab | 열린 윈도우 내의 TAB 이동 
 우측 윈도우로 현재 TAB 복사 | Ctrl + \ | 현재 열린 파일을 우측 윈도우로 복사한다
 Markdown Preview | Ctrl + Shift + B | Auto-Open Markdown Preview 플러그인
-gus
 편집기 TAB 닫기 | Ctrl + W | 현재 열린 편집기를 닫습니다.
 
-
-## Github 연동하기
+#### Github 연동하기
 
 탐색기에서 폴더를 열 때 github에서 다운로드 받은 디렉토리를 엽니다.
 에디터에서 자동적으로 연결이 됩니다.
-VSC[^1] 에서 바로바로 Commit & Push 가 가능합니다.
-
-[^1] : Visual Studio Code
+VSC 에서 바로바로 Commit & Push 가 가능합니다.
