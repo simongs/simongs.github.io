@@ -29,4 +29,9 @@ gus
 
 탐색기에서 폴더를 열 때 github에서 다운로드 받은 디렉토리를 엽니다.
 에디터에서 자동적으로 연결이 됩니다.
-VSC 에서 바로바로 Commit & Push 가 가능합니다.
+VSC[^1] 에서 바로바로 Commit & Push 가 가능합니다.
+
+* [VSC] : Visual Studio Code
+
+
+[^1] : Visual Studio Code
