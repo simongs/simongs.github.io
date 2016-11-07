@@ -12,6 +12,8 @@ categories: etc windows
 
 [공식 키보드 단축키 리스트-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) 
 
+주로 쓰는 단축키는 아래와 같이 정리합니다.
+
 Action | ShortCut | Description
 ------------- | ------------- | -------------
 라인복사 |Shift + Alt + arrow key (방향키) | 라인을 복사합니다.
@@ -30,8 +32,5 @@ gus
 탐색기에서 폴더를 열 때 github에서 다운로드 받은 디렉토리를 엽니다.
 에디터에서 자동적으로 연결이 됩니다.
 VSC[^1] 에서 바로바로 Commit & Push 가 가능합니다.
-
-* [VSC] : Visual Studio Code
-
 
 [^1] : Visual Studio Code
