@@ -22,12 +22,10 @@ MAC에서는 비슷한 프로그램으로 Alfred 3 가 존재한다.
 윈도우에서 쓸 수 있는 Quick Launchy
 ~~~
 
-#### Visual Studio Code
-~~~
-윈도우 환경에서 쓸 수 있는 Text Editor
+#### Clover
 
-Sublime, Atom, VSC(Visual Studio Code) 주로 3개가 언급되고 
-취향에 따라 택일하면 된다.
+~~~
+기본 탐색기 대신에 사용하는 크롬UI형 탐색기
 ~~~
 
 #### APACHE 서비스 등록
@@ -45,3 +43,9 @@ conemu 를 wrapping 하여 만든 프로젝트
 링크주소 : https://github.com/cmderdev/cmder
 ~~~
 
+#### 기타 프로그램 설치 목록 (2016.11 시점)
+ - git 설치 (2.10.X)
+ - SourceTree 설치
+ - JAVA 설치 (1.7, 1.8)
+ - Gradle 설치 (2016.11 시점 3.1)
+ - Maven 설치

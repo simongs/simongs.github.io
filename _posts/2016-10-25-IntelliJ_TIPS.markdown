@@ -125,6 +125,13 @@ sun.java2d.d3d=false
 apple.laf.useScreenMenuBar=true
 ~~~
 
+#### Spelling Check Disable 
+
+~~~
+File >> Settings >> Editor >> Inspections >> Spelling >> Typo
+를 선택해제한다.
+~~~
+
 #### static import 관련 설정
 
 #### windowed 모드
