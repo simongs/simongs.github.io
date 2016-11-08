@@ -5,21 +5,253 @@ date:   2016-10-25 09:00:00 +0900
 categories: etc netty framework 
 ---
 
-# Netty란
+ - [본 글에 나오는 Source Github Link](https://github.com/krisjey/netty.book.kor)
+ - 본 글은 자바 네트워크 소녀 Netty 책을 보고 정리한 글입니다. (책 내용이 참으로 좋습니다.) 
 
-## 1강
-10시 30분 ~ 11시 30분
-김대현님. 프리랜서 제주도 개발자.
-30대 서버였지만 지속적인 장애발생. 일일 3억 PV 
-비동기기반의 통신으로 교체하면서 36대 장비를 2대 장비로 교체.
-이때 비동기의 위력을 알게 되었다고 합니다.
+## 네트워크 프로그래밍 개념학습
 
-HAProxy , Memcached, Redis, nginx, nodeJS = 비동기 기반.
+### 동기 vs 비동기
 
-Netty를 사용하는 이유는 고성능, 쓰기 편하고, 유연하고 쉽다.
-어려운 주제임에도 불구하고 레이어가 잘 구성되어 있다.
+#### 동기
+ - 완료될 때 까지 결과를 기다리는 것
 
-Netty의 이점
+#### 비동기
+ - 완료될 때까지 기다리지 않는것
+ - 호출한 쪽이 주기적으로 끝났는지 알아내거나 (Polling)
+ - 호출받은 쪽이 완료되면 알려주거나 한다 (Notify, Callback)
+
+### Blocking I/O vs Non-Blocking I/O
+
+#### Blocking I/O
+ - 요청한 작업이 성공하거나 에러가 발생할 때 까지 응답을 돌려주지 않는다.
+ - 아래 소스에서 다수의 요청을 받기 위한 모델이 request 별로 별도의 thread 생성
+ - 1 request = 1 Socket = 1 Thread
+ - 1 thread 별 thread stack 이 쌓이므로 메모리의 한계가 있다
+ - 그 다음모델은 thread pool 을 관리하여 메모리의 누수를 막는 방법이 있다.
+ - 적절한 스레드 갯수를 정해야 하는데 두가지 관점을 고려해야한다.
+    - JVM GC를 고려해야한다. heap이 클수록 Stop-the-world 시간은 길어진다.
+    - Context Switching의 비용은 thread 수가 늘어날 수록 커진다.
+ - 그래서 Blocking방식으로는 아주 많은 수의 동시접속 사용자를 수용하기에 한계가 있다.
+
+ ~~~java
+ public class BlockingServer {
+    public static void main(String[] args) throws Exception {
+        BlockingServer server = new BlockingServer();
+        server.run();
+    }
+
+    private void run() throws IOException {
+        ServerSocket server = new ServerSocket(8888);
+        System.out.println("접속 대기중");
+
+        while (true) {
+            Socket sock = server.accept();
+            System.out.println("클라이언트 연결됨");
+
+            OutputStream out = sock.getOutputStream();
+            InputStream in = sock.getInputStream();
+
+            while (true) {
+                try {
+                    int request = in.read(); // blocking method
+                    
+                    // blocking method, 운영체제의 송신버퍼에 전송할 데이터를 기록한다. 
+                    // 이때 송신버퍼의 남은 크기가 write 메소드에서 기록한 데이터의 크기보다 작다면 
+                    // 송신버퍼가 비워질 때까지 블로킹된다.
+                    out.write(request); 
+                }
+                catch (IOException e) {
+                    break;
+                }
+            }
+        }
+    }
+}
+~~~
+
+#### Non-Blocking I/O
+ - 요청한 작업의 성공여부와 상관없이 바로 결과를 돌려주는 것
+ - blocking 소켓은 read, write, accept() 등과 같이 입출력 메소드가 호출되면 완료될 때까지 스레드가 멈추게 된다.
+ - 일종의 이벤트 기반 프로그래밍이다.
+ - Non-Blocking 소캣의 Selector 를 활용한 I/O 이벤트 감시
+
+~~~java
+public class NonBlockingServer {
+    private Map<SocketChannel, List<byte[]>> keepDataTrack = new HashMap<>();
+    private ByteBuffer buffer = ByteBuffer.allocate(2 * 1024);
+
+    private void startEchoServer() {
+       try (
+          // Selector는 자신에게 등록된 채널에 변경 사항이 발생했는지 확인한다.
+          // 변경사항이 발생한 채널에 대한 접근을 가능하게 한다.
+          Selector selector = Selector.open();
+
+          // blocking 소켓의 ServerSocket에 대응하는 Non-Blocking 소켓클래스
+          ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()
+        ) {
+
+          if ((serverSocketChannel.isOpen()) && (selector.isOpen())) {
+             serverSocketChannel.configureBlocking(false); // default value is true. 비동기로 하려면 세팅필요
+             serverSocketChannel.bind(new InetSocketAddress(8888)); // port binding
+
+             // ServerSocketChannel 에 Selector 를 등록한다.
+             // Selector가 감지할 이벤트는 연결 요청에 해당하는 Accept() Operation 이다.
+             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+             System.out.println("접속 대기중");
+
+             while (true) {
+                // Selector 에 등록된 채널에서 변경사항이 있는지 검사한다.
+                // Selector 에 아무런 I/O 이밴트도 발생하지 않으면 스레드는 이 부분에서 블로킹 된다.
+                // I/O 이벤트가 발생하지 않았을 때 블로킹을 피하고 싶다면 selectNow()를 사용하면 된다.
+                selector.select();
+
+                // Selector 에 등록돤 채널 중에서 I/O 이벤트가 발생한 채널들의 목록을 조회한다.
+                Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+
+                while (keys.hasNext()) {
+                   SelectionKey key = (SelectionKey) keys.next();
+
+                   // I/O 이벤트가 발생한 채널에서 동일한 이벤트가 감지되는 것을 방지하기 위해 제거한다.
+                   keys.remove();
+
+                   if (!key.isValid()) {
+                      continue;
+                   }
+                   
+                   // 연결요청
+                   if (key.isAcceptable()) {
+                      this.acceptOP(key, selector);
+                   }
+
+                   // 데이터 수신
+                   else if (key.isReadable()) {
+                      this.readOP(key);
+                   }
+
+                   // 데이터 쓰기 가능
+                   else if (key.isWritable()) {
+                      this.writeOP(key);
+                   }
+                }
+             }
+          }
+          else {
+             System.out.println("서버 소캣을 생성하지 못했습니다.");
+          }
+       }
+       catch (IOException ex) {
+          System.err.println(ex);
+       }
+    }
+
+    private void acceptOP(SelectionKey key, Selector selector) throws IOException {
+       ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
+       // 클라이언트의 연결을 수락하고 연결된 소켓 채널을 가져온다.
+       SocketChannel socketChannel = serverChannel.accept();
+       socketChannel.configureBlocking(false);
+
+       System.out.println("클라이언트 연결됨 : " + socketChannel.getRemoteAddress());
+
+       keepDataTrack.put(socketChannel, new ArrayList<byte[]>());
+
+       // 클라이언트 소켓 채널을 Selector에 등록하여 I/O 이벤트를 감시한다.
+       socketChannel.register(selector, SelectionKey.OP_READ);
+    }
+
+    private void readOP(SelectionKey key) {
+       try {
+          SocketChannel socketChannel = (SocketChannel) key.channel();
+          buffer.clear();
+          int numRead = -1;
+          try {
+             numRead = socketChannel.read(buffer);
+          }
+          catch (IOException e) {
+             System.err.println("데이터 읽기 에러!");
+          }
+
+          if (numRead == -1) {
+             this.keepDataTrack.remove(socketChannel);
+             System.out.println("클라이언트 연결 종료 : "
+                                + socketChannel.getRemoteAddress());
+             socketChannel.close();
+             key.cancel();
+             return;
+          }
+
+          byte[] data = new byte[numRead];
+          System.arraycopy(buffer.array(), 0, data, 0, numRead);
+          System.out.println(new String(data, "UTF-8")
+                              + " from " + socketChannel.getRemoteAddress());
+
+          doEchoJob(key, data);
+       }
+       catch (IOException ex) {
+          System.err.println(ex);
+       }
+    }
+
+    private void writeOP(SelectionKey key) throws IOException {
+       SocketChannel socketChannel = (SocketChannel) key.channel();
+
+       List<byte[]> channelData = keepDataTrack.get(socketChannel);
+       Iterator<byte[]> its = channelData.iterator();
+
+       while (its.hasNext()) {
+          byte[] it = its.next();
+          its.remove();
+          socketChannel.write(ByteBuffer.wrap(it));
+       }
+
+       key.interestOps(SelectionKey.OP_READ);
+    }
+
+    private void doEchoJob(SelectionKey key, byte[] data) {
+       SocketChannel socketChannel = (SocketChannel) key.channel();
+       List<byte[]> channelData = keepDataTrack.get(socketChannel);
+       channelData.add(data);
+
+       key.interestOps(SelectionKey.OP_WRITE);
+    }
+
+    public static void main(String[] args) {
+       NonBlockingServer main = new NonBlockingServer();
+       main.startEchoServer();
+    }
+ }
+~~~
+
+### Event-Driven 프로그래밍
+ - Javascript, iOS 앱, Android앱, 데스크탑 어플리케이션 주로 클라이언트 단의 프로그래밍에서 등장하는 패턴
+ - NodeJS는 비동기 싱글스레드이다. 비동기식 API와 동기식 API가 혼재되어 있다. (API에 명시됨)
+ - 이벤트 기반 프로그래밍은 추상화 레벨이 중요하다. abstract <-> detail 의 간격 조절 중요
+
+#### Event Driven in Netty
+
+##### 소켓 연결 순서
+
+소켓이란 데이터 송수신을 위한 네트워크 추상화 단위이다.
+일반적으로 네트워크 프로그래밍에서 소켓은 IP주소와 포트를 가지고 있으며 양방향 네트워크 통신이 가능한 객체이다.
+
+소켓에 데이터를 기록하거나 읽으려면 소켓에 연결된 소켓 채널(NIO) 이나 스트림(Old Blocking I.O)를 사용해야 한다.
+네티가 제공하는 소켓 채널과 용어를 분리하고자 스트림으로 통칭한다.
+클라이언트 어플리케이션이 소켓에 연결된 스트림에 데이터를 기록하면 소켓이 해당 데이터를 인터넷으로 연결된 서버로 전송한다.
+
+클라이언트|서버
+------|------
+-|서버소켓생성
+소켓생성|포트바인딩
+연결요청|연결대기
+- | 연결수락
+- | 소켓생성
+데이터 전송 | 데이터 수신
+데이터 수신 | 데이터 전송
+소켓 닫기 | 소켓 닫기
+
+#### Netty inbound vs outbound
+어떤 입장의 inbound, outbound인지를 명확하게 해야한다. (client 와 server는 정반대이다.)
+
+### Netty의 이점
  - Asyncronous Event-Driven Network Framework
  - Non-Blocking 비동기 처리가 기본이고 적은 스레드로 많은 사용자의 접속을 받을 수 있다.
  - GC부하를 최소화하는 Zero-copy ByteBuf를 지원한다. GC 시점에 회피하도록 한다.
@@ -30,37 +262,18 @@ Netty의 이점
 각종 네트워크 프로토콜 (코덱 기본 지원)
  - Size + Data = Payload 방식
 
-### 동기 vs 비동기
-완료될 때 까지 기다린다. 결과를 통보받는다. 의 차이점
-비동기의 2가지 방식 : polling , pushing
+### Netty Interface List
 
-#### Sync vs Async
-
-#### Blocking vs Non-Blocking
-
-#### Event-Driven 프로그래밍
-Javascript, iOS 앱, Android앱, 데스크탑 어플리케이션
-주로 클라이언트 단의 프로그래밍에서 등장하는 패턴
-
-NodeJS는 비동기 싱글스레드이다.
-비동기식 API와 동기식 API가 혼재되어 있다. (API에 명시됨)
-
-#### JAVA의 NIO
-
-### Netty
-
-#### Interface
-
-##### Channel
+#### Channel
 스트림, 파일, 모든 I/O 작업은 비동기
 읽기, 쓰기, 연결(connect), 바인드(bind)
 remoteAddress 지금 붙어있는 클라이언트의 IP정보 (SocketAddress)
 
-##### ChannelFuture
+#### ChannelFuture
 사건을 걸어놓는 장소
 Listener -> 여러개의 액션을 추가해놓는다. (addListener(List)
 
-##### ChannelHandler
+#### ChannelHandler
 어떻게 핸들링할까? 어떤 액션을 할까?
 Netty를 개발한다는 것은 ChannelHandler를 만드는 작업이다 (중요)
 channelInboundHandlerAdapter
@@ -69,29 +282,25 @@ ChannelOutboundHandlerAdapter
 내가 쓰고자 하는 요청을 받을 수 있다 여기서 내용을 writing 할 수 있다.
 보통은 무언가를 받았을때 무언가를 한다를 기술하게 된다.
 
-##### ChannelHandlerContext
+#### ChannelHandlerContext
 Handler는 하나이지만 어떤 request(Context)인지를 확인하는 용도로 사용한다.
 
-
-##### ChannelPipeline
+#### ChannelPipeline
 이런것들을 다 연결해 놓는 곳
 
-##### EventLoop
+#### EventLoop
 직접 건드릴 일은 거의 없음. 등록된 channel 들의 I/O 담당
 
-##### Intercepting Filter
+#### Intercepting Filter
 
-#### Netty와 UnitTest
+### Netty와 UnitTest
 비동기 방식의 유닛테스트는 어려울 수 있다. 
 EmbeddedChannel 을 활용한다. (Inbound, Outbound 등을 정의할 수 있다.)
 
-
-## 2강
-
 ### Netty 메모리 모델
+
 #### 메모리 모델과 바이트 버퍼
-중요한 포인트입니다.
-Netty에서 사용하는 ByteBuf 는 별도로 관리한다. 
+ - 중요한 포인트입니다. Netty에서 사용하는 ByteBuf 는 별도로 관리한다. 
  - 성능 측면에서 GC부담 최소화
  - ByteBuf를 window를 쪼개서 준다?
  - heap에 할당하면 GC가 돌아갈때 계속 counting을 한다. 그러나 Netty는 별도의 메모리 공간을 미리 할당해서 GC가 돌아갈때 count되지 않도록 회피한다.
@@ -158,6 +367,7 @@ Channel은 단 하나의 스레드에 할당되고 그 스레드에서만 호출
 무거운 작업은 다른 스레드가 했지만 결과를 원래 스레드로 받아서 활용
 
 #### Future
+
 ~~~
 Future<Image> img = loadImage(); // 이미지 로딩을 시작한다.
 renderHtmlText() // 일단 텍스트 부터 노출한다.
@@ -166,11 +376,11 @@ drawImage(img.get()) // 이미지가 로딩이 완료되면 이미지를 노출�
 img.get() 호출하면 일단 Blocking을 했다가 로딩이 완료되면 img.get()을 수행하여 완료한다.
 
 #### Promise
+
 Future애 결과를 통보하는 입장에서 사용.
 ~~~
 위의 예로보면 이미지를 로딩을 기다리고 있는 곳에 알려주는 역할을 한다.
 ~~~
-
 
 ## 4강
 
