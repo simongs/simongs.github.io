@@ -2,7 +2,7 @@
 layout: post
 title: "JVM Internal and Operation Tips"
 date:   2016-11-08 09:00:00 +0900
-categories: network
+categories: java
 ---
 
 ## TIPS
