@@ -2,7 +2,7 @@
 layout: post
 title: "[Netty] About Netty"
 date:   2016-10-25 09:00:00 +0900
-categories: etc netty 
+categories: etc netty framework 
 ---
 
 # Netty란

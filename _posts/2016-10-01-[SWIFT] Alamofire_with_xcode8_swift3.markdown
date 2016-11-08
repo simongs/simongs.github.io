@@ -59,7 +59,7 @@ pod install
 
 #### 2.1. (CocoaPods) swift 3.0 을 사용하기 위한 방법
 
- - Build Option 을 3.0으로 세팅
+ - Build Option 을 3.0으로 setting
  
 ~~~
   post_install do |installer|
@@ -182,7 +182,7 @@ func testExample() {
  - [Alamofire 라이브러리 연결](https://outofbedlam.github.io/swift/2016/02/04/Alamofire/)
  - [Alamofire 테스트 케이스](http://stackoverflow.com/questions/39894064/how-to-write-unit-test-for-alamofire-request-function)
  - [swift 에서 URLRequest, JSON 파싱 (REST API 클라이언트 개발)](http://mtsparrow.blogspot.kr/2016/04/swift-urlrequest-json-rest-api.html)
-- [cocoapods 이용하기](http://mtsparrow.blogspot.kr/2016/03/cocoapod.html)
-- [Alamofire JSON 응답결과 -> Object 로 변환](https://github.com/tristanhimmelman/AlamofireObjectMapper)
-- [JSON library comparison in Swift](
+ - [cocoapods 이용하기](http://mtsparrow.blogspot.kr/2016/03/cocoapod.html)
+ - [Alamofire JSON 응답결과 -> Object 로 변환](https://github.com/tristanhimmelman/AlamofireObjectMapper)
+ - [JSON library comparison in Swift](
 http://yannickloriot.com/2016/02/json-library-comparison-in-swift/)
