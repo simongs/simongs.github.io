@@ -5,10 +5,17 @@ date:   2016-11-08 09:00:00 +0900
 categories: java
 ---
 
+## Reference
+ - [Java Garbage Collection - GC의 기초학습](http://d2.naver.com/helloworld/1329)
+ - [Jvm Internal](http://d2.naver.com/helloworld/1230)
+ - [Java Reference와 GC](http://d2.naver.com/helloworld/329631)
+
 ## TIPS
 
 #### Get JVM GC Algorithm ([관련 링크 - STACKOVERFLOW](http://stackoverflow.com/questions/2498942/how-can-i-see-which-garbage-collector-java-is-using))
   
+현재 운영중인 서버의 GC 알고리즘이 궁금하다면?
+
 ~~~
 ~) jmap -heap 2313
 
