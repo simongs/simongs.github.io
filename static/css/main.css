@@ -4,7 +4,7 @@
 body {
     font-family: "Roboto Condensed", Arial, sans-serif;
     background-color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5em;
     color: #666;
     font-weight: 300;
@@ -40,16 +40,6 @@ h1:first-of-type{margin-top:1em}
 h2{margin-bottom:.8em;padding-bottom:.1em;border-bottom:2px solid #000;background:none;font-size:20px;line-height:1.5em}
 h3{margin-bottom:.4em;padding-bottom:.1em;border-bottom:1px dotted #999;background:none;font-size:17px;line-height:1.5em}
 h4{padding:0 .5em .2em;border-left:3px solid #333;background:none;font-size:14px}
-
-a, a:link, a:active {
-    text-decoration: none;
-    color: #8C8C8C;
-}
-
-a:hover {
-    color: #B3B3B3;
-    text-decoration: underline;
-}
 
 /**
  * /////////////////
@@ -212,4 +202,34 @@ div.col-sm-3 img#about {
     div.col-sm-3 {
         margin-top: 30px;
     }
+}
+
+a, a:link, a:active {
+    text-decoration: none;
+    color: #4080d0;
+}
+
+a:hover {
+    color: #4080d0;
+    text-decoration: underline
+}
+
+table {
+    border-collapse: collapse
+}
+
+table>thead>tr>th {
+    text-align: left;
+    border-bottom: 1px solid
+}
+
+table>tbody>tr>td,
+table>tbody>tr>th,
+table>thead>tr>td,
+table>thead>tr>th {
+    padding: 5px 10px
+}
+
+table>tbody>tr+tr>td {
+    border-top: 1px solid
 }

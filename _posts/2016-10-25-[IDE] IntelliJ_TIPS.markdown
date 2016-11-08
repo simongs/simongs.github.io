@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "IntelliJ TIPS"
+title: "[IDE] IntelliJ TIPS"
 date:   2016-10-25 09:00:00 +0900
-categories: etc 
+categories: etc ide
 ---
 
  - 본 문서는 MAC 기준으로 작성한 문서입니다. 
@@ -123,6 +123,13 @@ apple.awt.graphics.UseQuartz=true
 idea.no.launcher=false
 sun.java2d.d3d=false
 apple.laf.useScreenMenuBar=true
+~~~
+
+#### Spelling Check Disable 
+
+~~~
+File >> Settings >> Editor >> Inspections >> Spelling >> Typo
+를 선택해제한다.
 ~~~
 
 #### static import 관련 설정
