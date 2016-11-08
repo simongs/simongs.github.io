@@ -34,7 +34,9 @@ categories: etc netty framework
  - 그래서 Blocking방식으로는 아주 많은 수의 동시접속 사용자를 수용하기에 한계가 있다.
 
  ~~~java
+
  public class BlockingServer {
+
     public static void main(String[] args) throws Exception {
         BlockingServer server = new BlockingServer();
         server.run();
@@ -76,6 +78,7 @@ categories: etc netty framework
  - Non-Blocking 소캣의 Selector 를 활용한 I/O 이벤트 감시
 
 ~~~java
+
 public class NonBlockingServer {
     private Map<SocketChannel, List<byte[]>> keepDataTrack = new HashMap<>();
     private ByteBuffer buffer = ByteBuffer.allocate(2 * 1024);
@@ -250,6 +253,42 @@ public class NonBlockingServer {
 
 #### Netty inbound vs outbound
 어떤 입장의 inbound, outbound인지를 명확하게 해야한다. (client 와 server는 정반대이다.)
+
+### Netty BootStrap
+
+#### 대표적인 구성요소
+- 이벤트 루프
+    - 소켓 채널애서 발생한 이벤트를 처리하는 스레드 모델에 대한 구현
+- 채널의 전송 모드
+    - blocking, non-blocking, epoll
+    - epoll은 linux 커널 2.6 이상에서만 사용가능한 입출력 다중화 기볍
+- 채널 파이프라인
+    - 소켓 채널로 수신된 데이터를 처리할 데이터핸들러들을 지정한다.
+
+#### 정의
+부트스트랩은 네티로 작성한 네트워크 어플리케이션의 동작 방식과 환경을 설정하는 도우미 클래스이다.
+예를 들어 네트워크에서 수신한 데이터를 단일 스레드로 데이터베이스에 저장하는 네트워크 프로그램을 작성한다고 가정
+ - NIO 소켓 모드를 지원하는 서버 소캣 채널
+ - 데이터를 변환하여 데이터베이스에 저장하는 데이터 처리 이벤트 핸들러
+ - 8099 포트 바인딩
+ - 단일 스레드를 지원하는 이벤트 루프
+
+#### 구조
+- 전송계층 (소켓모드 및 I/O 종류)
+- 이벤트루프 (단일스레드, 다중스레드)
+- 채널 파이프라인
+- 소켓 주소와 포트
+- 소켓 옵션
+
+#### 종류
+- 서버 어플리케이션 : ServerBootStrap
+- 클라이언트 어플리케이션 : BootStrap
+
+
+
+
+
+
 
 ### Netty의 이점
  - Asyncronous Event-Driven Network Framework
