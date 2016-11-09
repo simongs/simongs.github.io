@@ -180,3 +180,14 @@ channelFuture closeFuture = serverChannel.closeFuture();
 // closeFuture 객체는 채널의 연결이 종료될 때 연결 종료 이벤트를 받는다.
 closeFuture.sync();
 ~~~
+
+
+### 보안 
+
+#### 네트워크 데이터 캡쳐 방법
+ - TCP Dump 계열의 네트워크 분석 도구 이용 (wireshark, Ethereal)
+ - 브라우져의 플러그인 (크롬의 개발자 도구)
+ - 특정한 프로토콜의 캡쳐 방법 (Fiddler, charles)
+    - Forward Proxy 방식
+    - 브라우져의 proxy 설정에 자신의 port를 등록하여 proxy 한다.
+####

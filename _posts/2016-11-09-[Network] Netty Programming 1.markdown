@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Netty] Start Netty Programming 1 - 개요"
-date:   2016-10-25 09:00:00 +0900
+date:   2016-11-09 08:00:00 +0900
 categories: etc netty framework 
 ---
 
@@ -33,7 +33,7 @@ categories: etc netty framework
     - Context Switching의 비용은 thread 수가 늘어날 수록 커진다.
  - 그래서 Blocking방식으로는 아주 많은 수의 동시접속 사용자를 수용하기에 한계가 있다.
 
- ~~~java
+~~~java
 public class BlockingServer {
     public static void main(String[] args) throws Exception {
         BlockingServer server = new BlockingServer();
@@ -66,7 +66,6 @@ public class BlockingServer {
         }
     }
 }
-
 ~~~
 
 #### Non-Blocking I/O
