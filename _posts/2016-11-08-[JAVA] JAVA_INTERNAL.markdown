@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "JVM Internal and Operation Tips"
+title: "[STUDY] JVM Internal and Operation Tips"
 date:   2016-11-08 09:00:00 +0900
-categories: java
+categories: java study
 ---
 
 ## Reference

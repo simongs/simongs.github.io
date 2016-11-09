@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "MariaDB 설치하기"
+title: "[DB] MariaDB 설치하기"
 date:   2016-09-28 17:45:49 +0900
-categories: database config 
+categories: database 
 ---
 
 ## Version Info

@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "[Netty] About Netty"
+title: "[Netty] Start Netty Programming"
 date:   2016-10-25 09:00:00 +0900
 categories: etc netty framework 
 ---
 
  - [본 글에 나오는 Source Github Link](https://github.com/krisjey/netty.book.kor)
- - 본 글은 자바 네트워크 소녀 Netty 책을 보고 정리한 글입니다. (책 내용이 참으로 좋습니다.) 
+ - 본 글은 `자바 네트워크 소녀 Netty` 책을 보고 정리한 글입니다. (책 내용이 참으로 좋습니다.) 
 
 ## 네트워크 프로그래밍 개념학습
 

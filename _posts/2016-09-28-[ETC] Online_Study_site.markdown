@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Online Study Site"
+title: "[ETC] Online Study Site"
 date:   2016-10-01 17:45:49 +0900
 categories: etc  
 ---
