@@ -36,7 +36,6 @@ categories: etc netty framework
  ~~~java
 
  public class BlockingServer {
-
     public static void main(String[] args) throws Exception {
         BlockingServer server = new BlockingServer();
         server.run();
@@ -68,7 +67,7 @@ categories: etc netty framework
             }
         }
     }
-}
+ }
 ~~~
 
 #### Non-Blocking I/O

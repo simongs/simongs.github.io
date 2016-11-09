@@ -35,7 +35,7 @@ VSC 에서 바로바로 Commit & Push 가 가능합니다.
 파일 > 기본설정 > 바로가기 키 를 선택한 후 수정하면 `keybindings.json` 파일이 생성됩니다.
 아래와 같이 재정의를 합니다.
 
-~~~json
+~~~java
 // 키 바인딩을 이 파일에 넣어서 기본값을 덮어씁니다.
 [
     { "key": "ctrl+shift+d", "command": "editor.action.deleteLines", "when": "editorTextFocus && !editorReadonly" },
