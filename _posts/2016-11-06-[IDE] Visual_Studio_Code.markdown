@@ -38,8 +38,14 @@ VSC 에서 바로바로 Commit & Push 가 가능합니다.
 ~~~java
 // 키 바인딩을 이 파일에 넣어서 기본값을 덮어씁니다.
 [
+    // 라인 삭제 재정의 및 키 바인딩 삭제 (- 표기)
     { "key": "ctrl+shift+d", "command": "editor.action.deleteLines", "when": "editorTextFocus && !editorReadonly" },
-    // 키 바인딩 삭제 (- 표기)
-    { "key": "ctrl+shift+d", "command": "-workbench.view.debug" }
+    { "key": "ctrl+shift+d", "command": "-workbench.view.debug" },
+    
+    // 라인복사 재정의 및 키 바인딩 삭제 (- 표기)
+    { "key": "ctrl+alt+down", "command": "editor.action.copyLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
+    { "key": "ctrl+alt+up",   "command": "editor.action.copyLinesUpAction", "when": "editorTextFocus && !editorReadonly" },
+    { "key": "ctrl+alt+up",   "command": "-editor.action.insertCursorAbove", "when": "editorTextFocus" },
+    { "key": "ctrl+alt+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus" }
 ]
 ~~~

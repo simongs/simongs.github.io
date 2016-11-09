@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Netty] Start Netty Programming"
+title: "[Netty] Start Netty Programming 1 - 개요"
 date:   2016-10-25 09:00:00 +0900
 categories: etc netty framework 
 ---
@@ -34,8 +34,7 @@ categories: etc netty framework
  - 그래서 Blocking방식으로는 아주 많은 수의 동시접속 사용자를 수용하기에 한계가 있다.
 
  ~~~java
-
- public class BlockingServer {
+public class BlockingServer {
     public static void main(String[] args) throws Exception {
         BlockingServer server = new BlockingServer();
         server.run();
@@ -54,12 +53,11 @@ categories: etc netty framework
 
             while (true) {
                 try {
-                    int request = in.read(); // blocking method
-                    
                     // blocking method, 운영체제의 송신버퍼에 전송할 데이터를 기록한다. 
                     // 이때 송신버퍼의 남은 크기가 write 메소드에서 기록한 데이터의 크기보다 작다면 
                     // 송신버퍼가 비워질 때까지 블로킹된다.
-                    out.write(request); 
+                    int request = in.read();
+                    out.write(request);
                 }
                 catch (IOException e) {
                     break;
@@ -67,7 +65,8 @@ categories: etc netty framework
             }
         }
     }
- }
+}
+
 ~~~
 
 #### Non-Blocking I/O
@@ -282,9 +281,6 @@ public class NonBlockingServer {
 #### 종류
 - 서버 어플리케이션 : ServerBootStrap
 - 클라이언트 어플리케이션 : BootStrap
-
-
-
 
 
 
