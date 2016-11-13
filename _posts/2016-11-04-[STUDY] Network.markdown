@@ -5,8 +5,8 @@ date:   2016-11-04 09:00:00 +0900
 categories: network study
 ---
 
+- TOC
 {:toc}
-
 
 ### DNS (Domain Name System)
  32bit IP주소(ipv4) 를 일일이 기억할 수 없어서 그와 매핑된 Domain을 관리하는 시스템
@@ -16,11 +16,12 @@ categories: network study
  - DNS Resolver = Name Resolution을 수행하는 녀석 (DNS Client) 
 
 #### DNS Request
-문의항목|설명
+
+요청항목|설명
 -----|------
-이름|서버나 메일 배송처의 이름
+이름  |서버나 메일 배송처의 이름
 클래스 | 이름의 클래스, 인터넷 IN 고정
-타입 | A: 등록되어 있는 서버명 IP 회답 <br/> MX : 이름은 메일 배송처 나타냄
+타입  | A: 등록되어 있는 서버명 IP 회답 <br/> MX : 이름은 메일 배송처 나타냄
 
 ### Byte Order
  - 쓰이는 곳에 따라 호스트 바이트 순서, 네트워크 바이트 순서 로 나뉜다.
