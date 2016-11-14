@@ -5,6 +5,7 @@ date: 2016-10-13 09:00:00 +0900
 categories: linux
 ---
 
+{:toc}
 
 ## Linux Command
 
@@ -27,9 +28,15 @@ tracetcp 10.161.221.136:3306 -n
 ~~~
 netstat -an | grep "연동서버 IP"
 ~~~
-* ESTABLISHED
-* TIME_WAIT
 
+##### option 설명
+ - -a : 통신중만 아니고 통신 개시 전의 것도 모두 포함
+ - -n : IP주소나 포트 번호를 번호로 표시합니다.
+ 
+##### connection 상태  
+* ESTABLISHED 접속 동작이 끝나고 데이터 통신 중임을 표시
+* LISTENING 상대로부터 접속을 기다리는 상태
+* TIME_WAIT
 
 ### About Log
 
