@@ -12,14 +12,19 @@ categories: etc spec document
 
 ### 9.1 RequestDispatcher 가져오기 (Obtaining a RequestDispatcher)
 
+~~~
 An object implementing the RequestDispatcher interface may be obtained from the
 ServletContext via the following methods:
+~~~
 
 ServletContext 의 아래 메소드를 통해 RequestDispatcher 인터페이스를 구현한 객체를 얻을 수 있다.
 
+----
  - getRequestDispatcher
  - getNamedDispatcher
+----
 
+~~~
  The getRequestDispatcher method takes a String argument describing a path
 within the scope of the ServletContext. This path must be relative to the root of the
 ServletContext and begin with a ‘/’, or be empty. The method uses the path to
@@ -27,6 +32,7 @@ look up a servlet, using the servlet path matching rules in Chapter 12, “Mappi
 Requests to Servlets”, wraps it with a RequestDispatcher object, and returns the
 resulting object. If no servlet can be resolved based on the given path, a
 RequestDispatcher is provided that returns the content for that path.
+~~~
 
  getRequestDispatcher 메소드는 ServletContext의 scope을 포함하는 path인 문자열 매개변수를 가진다. 
  이 path는 `ServletContext`의 root를 나타내는 상대경로여야만 하고, `/` 으로 시작하거나 혹은 비어 있어야 한다. 
@@ -34,23 +40,28 @@ RequestDispatcher is provided that returns the content for that path.
  (Chapter 12, `Mapping Requests to Servlets` 에 소개하는 Rule에 의해 찾는다). 
  만약 주어진 path 기반으로 resolved 되는 servelt이 없다면 a RequestDispatcher is provided that returns the content for that path.
 
+~~~
 The getNamedDispatcher method takes a String argument indicating the name of a
 servlet known to the ServletContext. If a servlet is found, it is wrapped with a
 RequestDispatcher object and the object is returned. If no servlet is associated with
 the given name, the method must return null.
+~~~
 
 `getNamedDispatcher` 메소드는 `ServletContext` 에 등록되어 있는 Servlet 이름을 나타내는 문자열 매개변수를 가진다. 
 만약 servlet을 찾으면, 메소드에서는 `RequestDispatcher` 객체를 wrapping 하고  해당 객체를 반환한다. 
 해당 매개변수의 servelt을 찾지 못한다면 메소드는 반드시 `null`을 반환한다.
 
+~~~
 To allow RequestDispatcher objects to be obtained using relative paths that are
 relative to the path of the current request (not relative to the root of the
 ServletContext), the getRequestDispatcher method is provided in the
 ServletRequest interface.
+~~~
 
 (ServletContext 의 root 기준이 아닌) 현재 요청에 상대적인 path를 이용해서 RequestDispatcher 객체를 가져오는 것을 허락하기 위해서 
 getRequestDispatcher 메소드는 ServletRequest 인터페이스에서 제공된다.
 
+~~~
 The behavior of this method is similar to the method of the same name in the
 ServletContext. The servlet container uses information in the request object to
 transform the given relative path against the current servlet to a complete path. For
@@ -58,15 +69,18 @@ example, in a context rooted at ’/’ and a request to /garden/tools.html, a r
 dispatcher obtained via ServletRequest.getRequestDispatcher("header.html")
 will behave exactly like a call to
 ServletContext.getRequestDispatcher("/garden/header.html").
+~~~
 
 이 메소드의 내용은 ServletContext 인터페이스의 같은 이름의 메소드와 비슷하다. 
 
 #### 9.1.1 Query Strings in Request Dispatcher Paths
 
+~~~
 The ServletContext and ServletRequest methods that create RequestDispatcher
 objects using path information allow the optional attachment of query string
 information to the path. For example, a Developer may obtain a RequestDispatcher
 by using the following code:
+~~~
 
 path 정보를 사용하여 RequestDispatcher 객체를 만드는 ServeltContext와 ServletRequest 의 메소드는 
 path 정보에 추가적인 Query String 정보를 붙이는 것을 허용한다. 
