@@ -233,3 +233,32 @@ then
     LOG_DATE=$2
 fi
 ~~~
+
+## Example
+
+### Example 1
+
+{% highlight ruby %}
+servers=(
+"server1"
+)
+
+servers2=(
+"server2"
+)
+
+directories=(
+"/home/test1/service/log"
+)
+
+
+for SERVER in "${servers2[@]}"
+do
+        echo "========= ${SERVER} ===============\n\n"
+
+        for DIR in "${directories[@]}"
+        do
+                ssh irteam@${SERVER} "mkdir -p ${DIR}"
+        done
+done
+{% highlight ruby %}
