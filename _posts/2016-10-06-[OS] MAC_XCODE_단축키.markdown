@@ -10,6 +10,11 @@ categories: swift
 #### MAC Symbols
 ![mac symbols](http://www.mfk.co.kr/media/kunena/attachments/legacy/images/201009_MacOSX_Symbol.jpg)
 
+#### Safari에서 영어단어 보기
+~~~
+특정 단어를 focusing 한 후에 3 fingers touch를 수행
+~~~
+
 #### screen Zoon in-out
 ~~~
 트랙패드에서 두 손가락으로 드래그하는 동안 Control(^) 키를 눌러 확대하십시오.
@@ -26,6 +31,11 @@ Command + L
 How to Use Multi Desktop 
 http://zosolution.com/166
 http://zosolution.com/191
+~~~
+
+#### MAC window 전체화면
+~~~
+Ctrl + Command + F
 ~~~
 
 #### Finder

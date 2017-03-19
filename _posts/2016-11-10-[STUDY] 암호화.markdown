@@ -132,3 +132,17 @@ drwxr-xr-x  7 simons  staff   238 11  9 20:33 ..
 -rw-r--r--  1 simons  staff  1070 11  9 20:42 netty.csr
 -rw-r--r--  1 simons  staff  1766 11  9 20:34 privatekey.pem
 ~~~
+
+## AES 알고리즘
+
+대표적인 대칭키 알고리즘
+
+- IV : Initial Vector
+- mode of operation : 운영모드
+
+IV 값은 운영모드가 결정한다.
+예를 들어 CBC 같은 경우는 IV 값의 크기가 Block 크기과 같다.
+
+AES-128, AES-256 은 KEY의 bit수를 나타낸다.
+즉 128은 16바이트, 256은 32바이트를 의미한다.
+Key의 바이트가 커진다고 IV 값이 무조건 커지지 않는다.
