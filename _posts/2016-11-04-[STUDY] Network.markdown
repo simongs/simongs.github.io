@@ -156,14 +156,19 @@ RJ-45 커넥터 - MAU - Ethernet Controller - Buffer Memory
 
 ### Byte Order
  - 쓰이는 곳에 따라 호스트 바이트 순서, 네트워크 바이트 순서 로 나뉜다.
+ - 메모리는 시작주소(낮은 주소)에서 부터 끝주소(높은 주소)로 쓰인다.
+
 
 #### Host Byte Order
- - 시스템이 내부적으로 데이터를 표현하는 방식
+ - 개별 시스템이 내부적으로 데이터를 표현하는 방식
  - Big-Endian, Little-Endian 으로 나뉜다.
  - 시스템의 CPU에 따라서 결정된다.
 
 ##### Big-Endian
  - IBM, ARM, Motorola 
+ - 시작주소에 4바이트 중 제일 큰 바이트(BIG)인 0x12 값이 먼저 쓰이는 케이스
+ - 11이라는 Integer(4 Byte)를 읽어내기 위해서 4개 바이트를 모두 읽어야 한다.
+ - 상위 바이트가 메모리에 먼저 적재되는 방식
 
 ~~~
 0×12345678
@@ -173,6 +178,9 @@ RJ-45 커넥터 - MAU - Ethernet Controller - Buffer Memory
 
 ##### Little-Endian
  - Intel X86, AMD, EDC
+ - 시작주소에 4바이트 중 제일 작은 바이트(BIG)인 0x78 값이 먼저 쓰이는 케이스
+ - 11이라는 Integer(4 Byte)를 읽어내기 위해서 첫번째 바이트만 읽어도 알 수 있다.
+ - 하위 바이트가 메모리에 먼저 적재되는 방식
 
 ~~~
 0×12345678
