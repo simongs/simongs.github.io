@@ -5,6 +5,9 @@ date:   2016-09-28 17:45:49 +0900
 categories: database 
 ---
 
+## 네이버 클라우드 플랫폼
+네이버 클라우드 장비를 통해서 기본 application 설정을 진행합니다.
+
 ## User 추가  (root 사용하지 않기)
 ~~~
 adduser user_test
@@ -67,7 +70,23 @@ PATH="$JAVA_HOME/bin:$PATH"
 ~~~
 ## 
 
+## Tomcat 설치
+~~~
+wget http://apache.tt.co.kr/tomcat/tomcat-8/v8.5.14/bin/apache-tomcat-8.5.14.tar.gz
+
+
+export CATALINA_HOME=/home/test_user/apps/tomcat
+export JAVA_HOME=/home/test_user/apps/java
+export PATH="$JAVA_HOME/bin:$CATALINA_HOME/bin:$PATH"
+~~~
+
+
+./configure --enable-module=so --enable-mods-shared=most --enable-maintainer-mode --enable-deflate --enable-headers --enable-rewrite --enable-ssl --enable-proxy --enable-proxy-http --enable-proxy-ajp --enable-proxy-balance --with-included-apr --with-pcre=/usr/local/pcre --prefix=/home/irteam/apps/apache-2.4.25
+
+
+
 ### 참고 URL
 
 - [Initial Server Setup with CentOS 7](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7)
-
+- [CentOS_vsftpd_설치_및_설정](http://zetawiki.com/wiki/CentOS_vsftpd_설치_및_설정) 
+- [CentOS 7 Apache 2.4.23 컴파일 설치](http://subinpapa.tistory.com/41)
