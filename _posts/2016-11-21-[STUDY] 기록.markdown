@@ -92,3 +92,138 @@ UPDATE/DELETE = 지정한 범위에 해당하는 모든 키와 범위내 가장 
 - index scan을 통해 삭제할 row와 그 다음 row를 찾아 U_LOCK을 획득.
 - 삭제할 row에 X_LOCK을 획득.
 - 테이블에 존재하는 다른 모든 index에 대해 현재 삭제하려는 row의 다음 key에 해당하는  row에 대해 NX_LOCK을 획득.
+
+## Spring Logging
+
+JCL = 아파치(자카르타) Commons Logging
+
+JCL은 로깅 추상화 라이브러리이다.
+
+JUL (Java Utility Logging) 도 쓸 수 있고, Log4J도 있고, SLF4J도 있고~~
+
+라이브러리나 프레임워크 개발자는 로깅 추상화 라이브러리 만 쓰고
+실제 어플리케이션을 개발하는 개발자가 구체화된 것을 선택할 수 있다.
+
+구현체 찾는 법
+1. 클래스 패스
+
+최근에는 JCL 을 꺼린다
+그 대신 SLF4J 를 사용하려 한다.
+
+SLF4J = Simple Logger Factory For Java
+JCL과는 클래스로더 방법이 다르다
+컴파일 시점에 사용할 로거가 정의된다.
+
+구성요소 : 브릿징, API, 바인딩
+API : if문으로 감싸지 않아도 된다. 
+바인딩 : 여러 로거로 연결해주는 작업을 한다. (Log4J) 
+       프레임워크, 라이브러리에서는 쓰지 않는다.
+       어플리케이션 개발자가 선택해야 하는 것
+       딱 하나만 넣어야 한다. (JDK14, JCL, Logback, LOG4J)
+브릿징 : 구현체 호출을 SLF4J가 호출한 것으로 바꾼다.
+        다양한 라이브러리 에서 사용한 다양한 로깅 구현체들이 SLF4J 로 흘러가게 만든다.
+        레거시 코드에서 중요한 역할을 한다.
+        ex) log4j-over-slfj.jar
+
+사용법
+내가 바인더를 logback을 선택하였다면 logback을 제외한 바인딩 들을 모두 클래스 패스에 추가한다.
+바인딩이라는 것은 가짜 구현체라고 보면 된다.
+
+스프링 부트는 무엇을 한것일까요?
+
+
+## JAVASCRIPT
+
+### with, eval 문법이 좋지 않은 이유
+
+eval
+eval is evil
+보안, 퍼포먼스 코드의 컨텍스트 변환 등으로 인한 유지보수 상 사용금지
+
+with의 모호성
+
+value가 어떤 value를 말하는 지 알 수 있을까?
+obj.value? parameter value?
+
+그래서 ECMAScript 6 에서는 with 구문이 제외 되었다.
+
+~~~
+function doSomething(value, obj){
+    with (obj) {
+        console.log(value);
+        value = "which scope is this?"
+    }
+}
+~~~
+
+## 스코프란
+스코프란 현재 접근할 수 있는 변수들의 범위를 의미한다.
+현재 위치에서 볼 수 있는 변수들의 범위
+
+~~~
+var i, len=3;
+
+for (i = 0; i <len; i++) {
+    document.getElementById("div" + i).addEventListener("click", function () {
+        alert("You clicked div #" + i);
+    }, false);
+}
+~~~
+
+위의 코드는 마치 div0, div1, div2 를 클릭하면 각각 0,1,2 가 나올거 같지만 
+모두 div3이 찍힌다.
+그 이유는 해당 function이 바라보는 i는 Global Scope에 있는 i 이기 때문이다.
+Global Scope의 i는 for() 수행이 끝나고 난 3이 되어 있는 상황이다.
+
+자바스크립트에서 Scope가 생성되는 구문은 다음과 같다
+with
+function
+catch
+
+## 클로져 (Closure) 란
+특정 함수가 참조하는 변수들이 선언된 렉시컬 스코프는 계속 유지되는데,
+그 함수와 스코프를 묶어서 클로져라고 한다.
+
+- 클로져가 나타나는 기본 조건
+- Scope 안에 Scope 가 있을 떄, 즉 function 안에 function이 있을때이다.
+
+~~~
+function outer() {}
+    var count = 0;
+    var inner = function () {
+        return ++count;
+    }
+    return inner;
+}
+
+var increase = outer();
+~~~
+outer() 의 count 변수는 마치 outer 객체의 private 변수 같은 느낌이다.
+
+~~~
+function outer() {
+    var count =  0;
+    
+    return {
+        increase : function () {
+            return count++;
+        },
+        decrease : function () {
+            return --count;
+        }
+    }
+}
+
+var counter = outer();
+counter.increase(); // 1
+counter.increase(); // 2
+counter.decrease(); // 1
+
+var counter2 = outer();
+counter2.increase(); // ?
+~~~
+
+counter2.increase(); 는 무슨 값이 나올까?
+정답은 1이다.
+그 이유는 함수를 호출할 때마다 별도의 scope를 가지기 때문이다.
+
