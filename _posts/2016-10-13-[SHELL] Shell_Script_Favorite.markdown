@@ -65,18 +65,42 @@ cat 파일명 | grep "^2011-03-08 10:20:[0-9][0-9]" >> bbb.txt
 바이너리 파일 grep
 > grep -a 'test' binary.log
 
+특정 문자열이 포함된 ROW는 출력하지 않는다.
+> grep -v 'test' binary.log
+
 ~~~
 
 #### sed
 ~~~
-start - end 까지 로그 자르기
+start line - end line 까지 로그 자르기 (라인수 기준)
 > sed -n '100,200p' catalina.log > temp
+
+특정문자가 포함된 문자열 삭제 (0000000000가 들어간 줄은 삭제하고 출력한다.)
+> sed '/0000000000/d' test.txt
+
+특정문자를 신규문자로 치환한다. (문서내의 addrass -> address 로 변경)
+> sed 's/addrass/address/' test.txt 
+
+특정문자가 포함된 문자열만 삭제하지 않는다 (0000000000이 들어간 문자열만 출력한다.)
+> sed '/0000000000/!d' test.txt
+
+공백라인을 삭제한다.
+> sed '/^$/d' test.txt
+
 ~~~
 
 #### head
 ~~~
 특정 파일 앞의 3바이트만 확인하기
 > head -n 3 lib_monitor_cmn.js | xxd -p
+~~~
+
+#### 중복처리
+~~~
+특정 파일안에 중복된 ROW 가 존재하는지 확인해보자
+ex)데이터식별자(1) USER_ID(50) + 카드번호(10) + 기타정보
+
+cut -b2-61 test.txt | sort | uniq -c | sort -nr | head -n 10
 ~~~
 
 ### vim
