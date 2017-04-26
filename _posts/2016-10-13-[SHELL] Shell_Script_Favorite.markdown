@@ -285,7 +285,7 @@ do
                 ssh irteam@${SERVER} "mkdir -p ${DIR}"
         done
 done
-{% highlight ruby %}
+{% endhighlight %}
 
 ### Example 2
 특정 디렉토리 하위의 모든 파일들을 찾아서 각 파일들의 LINE 수를 구하여라
