@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[SERVER] CentOS 7 Setup"
+title: "[ETC] CentOS 7 Setup"
 date:   2017-04-19 17:45:49 +0900
 categories: etc 
 ---
