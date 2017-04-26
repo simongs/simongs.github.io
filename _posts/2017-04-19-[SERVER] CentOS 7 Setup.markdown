@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[SERVER] CentOS 7 Setup"
-date:   2016-09-28 17:45:49 +0900
+date:   2017-04-19 17:45:49 +0900
 categories: database 
 ---
 
