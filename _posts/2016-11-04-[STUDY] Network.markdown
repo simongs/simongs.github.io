@@ -192,8 +192,26 @@ RJ-45 커넥터 - MAU - Ethernet Controller - Buffer Memory
  - 네트워크 바이트 오더는 `Big-Endian` 만 사용한다.
  - Little-Endian 시스템에서는 Big-Endian 으로 변경해서 통신해야 한다. 
 
+#### 용어정리
+
+##### Loop Detection
+~~~
+잘못된 네트워크 연결 또는 구성으로 인해 2계층에서 루프가 생성되고 
+브로드 캐스트, 멀티 캐스트 또는 알 수 없는 유니 캐스트가 반복적으로 전송 될 수 있습니다.
+반복되는 전송은 네트워크 리소스를 낭비 할 수 있으며 때때로 네트워크를 마비시킬 수 있습니다.
+루프 감지 매커니즘은 루프가 발생할 때 즉시 로그를 생성하므로 네트워크 연결 및 구성을 조정하도록
+즉시 알려줍니다. 루프 감지를 통해 루프된 포트를 종료 할 수 있습니다.
+~~~
+
+##### 루프백이란?
+~~~
+
+~~~
+
 #### Reference
  - [joinc.co.kr 네트워크 관련](http://www.joinc.co.kr/w/Site/Network_Programing/Documents/IntroTCPIP3)
  - [호스트 바이트 순서(Host Byte Order) – Big-Endian, Little-Endian](http://iblog.or.kr/hungi/it/server/network/2056)
  - [Terrorism 블로그의 TCP/IP 정리글](http://blog.naver.com/rnjstjdwo14/40126043617)
  - [성공과 실패를 결정하는 1%의 네트워크 원리]()
+
+
