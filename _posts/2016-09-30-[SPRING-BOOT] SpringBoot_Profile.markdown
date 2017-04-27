@@ -8,8 +8,10 @@ categories: spring-boot
 # SPRING-BOOT PROFILE
 
 ## 2 ways to configure eacch profile constants
+
 #### 1. application-{phase}.properties
 JVM 옵션인 spring.profiles.active 의 정보를 {phase}에 대입하여 파일을 구성한다.
+
 ~~~
 ex. application-local.properties
 logging.level.org.springframework=DEBUG
@@ -30,6 +32,7 @@ public class ApplicationConstants {
 
 #### 2. {keyword}.yml (Editing...)
 이 부분은 조금더 확인이 필요하다.
+
 ~~~
 ex. fixtures.yml
 fixtures:
