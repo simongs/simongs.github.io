@@ -5,88 +5,162 @@ date:   2017-04-19 17:45:49 +0900
 categories: etc 
 ---
 
-## 네이버 클라우드 플랫폼
-네이버 클라우드 장비를 통해서 기본 application 설정을 진행합니다.
+## Spring Boot Autoconfiguration
 
-## User 추가  (root 사용하지 않기)
-~~~
-adduser user_test
-passwd user_test
-~~~
+### @SpringBootApplication
+~~~java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public @interface SpringBootApplication {
 
-## wheel 그룹에 사용자 추가하기
-~~~
-gpasswd -a user_test wheel
-~~~
+	/**
+	 * Exclude specific auto-configuration classes such that they will never be applied.
+	 * @return the classes to exclude
+	 */
+	Class<?>[] exclude() default {};
 
-## yum update
-~~~
-sudo yum update
-sudo yum install tree
-~~~
-
-## .vimrc
-~~~
-set nocompatible " 오리지날 VI와 호환하지 않음
-set autoindent  " 자동 들여쓰기
-set cindent " C 프로그래밍용 자동 들여쓰기
-set smartindent " 스마트한 들여쓰기
-set wrap
-set nowrapscan " 검색할 때 문서의 끝에서 처음으로 안돌아감
-set nobackup " 백업 파일을 안만듬
-set visualbell " 키를 잘못눌렀을 때 화면 프레시
-set ruler " 화면 우측 하단에 현재 커서의 위치 표시
-set shiftwidth=4 " 자동 들여쓰기 4칸
-set number " 행번호 표시, set nu 도 가능
-set fencs=ucs-bom,utf-8,euc-kr.latin1 " 한글 파일은 euc-kr로, 유니코드는 유니코드로
-set fileencoding=utf-8 " 파일저장인코딩
-set tenc=utf-8      " 터미널 인코딩
-set expandtab " 탭대신 스페이스
-set hlsearch " 검색어 강조, set hls 도 가능
-set ignorecase " 검색시 대소문자 무시, set ic 도 가능
-set tabstop=4 "  탭을 4칸으로
-set lbr
-set incsearch "  키워드 입력시 점진적 검색
-syntax on "  구문강조 사용
-filetype indent on "  파일 종류에 따른 구문강조
-set background=dark " 하이라이팅 lihgt / dark
-colorscheme desert  "  vi 색상 테마 설정
-set backspace=eol,start,indent "  줄의 끝, 시작, 들여쓰기에서 백스페이스시 이전줄로
-set history=1000 "  vi 편집기록 기억갯수 .viminfo에 기록
+}
 ~~~
 
-## java 설치
+### EnableAutoConfiguration
+자동설정 관련한 어노테이션
+특정 기준의 설정클래스를 로드
+
+### @Enable* 어노테이션
+3.0에서는 잘 사용하지 않았다.
+자바 Configuration 을 잘 사용하지 않았었다.
+3.1로 넘어오면서 사용빈도가 높아진다.
+
+예를 들어 EnableWebMvc 같은 어노테이션이 있다.
+EnableAspectJAutoProxy
+
+@Import 와 함께 자신만의 모듈을 만들수 있다.
+
+### @EnableAutoConfiguration
+
+스프링부트의 설정의 시작
+
+~~~java
+@Import({ EnableAutoConfigurationImportSelector.class,
+		AutoConfigurationPackages.Registrar.class })
+public @interface EnableAutoConfiguration {
+
+	/**
+	 * Exclude specific auto-configuration classes such that they will never be applied.
+	 * @return the classes to exclude
+	 */
+	Class<?>[] exclude() default {};
+}
 ~~~
-wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
-gunzip jdk-8u131-linux-x64.tar.gz
-tar -xvf jdk-8u131-linux-x64.tar.gz
-mv jdk1.8.0_131 ~/apps/
-cd ~/apps
-ln -s jdk1.8.0_131/ java
 
-in .bashrc
-JAVA_HOME=/home/test_user/apps/java
-PATH="$JAVA_HOME/bin:$PATH"
+### @EnableAutoConfigurationImportSelector
+
+
+
+제일 핵심인 코드
+
+DeferredImportSelector 이 어노테이션을 통해서 설정정보를 가져온다.
+
+~~~java
+@Order(Ordered.LOWEST_PRECEDENCE)
+class EnableAutoConfigurationImportSelector implements DeferredImportSelector, BeanClassLoaderAware, ResourceLoaderAware {
+
+	private ClassLoader beanClassLoader;
+
+	private ResourceLoader resourceLoader;
+
+    /*
+    * 문자열 배열의 의미는 package와 class명 정보를 가져온다.
+    */
+	@Override
+	public String[] selectImports(AnnotationMetadata metadata) {
+		try {
+			AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(EnableAutoConfiguration.class.getName(), true));
+
+			// Find all possible auto configuration classes, filtering duplicates
+			List<String> factories = new ArrayList<String>(new LinkedHashSet<String>(SpringFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class, this.beanClassLoader)));
+
+			// Remove those specifically disabled
+			factories.removeAll(Arrays.asList(attributes.getStringArray("exclude")));
+
+			// Sort
+			factories = new AutoConfigurationSorter(this.resourceLoader).getInPriorityOrder(factories);
+
+			return factories.toArray(new String[factories.size()]);
+		}
+		catch (IOException ex) {
+			throw new IllegalStateException(ex);
+		}
+	}
+
+	@Override
+	public void setBeanClassLoader(ClassLoader classLoader) {
+		this.beanClassLoader = classLoader;
+	}
+
+	@Override
+	public void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
+	}
+
+}
+
 ~~~
-## 
 
-## Tomcat 설치
+### spring.factories
+설정리스트의 보관소
+스프링 개발자들이 만들어놓은 노가다 작업
+
+/META-INF/spring.factories 파일에 이미 정의 되어있다.
+해당 파일은 boot-Autoconfiguration.jar 파일에 존재한다.
+
+모든 클래스는 로딩이 되나 스프링 컨테이너에 올라가지는 않는다.
+메모리에 올라가면 상당이 느려질 수 있다.
+@Conditional 이라는 옵션을 통해서 조건적으로 Bean에 등록한다.
+Spring 4.x.x 에서부터 지원하기 시작하는 어노테이션
+그래서 스프링은 4.x.x 대부터 스프링부트를 사용할 수 있다.
+
 ~~~
-wget http://apache.tt.co.kr/tomcat/tomcat-8/v8.5.14/bin/apache-tomcat-8.5.14.tar.gz
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer,\
+org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
 
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.autoconfigure.BackgroundPreinitializer
 
-export CATALINA_HOME=/home/test_user/apps/tomcat
-export JAVA_HOME=/home/test_user/apps/java
-export PATH="$JAVA_HOME/bin:$CATALINA_HOME/bin:$PATH"
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
 ~~~
 
+### @Conditional 예제
+특정 Bean을 등록할 때 특정 환경에서만 등록하고 싶다.
 
-./configure --enable-module=so --enable-mods-shared=most --enable-maintainer-mode --enable-deflate --enable-headers --enable-rewrite --enable-ssl --enable-proxy --enable-proxy-http --enable-proxy-ajp --enable-proxy-balance --with-included-apr --with-pcre=/usr/local/pcre --prefix=/home/irteam/apps/apache-2.4.25
+~~~
+@Bean
+@Conditional(Phase.class)
+public CommandLineRunner .... 
+
+class Phase implements Condition {
+    public boolean match
+}
+
+~~~
+
+### @Profile 어노테이션
+대표적인 Conditional 에 대한 예제
+
 
 
 
 ### 참고 URL
 
-- [Initial Server Setup with CentOS 7](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7)
-- [CentOS_vsftpd_설치_및_설정](http://zetawiki.com/wiki/CentOS_vsftpd_설치_및_설정) 
-- [CentOS 7 Apache 2.4.23 컴파일 설치](http://subinpapa.tistory.com/41)
+- [DEEP DIVE INFO SPRING BOOT AUTO..](https://www.youtube.com/watch?v=ssT24xB9UTc)
