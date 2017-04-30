@@ -11,3 +11,14 @@ categories: database
 ~~~
 gradle :boot-api:test -Dorg.gradle.java.home=C:\framework\Java\jdk1.8.0_111
 ~~~
+
+## build.proporties에서 gradle.properties의 속성 참조하기
+~~~
+in gradle.properties
+servelt.api.version=3.1.0
+
+in build.properties
+providedCompile "javax.servlet:javax.servlet-api:${property('servlet.api.version')}"
+
+~~~
+
