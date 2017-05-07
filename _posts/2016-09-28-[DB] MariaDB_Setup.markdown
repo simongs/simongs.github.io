@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[DB] MariaDB 설치하기"
+title: "[DB] MariaDB (MySQL) 설치하기 - CentOS 7.3, MariaDB 10.1.XX"
 date:   2016-09-28 17:45:49 +0900
 categories: database 
 ---
@@ -8,35 +8,41 @@ categories: database
 ## Version Info
 ~~~
 [mysql]$ cat /etc/redhat-release
-CentOS Linux release 7.2.1511 (Core)
+entOS Linux release 7.3.1611 (Core)
 
 [mysql]$ mysql -V
-mysql  Ver 15.1 Distrib 5.5.50-MariaDB, for Linux (x86_64) using readline 5.1
+mysql  Ver 15.1 Distrib 10.1.23-MariaDB, for Linux (x86_64) using readline 5.1
 ~~~
 
 ## yum repository 설정
 
 ### 설치 FLOW
 ~~~
-vi /etc/yum.repos.d/MariaDB.repo
+vi /etc/yum.repos.d/CentOS-MariaDB.repo
+ MariaDB 10.1 CentOS repository list - created 2017-05-02 14:41 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
 [mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/5.5/centos6-amd64
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 ~~~
 
 ## MariaDB 설치
-~~~
-#  yum install MariaDB-server MariaDB-client
-# /etc/init.d/mysql start
 
-설치가 잘 되지 않은 경우는 mariadb-server 를 재설치한다.
+~~~
+yum install MariaDB-server MariaDB-client -y
 ~~~
 
 ## MariaDB 설정파일 복사
 ~~~
 cp -r /usr/share/mysql/my-small.cnf /etc/my.cnf
+~~~
+
+## DB Port 변경
+~~~
+[mysqld]
+port=40006
 ~~~
 
 ## DB UTF-8 설정
@@ -46,10 +52,28 @@ character-set-server=utf8
 collation-server=utf8_general_ci
 ~~~
 
-## mariadb start
+## DB Transation Isolation Level 변경
 ~~~
-[etc]$ sudo service mariadb start
-Redirecting to /bin/systemctl start  mariadb.service
+[mysqld]
+transation-isolation = READ-UNCOMMITTED
+transation-isolation = READ-COMMITTED
+~~~
+
+## mariadb start & stop
+~~~
+[irteam@simons-app901 etc]$ systemctl stop mariadb
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to manage system services or units.
+Authenticating as: irteam
+Password:
+==== AUTHENTICATION COMPLETE ===
+
+[irteam@simons-app901 etc]$ systemctl start mariadb
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to manage system services or units.
+Authenticating as: irteam
+Password:
+==== AUTHENTICATION COMPLETE ===
 ~~~
 
 ### ROOT password 변경
@@ -62,10 +86,10 @@ sudo mysqladmin password
 [etc]$ mysql -u root -p
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 9
-Server version: 5.5.50-MariaDB MariaDB Server
+Your MariaDB connection id is 4
+Server version: 10.1.23-MariaDB MariaDB Server
 
-Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
@@ -77,7 +101,10 @@ Database changed
 MariaDB [mysql]> create database simpledb;
 Query OK, 1 row affected (0.00 sec)
 
-MariaDB [mysql]> create user 'user'@'localhost' identified by 'password';
+MariaDB [mysql]> create user 'simongs'@'localhost' identified by 'password';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> create user 'simongs'@'%' identified by 'password';
 Query OK, 0 rows affected (0.00 sec)
 
 MariaDB [mysql]> flush privileges;
@@ -110,3 +137,4 @@ tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      
 
 - https://ko.wikipedia.org/wiki/MariaDB (위키)
 - http://firstboos.tistory.com/entry/CentOS-7-에서-mariadb-설치
+- [How to Install and Secure MariaDB 10 in CentOS 7](https://www.tecmint.com/install-mariadb-in-centos-7/)
