@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[ETC] CentOS 7 Setup"
+title: "[STUDY] Spring Boot Auto configuration"
 date:   2017-04-19 17:45:49 +0900
 categories: etc 
 ---
@@ -157,9 +157,6 @@ class Phase implements Condition {
 
 ### @Profile 어노테이션
 대표적인 Conditional 에 대한 예제
-
-
-
 
 ### 참고 URL
 
