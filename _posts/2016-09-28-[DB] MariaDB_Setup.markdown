@@ -39,20 +39,20 @@ yum install MariaDB-server MariaDB-client -y
 cp -r /usr/share/mysql/my-small.cnf /etc/my.cnf
 ~~~
 
-## DB Port 변경
+## DB Port 변경 (/etc/my.cnf)
 ~~~
 [mysqld]
 port=40006
 ~~~
 
-## DB UTF-8 설정
+## DB UTF-8 설정 (/etc/my.cnf)
 ~~~
 [mysqld]
 character-set-server=utf8
 collation-server=utf8_general_ci
 ~~~
 
-## DB Transation Isolation Level 변경
+## DB Transation Isolation Level 변경 (/etc/my.cnf)
 ~~~
 [mysqld]
 transation-isolation = READ-UNCOMMITTED
