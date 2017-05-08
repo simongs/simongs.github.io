@@ -8,11 +8,12 @@ categories: spring-boot
 # SPRING-BOOT WEB PROJECT 설정
 
 ## 멀티모듈프로젝트 
+~~~
 study-boot - boot-core - boot-api
                        - boot-web     
+~~~
 
-## 
-[](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html)
+
 
 
 ## Reference
