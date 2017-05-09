@@ -59,6 +59,22 @@ transation-isolation = READ-UNCOMMITTED
 transation-isolation = READ-COMMITTED
 ~~~
 
+## Skip name resolve option 추가
+~~~
+검색 결과는 대부분 --skip-name-resolve 옵션에 대하여 언급했습니다. 
+MySQL(Mariadb)은 새로운 커넥션 요청이 있을 때 인증을 위해 클라이언트의 IP 주소를 통하여 
+hostname이 host_cache 테이블에 있는지 확인합니다. 
+만약 없거나 인증 flag가 false라면 IP 주소로 hostname을 알아내는 과정을 거치게 됩니다. 
+이때 오류가 발생하거나 시간이 오래 소요되어 너무 많은 클라이언트가 연결에 성공하지 못하면 해당 호스트의 추가 연결을 차단하게 됩니다.
+
+MySQL 공식 문서에 따르면 DNS가 느리거나 많은 호스트들을 가지고 있다면 --skip-name-resolve 옵션을 
+my.cnf 파일에 추가하여 위와 같은 과정을 무시(disable DNS lookup) 할 수 있다고 합니다. (인증 관련 문제가 생길 수 있기 때문에 사전에 확인하시기 바랍니다.)
+
+추가방법
+[mysqld]
+skip-name-resolve
+~~~
+
 ## mariadb start & stop
 ~~~
 [irteam@simons-app901 etc]$ systemctl stop mariadb
