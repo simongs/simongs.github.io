@@ -1,0 +1,229 @@
+---
+layout: post
+title: "[STUDY] 관심사항"
+date:   2016-11-21 09:00:00 +0900
+categories: network study
+---
+
+## 관심사항 리스트
+- 하이퍼바이져란?
+
+
+## ## Transaction Isolation Level
+트랜잭션 간의 격리를 의미
+레벨이 높을 수록 동시성은 떨어지고 일관성은 높아진다. 즉 변경에 대해 더 방어적이게 된다. 
+
+### 일반적인 분류
+- Read Uncommitted
+- Read Committed
+- Repeatable Read
+- Serializable
+
+#### Read Uncommitted
+Shared-Lock 이 걸리지 않는 레벨
+A라는 데이터를 B로 변경하는 동안에는 다른 사용자는 해당 데이터에 접근할 수 있다.
+
+#### Read Committed
+Shared-Lock 이 걸리는 레벨
+A라는 데이터를 B로 변경하는 동안에는 다른 사용자는 해당 데이터에 접근할 수 없다.
+
+#### Repeatable Read
+트랜잭션이 완료될 때까지 SELECT 문장이 사용하는 모든 데이터에 Shared Lock이 걸리므로 
+다른 사용자는 그 영역에 해당되는 데이터에 대한 수정이 불가능합니다. 
+가령, Select col1 from A where col1 between 1 and 10을 수행하였고 이 범위에 해당하는 데이터가 2건이 있는 경우(col1=1과 5) 
+다른 사용자가 col1이 1이나 5인 Row에 대한 UPDATE이 불가능합니다. 
+하지만, col1이 1과 5를 제외한 나머지 이 범위에 해당하는 Row를 INSERT하는 것이 가능합니다.
+
+
+#### Serializable
+트랜잭션이 완료될 때까지 SELECT 문장이 사용하는 모든 데이터에 Shared Lock이 걸리므로 
+다른 사용자는 그 영역에 해당되는 데이터에 대한 수정 및 입력이 불가능합니다. 
+예를 들어, Repeatable Read의 경우 1에서 10 사이에 해당되는 데이터에 대한 UPADTE이 가능하였습니다. 
+하지만 이 Level에서는 UPDATE 작업도 허용하지 않습니다. 
+
+## Lock 의 종류
+
+### Shared-Lock
+읽기 연산을 수행하기 전에 획득하는 Lock , 여러 트랜잭션이 획득 가능
+isolation level에 따라서 읽은 후에 바로 Lock 을 푸는 경우가 있고 풀지 않는 경우가 있다.
+case 1) READ COMMITTED(4)인 경우 트랜잭션 T1이 커밋되기 전이라도 읽기 연산을 완료하면 획득한 공유 잠금을 즉시 해제
+        다른 트랜잭션 중 하나가 해당 객체에 대한 갱신 또는 삭제 연산을 수행할 수 있다.
+case 2) EPEATABLE READ(5)인 경우, 트랜잭션 T1이 커밋될 때까지 공유 잠금을 유지
+        다른 트랜잭션 중 하나가 해당 객체에 대한 갱신 또는 삭제 연산을 수행할 수 없다.
+
+### Execlusive-Lock
+객체에 대한 `갱신연산을 수행하기 전`에 획득함. 하나의 트랜잭션만 획득
+
+~~~
+트랜잭션 T1이 특정 객체 X에 대해 갱신 연산을 수행하기 전에 배타 잠금을 먼저 획득하고, 
+갱신 연산을 완료하더라도 트랜잭션 T1이 커밋될 때까지 배타 잠금을 해제하지 않는다. 
+따라서, 트랜잭션 T2, T3은 트랜잭션 T1이 배타 잠금을 해제하기 전까지는 X에 대한 읽기 연산도 수행할 수 없다.
+~~~
+
+### Update-Lock
+갱신연산을 수행하기 전, 조건절에서 읽기 연산을 수행할 때 획득하는 잠금이다.
+즉, update ... where ... , delete ... where 문에서 사용된다.
+
+~~~
+예를 들어 WHERE 절과 결합된 UPDATE 문을 수행하는 경우, 
+WHERE 절에서 인덱스 검색을 하거나 풀 스캔 검색을 수행할 때 행 단위로 갱신 잠금을 획득하고, 
+조건을 만족하는 결과 행들에 대해서만 배타 잠금을 획득하여 갱신 연산을 수행한다. 
+이처럼 갱신 잠금은 실제 갱신 연산을 수행할 때 배타 잠금으로 변환되며, 
+이는 다른 트랜잭션이 동일한 객체에 대해 읽기 연산을 수행하지 못하도록 하므로 준 배타 잠금이라고 할 수 있다.
+~~~
+
+### 키잠금
+키가 존재하는 행에 대해서는 CRUD 작업시에 키에 대한 잠금을 획득한다.
+INSERT = 해당 키에 X_LOCK, 해당키와 다음키에 NS_LOCK을 획득한다.
+UPDATE/DELETE = 지정한 범위에 해당하는 모든 키와 범위내 가장 마지막 키의 다음키에 NX_LOCK을 획득한다.
+
+#### Next-Key Shared Lock, NS_LOCK
+고유 키가 존재하는 행에 대해 Insert 를 수행할 때 
+해당 작업이 영향을 주는 범위를 보호하기 위해 다음키에 대핸 잠금을 획득한다.
+
+#### Next-Key Execlusive Lock, NX_LOCK
+고유 키가 존재하는 행에 대해서 UPDATE, DELETE 작업 수행시
+해당 작업이 영향을 주는 범위를 보호하기 위해 이전키와 다음키에 잠금을 획득한다. 
+
+### Update-Lock
+
+
+### Example
+- index scan을 통해 삭제할 row와 그 다음 row를 찾아 U_LOCK을 획득.
+- 삭제할 row에 X_LOCK을 획득.
+- 테이블에 존재하는 다른 모든 index에 대해 현재 삭제하려는 row의 다음 key에 해당하는  row에 대해 NX_LOCK을 획득.
+
+## Spring Logging
+
+JCL = 아파치(자카르타) Commons Logging
+
+JCL은 로깅 추상화 라이브러리이다.
+
+JUL (Java Utility Logging) 도 쓸 수 있고, Log4J도 있고, SLF4J도 있고~~
+
+라이브러리나 프레임워크 개발자는 로깅 추상화 라이브러리 만 쓰고
+실제 어플리케이션을 개발하는 개발자가 구체화된 것을 선택할 수 있다.
+
+구현체 찾는 법
+1. 클래스 패스
+
+최근에는 JCL 을 꺼린다
+그 대신 SLF4J 를 사용하려 한다.
+
+SLF4J = Simple Logger Factory For Java
+JCL과는 클래스로더 방법이 다르다
+컴파일 시점에 사용할 로거가 정의된다.
+
+구성요소 : 브릿징, API, 바인딩
+API : if문으로 감싸지 않아도 된다. 
+바인딩 : 여러 로거로 연결해주는 작업을 한다. (Log4J) 
+       프레임워크, 라이브러리에서는 쓰지 않는다.
+       어플리케이션 개발자가 선택해야 하는 것
+       딱 하나만 넣어야 한다. (JDK14, JCL, Logback, LOG4J)
+브릿징 : 구현체 호출을 SLF4J가 호출한 것으로 바꾼다.
+        다양한 라이브러리 에서 사용한 다양한 로깅 구현체들이 SLF4J 로 흘러가게 만든다.
+        레거시 코드에서 중요한 역할을 한다.
+        ex) log4j-over-slfj.jar
+
+사용법
+내가 바인더를 logback을 선택하였다면 logback을 제외한 바인딩 들을 모두 클래스 패스에 추가한다.
+바인딩이라는 것은 가짜 구현체라고 보면 된다.
+
+스프링 부트는 무엇을 한것일까요?
+
+
+## JAVASCRIPT
+
+### with, eval 문법이 좋지 않은 이유
+
+eval
+eval is evil
+보안, 퍼포먼스 코드의 컨텍스트 변환 등으로 인한 유지보수 상 사용금지
+
+with의 모호성
+
+value가 어떤 value를 말하는 지 알 수 있을까?
+obj.value? parameter value?
+
+그래서 ECMAScript 6 에서는 with 구문이 제외 되었다.
+
+~~~
+function doSomething(value, obj){
+    with (obj) {
+        console.log(value);
+        value = "which scope is this?"
+    }
+}
+~~~
+
+## 스코프란
+스코프란 현재 접근할 수 있는 변수들의 범위를 의미한다.
+현재 위치에서 볼 수 있는 변수들의 범위
+
+~~~
+var i, len=3;
+
+for (i = 0; i <len; i++) {
+    document.getElementById("div" + i).addEventListener("click", function () {
+        alert("You clicked div #" + i);
+    }, false);
+}
+~~~
+
+위의 코드는 마치 div0, div1, div2 를 클릭하면 각각 0,1,2 가 나올거 같지만 
+모두 div3이 찍힌다.
+그 이유는 해당 function이 바라보는 i는 Global Scope에 있는 i 이기 때문이다.
+Global Scope의 i는 for() 수행이 끝나고 난 3이 되어 있는 상황이다.
+
+자바스크립트에서 Scope가 생성되는 구문은 다음과 같다
+with
+function
+catch
+
+## 클로져 (Closure) 란
+특정 함수가 참조하는 변수들이 선언된 렉시컬 스코프는 계속 유지되는데,
+그 함수와 스코프를 묶어서 클로져라고 한다.
+
+- 클로져가 나타나는 기본 조건
+- Scope 안에 Scope 가 있을 떄, 즉 function 안에 function이 있을때이다.
+
+~~~
+function outer() {}
+    var count = 0;
+    var inner = function () {
+        return ++count;
+    }
+    return inner;
+}
+
+var increase = outer();
+~~~
+outer() 의 count 변수는 마치 outer 객체의 private 변수 같은 느낌이다.
+
+~~~
+function outer() {
+    var count =  0;
+    
+    return {
+        increase : function () {
+            return count++;
+        },
+        decrease : function () {
+            return --count;
+        }
+    }
+}
+
+var counter = outer();
+counter.increase(); // 1
+counter.increase(); // 2
+counter.decrease(); // 1
+
+var counter2 = outer();
+counter2.increase(); // ?
+~~~
+
+counter2.increase(); 는 무슨 값이 나올까?
+정답은 1이다.
+그 이유는 함수를 호출할 때마다 별도의 scope를 가지기 때문이다.
+
