@@ -1,0 +1,56 @@
+---
+layout: post
+title: "[TDD] TDD 교육"
+date:   2017-05-23 09:00:00 +0900
+categories: IDE 
+---
+
+# TDD
+
+
+## 적용법
+
+## 강의 STEP
+ - TDD의 리듬감 전달
+ - 
+
+## 중요한 단축키
+ - Quick Fix (Ctrl + 1)
+ - Test 실행 (Shift + Alt + F1)
+
+## TDD 어디서 부터 시작해볼까?
+OUT -> IN 방식으로 도전 
+
+메모 API 테스트를 만든다
+메모목록을 조회할수 있다 테스트 생성
+LiveNote 
+
+## assert 에 대한 두가지 스타일
+JUNIT 스타일 (Assert.assertEquals())
+assertThat 스타일
+
+## 404 에러, 405 에러, 500 에러
+URI 자체가 없는것 = 404
+URI 는 있으나 http method 방식이 없는 상황 = 405
+서버 내부 오류 = 500
+
+## Hibernate Repository Test
+하이버네이트에서 중간에 Fassion 이라는 개념이 있다.
+insert 시점이 명확하지 않을 때는 강제로 insert 수행한다.
+clearAndFlush() 
+
+## 테스트케이스 관련 논의
+Dependency Breaking -> Double(대역사용) -> Seam?
+
+Activity(UI) 테스트
+단위테스트는 조금 정교하게 통합테스트는 하나 정도 만들어서 외부 API에 대한 테스트를 구성한다.
+
+setter를 통해서 Seam을 만들었다 (이것은 틈이라고 볼수 있다.)
+그리고 대역(double)을 setter를 통해 주입한다.
+
+## Tell Don't ASK
+디펜덴시가 늘어나는 경우에 대해서 어떻게 고민을 해야하는가?
+객체지향의 핵심 각자 책임을 가지고 
+
+## Reference
+[차민창님의 TDD 관련 교육](https://github.com/MinCha/tdd)
