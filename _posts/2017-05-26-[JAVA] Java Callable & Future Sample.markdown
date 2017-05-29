@@ -51,26 +51,21 @@ public class MessageCallable implements Callable<List<Message>>{
 public Integer sendParallelMessageProcessing(List<Message> messageList, Integer executorPoolSize) {
     Integer failCount = 0;
 
-    int partitionSizePerThread = getPartitionSizePerThread(messageList.size(), executorPoolSize);
     List<List<Message>> partitionedList = Lists.partition(messageList, partitionSizePerThread); // 최대 8개의 Thread 가 동작할 수 있는 적절한 값을 찾는다.
 
-    log.info("총 처리 개수 :: {}, 스레드당 처리 개수 :: {}, 파티션된 리스트 개수) :: {}", messageList.size(), partitionSizePerThread, partitionedList.size());
+    ExecutorService executor = Executors.newFixedThreadPool(executorPoolSize); // Poll 생성
 
-    ExecutorService executor = Executors.newFixedThreadPool(executorPoolSize);
     List<Future<List<Message>>> futureList = Lists.newArrayList();
-
+    /** 비동기 수행 */
     for (List<Message> eachList : partitionedList) {
         Callable<List<Message>> worker = new MessageCallable(eachList, messageSendBO);
         Future<List<Message>> submit = executor.submit(worker);
         futureList.add(submit);
     }
 
+    /** future.get() */
     for (Future<List<Message>> future : futureList) {
-        try {
-            future.get();
-        } catch (Exception e) {
-            ExceptionCommonLogger.error(ExceptionPrefix.BATCH, e);
-        }
+        future.get();
     }
 
     /** safely shutdown */
