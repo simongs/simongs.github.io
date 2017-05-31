@@ -39,8 +39,8 @@ urls:
 
 url: "https://simongs.github.io"
 baseurl: ""
-paginate: 5
-per_page: 15
+paginate: 15
+per_page: 5
 paginate_path: "/page:num/"
 markdown: kramdown
 gems:
