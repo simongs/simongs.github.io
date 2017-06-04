@@ -71,6 +71,12 @@ cat 파일명 | grep "^2011-03-08 10:20:[0-9][0-9]" >> bbb.txt
 ~~~
 
 #### sed
+
+Stream Edior 
+대화식 에디터가 아닌 흘러 들어오는 텍스트를 그대로 편집하는 프로그램
+VIM은 특정 파일을 오픈하여 실시간으로 편집하는 스크린 에디터이다.
+ED 라는 라인 에디터도 존재하지만 사용률은 미미하다.
+
 ~~~
 start line - end line 까지 로그 자르기 (라인수 기준)
 > sed -n '100,200p' catalina.log > temp
@@ -87,7 +93,15 @@ start line - end line 까지 로그 자르기 (라인수 기준)
 공백라인을 삭제한다.
 > sed '/^$/d' test.txt
 
+한 줄 안에 포함된 모든 문자를 치환한다.
+> sed "s/test/test2/g"
+
+대소문자 구분을 하지 않는다
+> sed "s/Windows XP/Windows/i"
+> sed "s/Widdows XP/Windows/gi" // 두가지 옵션을 같이 설정할 때
 ~~~
+
+
 
 #### head
 ~~~
@@ -108,6 +122,13 @@ cut -b2-61 test.txt | sort | uniq -c | sort -nr | head -n 10
 #### 이미 읽은 파일 인코딩 변경
 ~~~
 :e ++enc=UTF-8
+~~~
+
+#### 자주쓰는 단축키 정보
+~~~
+^ : 커서를 라인 처음으로 위치시킨다. (정규표현식에서는 맨 앞의 문자를 의미)
+$ : 커서를 라인 끝으로 위치시킨다. (정규표현식에서는 맨 뒤의 문자를 의미)
+
 ~~~
 
 ### 압축
@@ -154,6 +175,23 @@ find . -name "*.sh" | xargs grep JAVA
 #### 마지막 수정일이 7일 이상된의 파일을 찾아서 지우고 싶다.
 ~~~
 [localhost /home/user]# find ./* -mtime +7 -exec rm -rf {} \;
+~~~
+
+#### 7일 ~ 15일 사이에 생성된 파일을 찾고 싶다.
+~~~
+find . -ctime +7 and -ctime +15
+~~~
+
+#### 30일이 지난 access 파일이나 error 파일 검색
+~~~
+find . -ctime +30 and \( -name "*access*" or -name "*error*" \)
+~~~
+
+#### ctime, mtime, atime 의 차이 
+~~~
+atime - accesstime (접근시간), grep 명령어로도 갱신
+mtime - 최종변경시간 - 파일 내용에 대한 변경 시간.
+ctime - changed time, 이름, 퍼미션, 디렉토리 이동등 파일에 대한 변경 시간.
 ~~~
 
 ### File
@@ -220,6 +258,24 @@ while [ $THIS_DATE -le $ED_DATE ]; do
 	sleep 0.5
 
     THIS_DATE=`date --date "$THIS_DATE 1 day" +%Y%m%d`
+done
+~~~
+
+#### sub directory 작업
+()이 없으면 logs 까지 내려갔다가 data 디렉토리를 갈때 logs에서 가려고 한다.
+() 이렇게 묶는 기법을 서브쉘이라고 한다.
+하지만 왠만하면 함수를 사용해라
+~~~
+for dir in logs data users
+do
+    (
+        cd $dir
+        files=$(find . -name "*.bak");
+        for file in $files;
+        do
+            rm $file;
+        done
+    )
 done
 ~~~
 
@@ -293,3 +349,49 @@ done
 ~~~
 find . -type f -print | xargs wc -l
 ~~~
+
+# 정규표현식
+
+## grep
+
+~~~
+-E : 확장 정규표현식
+
+특정 검색어가 있는 문자열 검색 하기
+> grep -E "(검색어1|검색어2|검색어3)" catalina.log
+
+숫자만 있는 문자열
+> 의미 : 0~9까지의 문자가 1개 이상이다.
+> [0-9]+
+
+시작하는 문자만 변경
+>  - 라라라 ->  * 라라라 로 변경
+> s/^( +)-/\1*/
+
+끝나는 문자만 변경
+> s/a$/b
+
+
+~~~
+
+## VIM
+
+~~~
+정규표현식을 활용한 치환
+> 문서 내의 반환중 혹은 회수중 문자열를 회수완료 문자열로 치환
+> (명령어 prompt에서) :%s/\v(반환중|회수중)/회수완료/
+~~~
+
+## SED
+
+리눅스용 GNU SED는 -r 옵션으로 정규표현식 사용
+MAC OS 나 BSD의 BSD SED는 -E 옵션으로 정규표현식 사용
+
+~~~
+문자열 구성 : prePart + "사용중" + postPart
+변경하고 싶은 문자열 : prePart + "회수완료" + postPart + "파기예정"
+
+sed -r -e "s/(Windows XP.+)사용중(.+)"/\1회수완료\2파기예정/"
+~~~
+
+
