@@ -49,6 +49,123 @@ categories: STUDY
     }
     ~~~
 
+## Elastic Date Type
+
+JSON 에서는 별도의 datetype을 가지고 있지 않다.
+Elastic Search 에서 Date 타입을 표현하기 위한 방법은 아래와 같다.
+
+1. 포맷팅된 문자열을 사용한다. (ex. 2015-01-01, 2015/01/01 12:10:31)
+2. epoch (1970-01-01) 이후의 시간을 milliseconds 단위로 표현한 Long 타입 숫자 (ex. 1483341642046)
+3. epoch (1970-01-01) 이후의 시간을 seconds 단위로 표현한 Integer 타입 숫자 (ex. 1483341642046)
+
+내부적으로 날짜형식은 UTC 로 변경되고, 두번째 포맷으로 저장된다.
+
+Date 포맷은 커스터마이징 될 수 있다.
+만약 포맷이 지정되지 않는다면 아래와 같이 default로 동작한다.
+
+~~~
+"strict_date_optional_time||epoch_millis"
+~~~
+
+예를 들어 아래와 같은 코드가 있다고 가정한다.
+~~~
+0) The date field uses the default format.
+PUT my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "date": {
+          "type": "date" 
+        }
+      }
+    }
+  }
+}
+
+1) This document uses a plain date.
+PUT my_index/my_type/1
+{ "date": "2015-01-01" } 
+
+2) This document includes a time.
+PUT my_index/my_type/2
+{ "date": "2015-01-01T12:10:30Z" } 
+
+3) This document uses milliseconds-since-the-epoch
+PUT my_index/my_type/3
+{ "date": 1420070400001 } 
+
+4) Note that the sort values that are returned are all in milliseconds-since-the-epoch.
+GET my_index/_search
+{
+  "sort": { "date": "asc"} 
+}
+~~~
+
+## store 개념
+기본적으로 필드 밸류들은 검색이 가능하도록 인덱싱이 된다.그러나 저장이 되진 않는다.
+이것은 쿼리할 때 사용될 수 있어도 원 필드 값을 가져오는 것은 불가능하다는 것을 의미한다.
+
+일반적으로 이건 문제가 되지 않는다.
+필드 값은 _source 필드안에 이미 포함되어 있기 때문이다.
+만약 당신이 개별 필드 혹은 일부의 값을 조회하길 원한다면 (_source의 전체 값 대신)
+_source 관련한 설정을 [필터링](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html)할 수 있다. (ex. _source=false)
+
+이러한 상황에 특정 필드의 store 하는 것은 합당하다.
+예를 들어 당신이 만든 Document가 title, date, 큰 content 필드를 가지고 있다면
+너는 큰 content 필드 빼고 title과 date 만 가져오길 원할 수 있다.
+
+~~~
+
+0) The title and date fields are stored.
+PUT my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "title": {
+          "type": "text",
+          "store": true 
+        },
+        "date": {
+          "type": "date",
+          "store": true 
+        },
+        "content": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}
+
+2) 데이터 입력
+PUT my_index/my_type/1
+{
+  "title":   "Some short title",
+  "date":    "2015-01-01",
+  "content": "A very long content field..."
+}
+
+3) title과 date 필드 정보만 가져온다.
+GET my_index/_search
+{
+  "stored_fields": [ "title", "date" ] 
+}
+~~~
+
+## doc_values 개념
+
+대부분의 필드는 기본적으로 검색가능하도록 인덱싱된다.
+
+이런 인덱싱은 소팅이나, 집합 같은 연산에는 최적화 되어 있지 않다,
+
+Doc Value는 디스크 기반은 자료구조이고, 인덱스 생성 시간에 만들어진다.
+그 것은 같은 값을 _source에 저장한다. 
+
+만약 특정 필드에 대해서 소팅이나, 집합 연산이나  스크립트를 통한 접근이 필요 없다면,
+디스크 공간을 아끼기 위하여 doc values를 disable 시킬수 있다.
+
 ## FAQ
 
 ### 1. primary shard 와 replica shard의 차이점
