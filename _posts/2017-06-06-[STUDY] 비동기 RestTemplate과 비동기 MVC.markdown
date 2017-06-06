@@ -1,0 +1,198 @@
+---
+layout: post
+title: "[STUDY] 스프링 리액티브 웹 개발 시리즈 (토비)"
+date:   2017-06-06 09:00:00 +0900
+categories: STUDY
+---
+
+### 시청 로그
+#### 8회 2017-06-06
+
+# 7회. 4부. 자바와 스프링의 비동기 개발 기술 살펴보기
+
+## 자바에서 비동기 작업의 결과를 받아오는 두가지 방법
+1. Future
+2. Callback
+
+## Future 에 대한 이야기
+1.5 버젼때 만들어진 객체.
+
+Thread를 하나하나 생성하는 것 자체가 비용이다. 
+그래서 Thread Pool을 만들어 놓고 Thread를 재활용하여 비용을 줄이는 기법
+Executors.newCachedThreadPool() => 만들어진 Thread를 GC 하지 않고 그대로 남겨놓음
+
+ExecutorService의 submit()를 사용하면 다른 Thread의 결과 값을 받을 수 있다.
+Callable 인터페이스는 예외 발생 시 Exception을 던지고 결과객체도 리턴할 수 있다.
+Runnable 인터페이스는 예외를 안에서 모두 해결해야 하고 결과객체 리턴 불가.
+
+future.get() - blocking method, 결과를 리턴해 줄 수 있을 때까지 대기한다.
+
+## FutureTask 에 대한 이야기
+ - Callback에 대한 이야기 - 시작은 FutureTask
+
+~~~java
+ExecutorService es = Executors.newCachedThreadPool();
+
+FutureTask<String> futureTask = new FutureTask<String>(() -> {
+    Thread.sleep(2000L);
+    return "done";
+}) {
+    // 익명클래스를 정의한다.
+    // 
+    @Override
+    protected void done() {
+        System.out.println(get());
+    }
+}
+
+es.execute(futureTask);
+es.shutdown(); //  비동기 작업들이 모두 끝날때까지 대기하다가 종료하라
+~~~
+
+## ListenableFuture
+
+## CompletableFuture
+
+## DeferedResult
+ - Controller의 리턴 값으로 DeferedResult를 사용한다.
+ - DeferedResult 에 별도의 signal 을 보내면 (Event 발생) 다시 응답 스레드에 응답한다.
+ - request -> tomcat Thread -> deferedResult -> Event -> tomcat Thread -> response
+ - regsiter, counter, event 의 URI 로 테스트 가능
+
+## ResponseBodyEmitter
+ - 한번 요청에 여러번 나누어서 응답을 보내는 기술?
+
+## 스프링의 기본 Executor
+
+### SimpleAsyncTaskExecutor
+이건 작업 하나당 무조건 1 Thread를 만든다.
+
+### @Bean
+ - Thread 통계를 보고 싶다면 ThreadDecorator를 통해서 수집하면 좋다.
+~~~java
+@Bean
+ThreadPoolTaskExecutor tp() {
+    ThreadPoolTaskExecutor te = new ThreadPoolTaskExecutor();
+    te.setCorePoolSize(10); // ThreadPool을 기본적으로 4개를 만들어둔다. (첫 요청 시점에)
+    te.setMaxPoolSize(100); // pool이 꽉찼는데 100개까지 만든다 는 아니다. queue만큼 차면 늘리는 개념이다.
+    te.setQueueCapacity(200); // Queue가 꽉 차면 MaxPoolSize까지 늘린다. 
+    te.setThreadNamePrefix("myThread");
+    te.initialize();
+    return te;
+}
+~~~
+
+# 8회. 5부. 비동기 RestTemplate, 비동기 MVC 의 결합
+
+## 접근 1
+
+### AsyncRestTemplate
+
+ - 응답은 원하는대로 병렬적으로 온다.
+ - 서버의 성능이 개선되지 않는다.
+
+~~~java
+AsyncRestTemplate rt = new AsyncRestTemplate();
+
+@GetMapping("test")
+public ListenableFuture<ResponseEntity<String>> rest (int idx) {
+    ListenableFuture<ResponseEntity<String>> res = rt.getForEntity(URL, String.class, "hello");
+    return res; // 비동기적으로 처리한다. 즉시 리턴을 한다.
+}
+
+// 내부적으로 100번 외부 호출에 대해서 100 개의 스레드를 만든다.
+// 서블릿 스레드를 100개 쓰는게 낫지 별도의 스레드 100개를 만드는 작업은 원치 않는다.
+~~~
+
+## 접근 2
+
+### AsyncRestTemplate With Netty
+
+ - Netty 를 통해서 외부 API를 콜한다.
+
+~~~java
+// 외부 API 를 호출하기 위해서 Netty를 통해 Call한다.
+// 이때 Netty로도 Thread 1개로 통신한다.
+AsyncRestTemplate rt = new AsyncRestTemplate(new Netty4ClientHttpRequestFactory(new NioEventLoopGroup(1)));
+
+@GetMapping("test")
+public ListenableFuture<ResponseEntity<String>> rest (int idx) {
+    ListenableFuture<ResponseEntity<String>> res = rt.getForEntity(URL, String.class, "hello");
+    return res; // 비동기적으로 처리한다. 즉시 리턴을 한다.
+}
+~~~
+
+## 접근 3
+
+### AsyncRestTemplate + DeferredResult
+ - 결과 값을 가공하고 싶다.
+ - future.get()을 호출하면 안된다. 해당 메소드는 blocking 메소드이므로 대기를 하게 된다.
+ - Callback으로 처리하게 해야한다.
+ - DeferredResult 를 사용해서 처리한다.
+
+~~~java
+@GetMapping("test")
+public DeferedResult<String> rest (int idx) {
+    // DR 선언
+    DeferedResult<String> dr = new DeferedResult<>();
+
+    ListenableFuture<ResponseEntity<String>> res = rt.getForEntity(URL, String.class, "hello");
+
+    // callback 세팅
+    res.addCallback(s-> {
+        dr.setResult(s.getBody() + "/work"); // API의 응답값을 결과에 써 준다.
+    }, e-> {
+        dr.setErrorResult(e.getMessage()) // 에러를 세팅하면 Spring Controller가 처리한다.
+    })
+
+    // 언제가 될지 모르지만 DR에 값을 써주면 그 값을 응답값으로 처리해주겠다 라는 것
+    return dr;
+}
+~~~
+
+## 접근 4
+
+### 중첩 Callback 
+ - 의존적인 API 호출이 연결되어야 하는 경우
+ - Callback 안에 다시 AsyncRestTemplate을 호출하도록 한다.
+ - Callback Hell 이 시작되는 코드이다.
+ - 아래 느낌의 코드를 정리하는 방법을 6부에서 진행한다.
+
+~~~java
+@GetMapping("test")
+public DeferedResult<String> rest(int idx) {
+    // DR 선언
+    DeferedResult<String> dr = new DeferedResult<>();
+
+    ListenableFuture<ResponseEntity<String>> res1 = rt.getForEntity(URL, String.class, "hello");
+    res1.addCallback(s-> {
+        ListenableFuture<ResponseEntity<String>> res2 = rt.getForEntity(URL2, String.class, "hello");
+        res2.addCallback(s2-> {
+            ListenableFuture<ResponseEntity<String>> res3 = rt.getForEntity(URL3, String.class, "hello");
+            res3.addCallback(s3-> {
+                dr.setResult(s3.getBody())
+            }, e-> {
+                dr.setErrorResult(e.getMessage()) // 에러를 세팅하면 Spring Controller가 처리한다.
+            })
+        }, e-> {
+            dr.setErrorResult(e.getMessage()) // 에러를 세팅하면 Spring Controller가 처리한다.
+        })
+    }, e-> {
+        dr.setErrorResult(e.getMessage()) // 에러를 세팅하면 Spring Controller가 처리한다.
+    })
+
+    // 언제가 될지 모르지만 DR에 값을 써주면 그 값을 응답값으로 처리해주겠다 라는 것
+    return dr;
+}
+~~~ 
+
+# 6.
+
+
+## 기타
+
+
+
+### CyclicBarrier
+
+
