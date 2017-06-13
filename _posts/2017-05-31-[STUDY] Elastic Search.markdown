@@ -5,30 +5,31 @@ date:   2017-05-31 09:00:00 +0900
 categories: STUDY
 ---
 
+- Table of Contents
+{:toc}
+
 # Elastic Search
 
-## Elastic Search란
+## Tips
 
-## 클러스터 구성
+### 1. Parent-Child 구성
 
-## Parent-Child 구성
-
-### ▶ 성능상 고려사항
+#### ▶ 성능상 고려사항
  - Parent-Child 쿼리는 Nested 쿼리보다 5~10배 정도 느리다.
  - 각 Parent에 많은 Children이 있는 경우가 더 적합하다.
     (적은 children에 많은 parent 구성보다)
 
-### ▶ 충고사항
+#### ▶ 충고사항
  - 심사숙고하여 결정하길 바랍니다. (parent 보다 children 이 많을때 사용하세요)
  - 단일 쿼리에서 여러개의 parent, child 조합은 피하세요
  - has_children 쿼리에서는 Scoring을 피하세요. (score_mode를 none으로 세팅하세요)
  - parent의 _id 정보를 짧게 정하세요. (메모리 사용과 Doc Value 압축효율 높임)
  - parent-child 모델에 이르기전에 other relationship techniques 가 있는지 생각해보세요.
 
-### ▶ 유의사항
+#### ▶ 유의사항
  - 조회시에 Parent의 상세 정보는 결과에 포함되지 않습니다. (별도의 질의 필요)
 
-### ▶ 샘플 URL
+#### ▶ 샘플 URL
 - Parent 전체 조회 : http://10.162.4.44:9200/get-together/group/_search
 - Child 전체 조회 : http://10.162.4.44:9200/get-together/event/_search
 - Child 단건 조회 : http://10.162.4.44:9200/get-together/event/102?parent=1
@@ -49,7 +50,7 @@ categories: STUDY
     }
     ~~~
 
-## Elastic Date Type
+### 2. Elastic Date Type
 
 JSON 에서는 별도의 datetype을 가지고 있지 않다.
 Elastic Search 에서 Date 타입을 표현하기 위한 방법은 아래와 같다.
@@ -102,7 +103,7 @@ GET my_index/_search
 }
 ~~~
 
-## store 개념
+### 3. store 개념
 기본적으로 필드 밸류들은 검색이 가능하도록 인덱싱이 된다.그러나 저장이 되진 않는다.
 이것은 쿼리할 때 사용될 수 있어도 원 필드 값을 가져오는 것은 불가능하다는 것을 의미한다.
 
@@ -154,7 +155,7 @@ GET my_index/_search
 }
 ~~~
 
-## doc_values 개념
+### 4. doc_values 개념
 
 대부분의 필드는 기본적으로 검색가능하도록 인덱싱된다.
 
@@ -172,8 +173,6 @@ Doc Value는 디스크 기반은 자료구조이고, 인덱스 생성 시간에 
 
 ### 2. 운영과정에서의 Trouble Shooting
 해당 정보는 SKPlanet의 동영상을 보고 정리하였습니다.
-
-
 
 ## Reference
 - [Parent-Child Relationship Reference DOC](https://www.elastic.co/guide/en/elasticsearch/guide/master/parent-child.html )

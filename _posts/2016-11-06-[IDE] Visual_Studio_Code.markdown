@@ -32,6 +32,7 @@ VSC 에서 바로바로 Commit & Push 가 가능합니다.
 
 #### 단축키 변경 (modify keybindings.json)
 
+##### WINDOWS 
 파일 > 기본설정 > 바로가기 키 를 선택한 후 수정하면 `keybindings.json` 파일이 생성됩니다.
 아래와 같이 재정의를 합니다.
 
@@ -46,6 +47,22 @@ VSC 에서 바로바로 Commit & Push 가 가능합니다.
     { "key": "ctrl+alt+down", "command": "editor.action.copyLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
     { "key": "ctrl+alt+up",   "command": "editor.action.copyLinesUpAction", "when": "editorTextFocus && !editorReadonly" },
     { "key": "ctrl+alt+up",   "command": "-editor.action.insertCursorAbove", "when": "editorTextFocus" },
-    { "key": "ctrl+alt+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus" }
+    { "key": "ctrl+alt+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus" },
+
+    // 문서 formatting (- 표기)
+    { "key": "ctrl+shift+f", "command": "editor.action.formatDocument", "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly" },
+    { "key": "ctrl+shift+f", "command": "-search.action.focusActiveEditor","when": "searchInputBoxFocus && searchViewletVisible" },
+    { "key": "ctrl+shift+f", "command": "-workbench.action.findInFiles", "when": "!searchInputBoxFocus" }
 ]
+~~~
+
+~~~java
+// 설정을 이 파일에 넣어서 기본 설정을 덮어씁니다.
+{
+    "files.autoSave": "afterDelay",
+    "git.confirmSync": false,
+    "workbench.statusBar.visible": true,
+    "window.zoomLevel": 0,
+    "editor.detectIndentation": false
+}
 ~~~
