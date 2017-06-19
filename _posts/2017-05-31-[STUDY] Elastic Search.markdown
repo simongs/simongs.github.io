@@ -174,5 +174,10 @@ Doc Value는 디스크 기반은 자료구조이고, 인덱스 생성 시간에 
 ### 2. 운영과정에서의 Trouble Shooting
 해당 정보는 SKPlanet의 동영상을 보고 정리하였습니다.
 
+<figure class="video_container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/y0fSe5nLeMs" frameborder="0" allowfullscreen></iframe>
+</figure>
+
+
 ## Reference
 - [Parent-Child Relationship Reference DOC](https://www.elastic.co/guide/en/elasticsearch/guide/master/parent-child.html )

@@ -135,4 +135,40 @@ public class CrawledSites {
 
 ### 4.1. Overview
 Java 메모리 모델은 어플리케이션의 메인 메모리와 각 스레드의 메모리 간의 커뮤니케이션을 설명한다.
+스레드에 의해 수행된 메모리의 변경이 다른 스레드로 전파되는 방식에 대한 규칙을 정의합니다.
 
+또한 Java 메모리 모델은 스레드가 메인 메모리에서 각 스레드의 메모리를 re-fresh 하는 상황을 정의합니다.
+또한 원자적인 Operation과 Orderation의 순서도 설명합니다.
+
+### 4.2 Atomic operation
+Atomic Operation이란 다른 Operation의 간섭가능성 없이 단일 unit으로 수행하는 operation을 의미합니다.
+
+자바 언어 스펙은 변수를 읽거나 쓰는 것을 Atomic 하게 보장합니다. (long, double 타입이 아닌 경우에만)
+long, double 자료형은 `volatile` 키워드와 함께 선언되어야만 Atomic 하게 움직입니다.
+
+i 가 int 형으로 선언되어 있다고 가정한다.
+i++ 연산은 자바에서 원자적인 연산이 아니다.
+이것은 다른 numeric 자료형에서도 적용된다.
+
+i++ 연산은 먼저 i에 현재 저장되어 있어 있는 값을 읽고(원자적), 그리고 1을 더합니다.(원자적)
+그러나 읽고 쓰는 사이에서 i의 값이 변경되었을 수도 있습니다.
+
+Java 1.5 부터는 자바는 원자적 변수를 제공합니다. (AtomicInteger, AtomicLong) 원자적인 연산을 위해 getAndDecrement(), getAndIncrement() 등의 메소드를 제공합니다.
+
+### 4.3. Memory updates in synchronized code
+자바 메모리 모델은 syncronized 블락에 진입한 각각의 스레드가 동일한 잠금에 의해서 보호된 이전 변경사항의 영향을 받는것을 보장합니다.
+
+## 5. Immutability and Defensive Copies
+### 5.1. Immutability
+
+동시성 문제를 피하는 가장 간단한 방법은 스레드간에 불변 데이터만 공유하는 것이다. 불편데이터는 변경할 수 없는 데이터를 의미한다.
+
+클래스를 불편으로 만들기 위해서는 
+ - 모든 필드를 final로 선언한다.
+ - class를 final로 선언한다.
+ - the this reference is not allowed to escape during construction
+ - 변경 가능한 데이터 객체를 참조하는 모든 필드는 private 으로 선언한다.
+ - setter 메소드를 만들지 않는다.
+ - 호출하는 쪽에 직접 노출되거나 반환되지 않는다.
+ 
+불변 클래스는 그 상태를 관리하기 위해서 몇 개의 변경 가능한 데이터도 포함할 수 있습니다. 그러나 외부로부터. 클래스의 속성은 변경될 수 있습니다.
