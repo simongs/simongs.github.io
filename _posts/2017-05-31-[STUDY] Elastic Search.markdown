@@ -167,6 +167,18 @@ Doc Value는 디스크 기반은 자료구조이고, 인덱스 생성 시간에 
 만약 특정 필드에 대해서 소팅이나, 집합 연산이나  스크립트를 통한 접근이 필요 없다면,
 디스크 공간을 아끼기 위하여 doc values를 disable 시킬수 있다.
 
+### 5. Index Module 개념
+
+인덱스 모듈은 인덱스 하나당 생성되는 모듈이고 인덱스와 관련한 속성을 컨트롤한다.
+
+인덱스 세팅 하나에 관련하여 세팅할 수 있다.
+static - Close 상태나 생성시점에만 설정할 수 있다.
+dynamic - update-index-settings API를 통해서 변경할 수 있다.
+
+index.max_result_window
+from + size 의 maximum value를 의미하고 default로는 10000입니다.
+검색 요청은 from+size 크기에 비례해서 힙메모리를 증가시킵니다.
+
 ## FAQ
 
 ### 1. primary shard 와 replica shard의 차이점
