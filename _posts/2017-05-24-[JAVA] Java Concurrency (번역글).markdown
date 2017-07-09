@@ -5,15 +5,15 @@ date:   2017-05-24 09:00:00 +0900
 categories: JAVA 
 ---
 
-# 원문
-[http://www.vogella.com/tutorials/JavaConcurrency/article.html](http://www.vogella.com/tutorials/JavaConcurrency/article.html)
+- [원문 링크 : http://www.vogella.com/tutorials/JavaConcurrency/article.html](http://www.vogella.com/tutorials/JavaConcurrency/article.html)
+- 본 글은 번역글입니다.
+- SKIP 한 부분이 존재합니다.
+- 작성중입니다.
 
 - Table of Contents
 {:toc}
 
-## 본 글은 번역글입니다.
-## SKIP 한 부분이 존재합니다.
-## 작성중입니다.
+# Java Concurrency
 
 ~~~
 이 아티클은 자바에서 어떻게 병렬프로그래밍을 할 수 있는지 설명합니다.

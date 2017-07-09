@@ -43,3 +43,11 @@ categories: etc
 
 #### 개발블로그
 [https://github.com/sarojaba/awesome-devblog](https://github.com/sarojaba/awesome-devblog)
+
+#### 하마 블로그
+ - 이 분의 생각을 따라가다보면 섬세해서 좋은 블로그
+[http://hamait.tistory.com/355](http://hamait.tistory.com/355)
+
+#### 머루 블로그
+ - 경험이 녹아든 개발자의 블로그
+[http://wonwoo.ml](http://wonwoo.ml)
