@@ -6,6 +6,7 @@ categories: STUDY
 ---
 
 ### 시청 로그
+#### 7회 2017-05-23
 #### 8회 2017-06-06
 
 # 7회. 4부. 자바와 스프링의 비동기 개발 기술 살펴보기
@@ -38,7 +39,6 @@ FutureTask<String> futureTask = new FutureTask<String>(() -> {
     return "done";
 }) {
     // 익명클래스를 정의한다.
-    // 
     @Override
     protected void done() {
         System.out.println(get());
@@ -52,6 +52,8 @@ es.shutdown(); //  비동기 작업들이 모두 끝날때까지 대기하다가
 ## ListenableFuture
 
 ## CompletableFuture
+ - Java8에 등장한 클래스
+ - callback 지옥을 벗어나게 해주는 비동기 기술
 
 ## DeferedResult
  - Controller의 리턴 값으로 DeferedResult를 사용한다.
@@ -65,7 +67,8 @@ es.shutdown(); //  비동기 작업들이 모두 끝날때까지 대기하다가
 ## 스프링의 기본 Executor
 
 ### SimpleAsyncTaskExecutor
-이건 작업 하나당 무조건 1 Thread를 만든다.
+ - 이건 작업 하나당 무조건 1 Thread를 만든다.
+ - 테스트 용으로 쓰기 적합하고 실운영에서 사용하기에는 부족함이 많다.
 
 ### @Bean
  - Thread 통계를 보고 싶다면 ThreadDecorator를 통해서 수집하면 좋다.
@@ -87,7 +90,6 @@ ThreadPoolTaskExecutor tp() {
 ## 접근 1
 
 ### AsyncRestTemplate
-
  - 응답은 원하는대로 병렬적으로 온다.
  - 서버의 성능이 개선되지 않는다.
 
@@ -105,9 +107,7 @@ public ListenableFuture<ResponseEntity<String>> rest (int idx) {
 ~~~
 
 ## 접근 2
-
 ### AsyncRestTemplate With Netty
-
  - Netty 를 통해서 외부 API를 콜한다.
 
 ~~~java
@@ -185,14 +185,3 @@ public DeferedResult<String> rest(int idx) {
     return dr;
 }
 ~~~ 
-
-# 6.
-
-
-## 기타
-
-
-
-### CyclicBarrier
-
-

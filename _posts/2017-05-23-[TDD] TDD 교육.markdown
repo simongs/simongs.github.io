@@ -5,14 +5,15 @@ date:   2017-05-23 09:00:00 +0900
 categories: IDE 
 ---
 
-# TDD
+#### NOTE
+본 글은 사내 TDD 교육 과정의 흔적입니다.
 
+# TDD
 
 ## 적용법
 
 ## 강의 STEP
  - TDD의 리듬감 전달
- - 
 
 ## 중요한 단축키
  - Quick Fix (Ctrl + 1)

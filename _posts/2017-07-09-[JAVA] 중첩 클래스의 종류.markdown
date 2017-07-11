@@ -1,0 +1,73 @@
+---
+layout: post
+title: "[JAVA] 중첩클래스 종류"
+date:   2017-07-09 09:00:00 +0900
+categories: JAVA
+---
+
+# 중첩클래스란 (nested class)
+다른 클래스 내부에 정의되는 클래스를 중첩클래스라고 한다.
+중첩 클래스는 독립적으로 오브젝트로 만들어질 수 있는 스태틱 클래스(static class)와 
+자신이 정의된 클래스의 오브젝트 안에서만 만들어질 수 있는 내부클래스(inner class)로 구분된다.
+
+내부 클래스는 다시 범위에 따라 세가지로 구분된다.
+멤버필드처럼 오브젝트 레벨에 정의되는 멤버 내부 클래스 (member inner class)
+메소드 레벨에 정의되는 로컬 클래스 (local class)
+이름을 갖지 않는 익명 내부 클래스 (anonymous inner class)이다.
+익명 내부 클래스의 범위는 선언된 위치에 따라 다르다.
+
+## 익명내부클래스
+클래스 선언과 오브젝트 생성이 결합된 형태로 만들어지며, 상속할 클래스나 구현할 인터페이스를 
+생성자 대신 사용해서 다음과 같은 형태로 만들어 사용한다.
+클래스를 재사용할 필요가 없고, 구현한 인터페이스 타입으로만 사용할 경우에 유용하다.
+~~~
+new 인터페이스명() {
+    클래스 본문
+}
+~~~
+
+# Sample Code
+
+~~~java
+class OuterClass {
+    
+    // 스태칙클래스
+    static class StaticNestedClass {
+        
+    }
+    
+    // 멤버내부클래스
+    class MemberInnerClass {
+        
+    }
+
+    void method(SomeObject someObject) {
+        // 선언된 메소드 내에서만 사용가능함
+        // 자신이 선언된 곳의 정보에 접근이 가능하다.
+        class LocalClass implements InterfaceAAA {
+            public String implement() {
+                return someObject.getTest();
+            }
+        }
+        InterfaceAAA test = new LocalClass();
+    }
+
+    void anonyMethod(SomeObject someObject) {
+        // 익명 내부 클래스
+        InterfaceAAA test = new InterfaceAAA() {
+            public String implement() {
+                return someObject.getTest();
+            }
+        }
+    }
+}
+
+// 익명클래스를 위한 인터페이스 정의
+interface InterfaceAAA {
+    String implements();
+}
+~~~
+
+# Reference
+ - 토비의 스프링
+

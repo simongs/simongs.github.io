@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[STUDY] Elastic Search"
+title: "[STUDY] Elastic Search Tips"
 date:   2017-05-31 09:00:00 +0900
 categories: STUDY
 ---
@@ -182,6 +182,8 @@ from + size 의 maximum value를 의미하고 default로는 10000입니다.
 ## FAQ
 
 ### 1. primary shard 와 replica shard의 차이점
+primary shard는 원본 데이터가 쪼개진 shard를 의미하고 
+replica shard는 primary shard 데이터 기준으로 복제된다.
 
 ### 2. 운영과정에서의 Trouble Shooting
 해당 정보는 SKPlanet의 동영상을 보고 정리하였습니다.
@@ -189,7 +191,6 @@ from + size 의 maximum value를 의미하고 default로는 10000입니다.
 <figure class="video_container">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/y0fSe5nLeMs" frameborder="0" allowfullscreen></iframe>
 </figure>
-
 
 ## Reference
 - [Parent-Child Relationship Reference DOC](https://www.elastic.co/guide/en/elasticsearch/guide/master/parent-child.html )
