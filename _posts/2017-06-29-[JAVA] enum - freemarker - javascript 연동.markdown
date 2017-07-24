@@ -46,16 +46,15 @@ public class EnumConstants {
 ~~~
 
 ### Freemarker 단 소스
-~~~
+~~~html
 <#assign JacksonUtil=statics["com.dasolute.JacksonUtil"]>
 <#assign EnumConstants=statics["com.dasolute.EnumConstants"]>
 
 <script type="text/javascript">
-    if (typeof bill == "undefined"){ bill = {};}
-    if (typeof bill.common == "undefined"){ bill.common = {};}
-    if (typeof bill.common.enum == "undefined"){ bill.common.enum = {};}
+    if (typeof com == "undefined"){ bill = {};}
+    if (typeof com.dasolute == "undefined"){ com.dasolute = {};}
 
-    bill.common.enum.data = ${(JacksonUtil.toJson(EnumConstants.getEnumMap()))!};
+    com.dasolute.data = ${(JacksonUtil.toJson(EnumConstants.getEnumMap()))!};
 </script>
 ~~~
 
