@@ -6,7 +6,7 @@ categories: STUDY
 ---
 
 #### Note
-본 글은 5월 26일에 작성된 [Java Callable & Future Sample](http://simongs.github.io/java/2017/05/26/JAVA-Java-Callable-&-Future-Sample.html)의 연장선상에 있는 글입니다.
+ - 본 글은 5월 26일에 작성된 [Java Callable & Future Sample](http://simongs.github.io/java/2017/05/26/JAVA-Java-Callable-&-Future-Sample.html)의 연장선상에 있는 글입니다.
 
 # 적용방법
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[javascript] javascript Practice 모음"
+title: "[javascript] Parent-Child CheckBox Event"
 date:   2017-07-13 09:00:00 +0900
 categories: JAVASCRIPT
 ---

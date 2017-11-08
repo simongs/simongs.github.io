@@ -14,6 +14,7 @@ categories: JAVA
 URL : https://github.com/ktoso/maven-git-commit-id-plugin
 
 #### pom.xml 수정
+ - 프로젝트 내부의 Resource 파일 중에 {git.branch} 같은 정의된 문자열을 치환한다.
 
 ~~~xml
 <project>

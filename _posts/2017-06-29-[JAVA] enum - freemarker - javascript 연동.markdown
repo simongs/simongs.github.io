@@ -67,8 +67,8 @@ if (typeof com.dasolute == "undefined"){ com.dasolute = {};}
 com.dasolute.formatter = {
 	code : {
 		getText : function(codeTypeName, code) {
-			if(bill.common.enum.data[codeTypeName] && bill.common.enum.data[codeTypeName][code]) {
-				return bill.common.enum.data[codeTypeName][code];
+			if(com.dasolute.data[codeTypeName] && com.dasolute.data[codeTypeName][code]) {
+				return com.dasolute.data[codeTypeName][code];
 			}
 			return "";
 		}

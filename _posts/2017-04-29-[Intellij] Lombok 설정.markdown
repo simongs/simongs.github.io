@@ -14,8 +14,9 @@ categories: IDE
 AnnotationProcessor를 이용하여 컴파일 시점에 코드를 생성한다.
 배포 시점에 lombok-1.16.xx.jar 파일이 존재하면 javac 가 동작하는 시점에 바이너리 코드가 생성된다.
 
-javax.annotation.processing 패키지
+## Lombok은 어떻게 동작하는가
 
+javax.annotation.processing 패키지
 
 
 ## Reference

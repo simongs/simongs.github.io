@@ -1,6 +1,6 @@
 ---
 layout: posts_by_category
-categories: book
-title: book
-permalink: /category/git
+categories: javascript
+title: javascript
+permalink: /category/javascript
 ---
