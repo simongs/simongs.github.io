@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[STUDY] Elastic Search Tips"
+title: "[STUDY] Elastic Search 몇가지 참고사항"
 date:   2017-05-31 09:00:00 +0900
 categories: STUDY
 ---
