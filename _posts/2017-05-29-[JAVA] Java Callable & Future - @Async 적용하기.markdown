@@ -58,6 +58,12 @@ public class AsyncConfiguration {
 
 Spring-Boot에서는 @EnableAsync, @EnableScheduling 을 통해서 활성화 시킬 수 있다.
 
+# @Async의 Return Type
+ - void
+ - Future<T>
+ - ListenableFuture<T>
+ - CompletableFuture<T>
+
 # Question
 
 ### Q1. executor는 언제 shutdown이 되는가?
