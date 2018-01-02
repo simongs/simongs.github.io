@@ -1,48 +1,60 @@
-title: Simongs NOTE
-description: Personal NOTE
-author: simongs
-github: https://github.com/simongs
-about: I'm WEB Programmer
-disqus_shortname: simongs
-google_analytics: UA-85442637-1
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
 
-future: true
-enableTags: true
-tagarray: []
+# Site settings
+title: HyG
+brief-intro: Front-end Dev Engineer
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://gaohaoyang.github.io" # the base hostname & protocol for your site
 
-collections:
-  project:
-    output: false
-    permalink: /project/:path/
+permalink: /:year/:month/:day/:title/
 
-social:
-    - icon: fa-facebook
-      link: "https://www.facebook.com/simhongsup"
-    - icon: fa-twitter
-      link: "https://twitter.com/chopokmado"
-    - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/홍섭-심-aa315331"
-    - icon: fa-stack-exchange
-      link: "https://stackexchange.com/users/9363458/hongsup-sim"
+# other links
+twitter_username: gaohaoyang126
+facebook_username: gaohaoyang.water
+github_username:  Gaohaoyang
+email: gaohaoyang126@126.com
+weibo_username: 3115521wh
+zhihu_username: gaohaoyang
+linkedIn_username: gaohaoyang
+dribbble_username:
 
-share:
-  twitter_username: chopokmado
-  fb_appid: 1749788565247320
+description_footer: 本站记录我前端之旅的沿途风景！
 
-urls:
-    - text: About Me
-      url: /about/
-    - text: Github
-      url: https://github.com/simongs
-    - text: XML Feed
-      url: /feed.xml
+# comments
+# two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
+duoshuo_shortname: #hygblog
+disqus_shortname: gaohaoyang
 
-url: "https://simongs.github.io"
-baseurl: ""
-paginate: 15
-per_page: 5
-paginate_path: "/page:num/"
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
+google_analytics_id: UA-72449510-4 # google 分析追踪id
+
+# Build settings
 markdown: kramdown
-gems:
-  - jekyll-paginate
-  - jekyll-gist
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# port
+# port: 1234
+
+# url
+category_dir: category/
+tag_dir: tag/
+
+# excerpt
+excerpt_separator: "\n\n\n\n"
+
+# paginate
+gems: [jekyll-paginate]
+paginate: 6
