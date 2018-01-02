@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[javascript] handlebars 템플릿과 레이어팝업"
+title: "[JAVASCRIPT] handlebars 템플릿과 레이어팝업"
 date:   2017-07-16 09:00:00 +0900
 categories: JAVASCRIPT
 ---

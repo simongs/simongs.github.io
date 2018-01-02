@@ -60,8 +60,6 @@ public @interface EnableAutoConfiguration {
 
 ### @EnableAutoConfigurationImportSelector
 
-
-
 제일 핵심인 코드
 
 DeferredImportSelector 이 어노테이션을 통해서 설정정보를 가져온다.
