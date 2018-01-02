@@ -64,6 +64,46 @@ Spring-Boot에서는 @EnableAsync, @EnableScheduling 을 통해서 활성화 시
  - ListenableFuture<T>
  - CompletableFuture<T>
 
+# @Async with Future
+ - java의 기본 비동기 interface
+ - get() Blocking Method이다
+
+~~~java
+@Async
+public Future<String> service() {
+    return AsyncResult<>(result);
+}
+
+Future<String> f = myService.service();
+String result = f.get()
+~~~
+
+# @Async with ListenableFuture
+ - Spring 4.X 대에 만들어진 Future
+ - Future.get() 처럼 Blocking 되지 않고 Callback을 통하여 호출한다.
+~~~java
+@Async
+public ListenableFuture<String> service() {
+    return AsyncResult<>(result);
+}
+
+ListenableFuture<String> f = myService.service();
+f.addCallback(r->log.info("success", r), e->log.info("error", e));
+~~~
+
+# @Async with CompletableFuture
+ - Java 8에서 지원되는 비동기 Future
+
+~~~java
+@Async
+public CompletableFuture<String> service() {
+    return CompletableFuture.completedFuture(result);
+}
+
+CompletableFuture<String> f = myService.service();
+f.thenAccept(r->log.info("success", r));
+~~~
+
 # Question
 
 ### Q1. executor는 언제 shutdown이 되는가?
