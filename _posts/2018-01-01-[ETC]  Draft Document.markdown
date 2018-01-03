@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[STUDY] 관심사항"
-date:   2016-11-21 09:00:00 +0900
-categories: network study
+title: "[ETC] 관심사항"
+date:   2018-01-01 09:00:00 +0900
+categories: ETC
 ---
 
 ## 관심사항 리스트

@@ -2,7 +2,7 @@
 layout: post
 title: "[JAVA] Java Callable & Future - @Async 적용하기"
 date:   2017-05-29 09:00:00 +0900
-categories: STUDY
+categories: JAVA
 ---
 
 #### Note

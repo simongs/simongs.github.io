@@ -2,7 +2,7 @@
 layout: post
 title: "[JAVA][NETWORK] Network Programming in Java"
 date:   2016-11-15 09:00:00 +0900
-categories: java
+categories: JAVA NETWORK
 ---
 
 ### Trouble Shouting 

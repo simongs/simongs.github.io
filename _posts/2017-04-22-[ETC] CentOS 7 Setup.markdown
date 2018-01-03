@@ -2,7 +2,7 @@
 layout: post
 title: "[ETC] CentOS 7 Setup"
 date:   2017-04-19 17:45:49 +0900
-categories: etc 
+categories: ETC 
 ---
 
 ## 네이버 클라우드 플랫폼

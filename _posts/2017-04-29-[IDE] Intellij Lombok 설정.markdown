@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Intellij] Lombok IDE 설정 및 배포 설정"
+title: "[IDE] Intellij Lombok IDE 설정 및 배포 설정"
 date:   2017-04-29 09:00:00 +0900
 categories: IDE 
 ---

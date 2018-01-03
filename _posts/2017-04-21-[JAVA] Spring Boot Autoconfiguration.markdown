@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[STUDY] Spring Boot Auto configuration"
+title: "[JAVA] Spring Boot Auto configuration"
 date:   2017-04-19 17:45:49 +0900
-categories: etc 
+categories: JAVA SPRING 
 ---
 
 ## Spring Boot Autoconfiguration

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[ETC] 유시민의 글쓰기 특강"
+title: "[BOOK] 유시민의 글쓰기 특강"
 date:   2017-03-19 09:00:00 +0900
-categories: etc
+categories: BOOK
 ---
 
 ## 유시민의 글쓰기 특강

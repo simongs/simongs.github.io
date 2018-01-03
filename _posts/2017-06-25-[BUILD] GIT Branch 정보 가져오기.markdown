@@ -2,7 +2,7 @@
 layout: post
 title: "[BUILD] GIT Branch 정보 가져오기."
 date:   2017-06-25 09:00:00 +0900
-categories: JAVA
+categories: JAVA MAVEN
 ---
 
 ## MAVEN에서 GIT Branch 정보 가져오는 법
