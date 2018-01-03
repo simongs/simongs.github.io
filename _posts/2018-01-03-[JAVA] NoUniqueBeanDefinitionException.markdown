@@ -11,10 +11,6 @@ categories: JAVA SPRING
 [2018/01/03 11:42:06.012][http-apr-31883-exec-3][ERROR][AbstractStep:225] Encountered an error executing step SomethingJobStep in job SomethingJob
 org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [org.springframework.transaction.PlatformTransactionManager] is defined: expected single matching bean but found 2: transactionManager,resourcelessTransactionManager
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:365) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:331) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.determineTransactionManager(TransactionAspectSupport.java:366) ~[spring-tx-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:271) ~[spring-tx-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) ~[spring-tx-4.1.7.RELEASE.jar:4.1.7.RELEASE]
 ~~~
 
 #### ▣ 문제원인
