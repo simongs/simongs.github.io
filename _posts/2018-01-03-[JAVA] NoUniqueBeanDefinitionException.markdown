@@ -53,6 +53,7 @@ public void someMethod() {
 
 ##### 2. @Primary 를 통해서 특정 Bean을 Default Bean으로 설정합니다.
 ~~~java
+@Primary
 @Bean
 public PlatformTransactionManager transactionManager(@Qualifier("masterDataSource") DataSource masterDataSource) {
     DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(masterDataSource);
