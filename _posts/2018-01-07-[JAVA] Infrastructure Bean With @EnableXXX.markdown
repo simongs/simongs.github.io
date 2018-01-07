@@ -115,127 +115,126 @@ public class Test {
 
 #### @Configuration 설정 확장 방법
 ##### Configuration 확장 (비추)
-    - class AppConfig extends BaseConfig + @Override
-    - 이 방식은 상속이 가지는 모든 단점을 가진다. 결합도가 높아진다.
+- class AppConfig extends BaseConfig + @Override
+- 이 방식은 상속이 가지는 모든 단점을 가진다. 결합도가 높아진다.
 ##### @Import + Metadata/Registry
-    - @ImportAware 어노테이션, ImportSelector 인터페이스, ImportBeanDefinitionRegistrar 인터페이스
-    - 다른 Configuration 을 가져올 수 있다.
-    - 확장포인트
-        - ImportAware 인터페이스를 통해서 확장한다.
-    - 보통은 @Import (A.class, B.class) 로 바로 접근하지 않고 @EnableXXX로 접근한다.
-        - Sample Code
-        ~~~java
-            @Configuration
-            @EnableHello // Import를 좀 더 명시적으로 사용하는 방법
-            //@EnableHello("Spring") // ImportAware 예제 케이스 (옵션 정보를 넘기는 방법)
-            //@EnableHello(type=1) // ImportSelector 예제 케이스 (설정정보의 분기를 처리하는 방법)
-            //@EnableHello(type=1) // ImportBeanDefinitionRegistrar 예제 케이스 (커스터마이징 방법이 가장 높은 방법 - @Bean 사용대신 직접 Bean 설정)
-            public class AppConfig {
+- @ImportAware 어노테이션, ImportSelector 인터페이스, ImportBeanDefinitionRegistrar 인터페이스
+- 다른 Configuration 을 가져올 수 있다.
+- 확장포인트
+    - ImportAware 인터페이스를 통해서 확장한다.
+- 보통은 @Import (A.class, B.class) 로 바로 접근하지 않고 @EnableXXX로 접근한다.
+~~~java
+    @Configuration
+    @EnableHello // Import를 좀 더 명시적으로 사용하는 방법
+    //@EnableHello("Spring") // ImportAware 예제 케이스 (옵션 정보를 넘기는 방법)
+    //@EnableHello(type=1) // ImportSelector 예제 케이스 (설정정보의 분기를 처리하는 방법)
+    //@EnableHello(type=1) // ImportBeanDefinitionRegistrar 예제 케이스 (커스터마이징 방법이 가장 높은 방법 - @Bean 사용대신 직접 Bean 설정)
+    public class AppConfig {
 
+    }
+
+    //1) @Import(HelloConfig.class) // 특정 Configuration을 지정해서 Import한다.
+    //2) @Import(HelloSelector.class) // Import할 Configuration을 판단하는 Selector를 Import한다.
+    //2) @Retention(RetentionPolicy.RUNTIME) // 해당 어노테이션이 언제까지 살아있는가? Default Retention은 RetentionPolicy.CLASS이다.
+    //2) (CLASS) JVM에 클래스가 로딩될때는 사라진다. - 클래스 시점에만 정보가 있는데 예제는 Runtime 시점에 정보를 알고 있어야 하므로 RUNTIME으로 변경해야한다.
+    //2) 제일 오래 살아남는게 RetentionPolicy.RUNTIME이므로 대부분 케이스가 RetentionPolicy.RUNTIME 으로 설정한다.
+    //3) @Import(HelloImportBeanDefinitionRegistrar.class) // 
+    @interface EnableConfig {
+        // 속성을 줄 수 있는 방법 (ImportAware)
+        // String name();
+
+        // type에 따른 Import 분기처리 (ImportSelector)
+        // int type;
+    }
+
+    // ImportAware 를 통한 확장 방법
+    @Configuration
+    class HelloConfig implements ImportAware {
+        @Bean
+        Hello hello() {
+            return new Hello("Test");
+        }
+
+        @Autowired
+        Hello hello; // 위의 @Bean 에 생성한 bean을 Autowired 한다.
+
+        @Override
+        public void setImportMetadata(AnnotationMetadata importMetadata) {
+            // Import 해서 HelloConfig를 Bean으로 등록하는 시점에
+            // AnnotationMetadata란 해당 HelloConfig 를 최초로 가져오게된 시점의 클래스, 메타데이터 정보 담는다.
+            // 해당 샘플코드에서는 AppConfig의 @EnableHello("Spring") 선언 정보이다.
+            // 즉 Enable에 설정된 옵션을 적용해서 확장할 수 있다.
+            String name = (String) importMetadata.getAnnotationAttributes(EnableHello.class.getName()).get("name");
+            hello.setName(name);
+        }
+    }
+
+    // ImportSelector 를 통한 확장 방법 
+    // @Configuration이 안붙어있다. 조건만 정의하면 되기 때문에 Bean이 될 필요가 없다.
+    class HelloSelector implements ImportSelector {
+        @Override
+        public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+            // AnnotationMetadata를 참조해보니 경우에 따라 Configuration을 선별적으로 Import 시키면 된다를 풀어낸다.
+            // 하나 이상의 Configuration을 리턴한다.
+            Intger name = (Integer) importingClassMetadata.getAnnotationAttributes(EnableHello.class.getName()).get("type");
+            if (type == 1) {
+                return new String[] {HelloConfig1.class.getName()};
+            } else {
+                return new String[] {HelloConfig2.class.getName()};
             }
+        }
+    }
 
-            //1) @Import(HelloConfig.class) // 특정 Configuration을 지정해서 Import한다.
-            //2) @Import(HelloSelector.class) // Import할 Configuration을 판단하는 Selector를 Import한다.
-            //2) @Retention(RetentionPolicy.RUNTIME) // 해당 어노테이션이 언제까지 살아있는가? Default Retention은 RetentionPolicy.CLASS이다.
-            //2) (CLASS) JVM에 클래스가 로딩될때는 사라진다. - 클래스 시점에만 정보가 있는데 예제는 Runtime 시점에 정보를 알고 있어야 하므로 RUNTIME으로 변경해야한다.
-            //2) 제일 오래 살아남는게 RetentionPolicy.RUNTIME이므로 대부분 케이스가 RetentionPolicy.RUNTIME 으로 설정한다.
-            //3) @Import(HelloImportBeanDefinitionRegistrar.class) // 
-            @interface EnableConfig {
-                // 속성을 줄 수 있는 방법 (ImportAware)
-                // String name();
+    // 옵션에 따라 등록되는 빈의 종류와 수가 복잡한 방식으로 변경된다면 고려해볼만하다.
+    public class HelloImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
-                // type에 따른 Import 분기처리 (ImportSelector)
-                // int type;
-            }
+        public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+            // BeanDefinitionRegistry - 빈 정의를 코드로 만들어서 등록할 수 있는 방법을 제공한다.
+            // BeanDefinition을 통해서 hello bean을 정의한다.
+            // 해당 기술을 사용해서 좀더 구체적으로 Bean들을 설정할 수 있다.
+            BeanDefinition beanDefinition = new RootBeanDefinition(Hello.class); // Bean 하나를 정의하는 방법
+            beanDefinition.getPropertyValues().addPropertyValue("name", "TEST");
+            registry.registerBeanDefinition("hello", beanDefinition);
 
-            // ImportAware 를 통한 확장 방법
-            @Configuration
-            class HelloConfig implements ImportAware {
-                @Bean
-                Hello hello() {
-                    return new Hello("Test");
-                }
-
-                @Autowired
-                Hello hello; // 위의 @Bean 에 생성한 bean을 Autowired 한다.
-
-                @Override
-                public void setImportMetadata(AnnotationMetadata importMetadata) {
-                    // Import 해서 HelloConfig를 Bean으로 등록하는 시점에
-                    // AnnotationMetadata란 해당 HelloConfig 를 최초로 가져오게된 시점의 클래스, 메타데이터 정보 담는다.
-                    // 해당 샘플코드에서는 AppConfig의 @EnableHello("Spring") 선언 정보이다.
-                    // 즉 Enable에 설정된 옵션을 적용해서 확장할 수 있다.
-                    String name = (String) importMetadata.getAnnotationAttributes(EnableHello.class.getName()).get("name");
-                    hello.setName(name);
-                }
-            }
-
-            // ImportSelector 를 통한 확장 방법 
-            // @Configuration이 안붙어있다. 조건만 정의하면 되기 때문에 Bean이 될 필요가 없다.
-            class HelloSelector implements ImportSelector {
-                @Override
-                public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-                    // AnnotationMetadata를 참조해보니 경우에 따라 Configuration을 선별적으로 Import 시키면 된다를 풀어낸다.
-                    // 하나 이상의 Configuration을 리턴한다.
-                    Intger name = (Integer) importingClassMetadata.getAnnotationAttributes(EnableHello.class.getName()).get("type");
-                    if (type == 1) {
-                        return new String[] {HelloConfig1.class.getName()};
-                    } else {
-                        return new String[] {HelloConfig2.class.getName()};
-                    }
-                }
-            }
-
-            // 옵션에 따라 등록되는 빈의 종류와 수가 복잡한 방식으로 변경된다면 고려해볼만하다.
-            public class HelloImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
-
-                public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-                    // BeanDefinitionRegistry - 빈 정의를 코드로 만들어서 등록할 수 있는 방법을 제공한다.
-                    // BeanDefinition을 통해서 hello bean을 정의한다.
-                    // 해당 기술을 사용해서 좀더 구체적으로 Bean들을 설정할 수 있다.
-                    BeanDefinition beanDefinition = new RootBeanDefinition(Hello.class); // Bean 하나를 정의하는 방법
-                    beanDefinition.getPropertyValues().addPropertyValue("name", "TEST");
-                    registry.registerBeanDefinition("hello", beanDefinition);
-
-                    
-                }
-            }
-        ~~~
+            
+        }
+    }
+~~~
 ##### Configuration + 자바코드 (Configurer)
-    - 개념적으로 보면 3.1 새로운 스펙이 아니고 기존 자바를 활용한 방법이다.
-    - EnableWebMvc 의 WebMvcConfigurer 가 해당 스타일로 작성이 되어 있다.
-    - WebMvcConfigurer[] configurers; 으로 선언해서 Collection 형태로 받을 수 있다. 
-    ~~~java
-        @Configuration
-        @EnableHello
-        public class AppConfig implements NameConfigurer {
-            @Override
-            public void configure(Hello hello) {
-                hello.setName("END");
-            }
+- 개념적으로 보면 3.1 새로운 스펙이 아니고 기존 자바를 활용한 방법이다.
+- EnableWebMvc 의 WebMvcConfigurer 가 해당 스타일로 작성이 되어 있다.
+- WebMvcConfigurer[] configurers; 으로 선언해서 Collection 형태로 받을 수 있다. 
+~~~java
+    @Configuration
+    @EnableHello
+    public class AppConfig implements NameConfigurer {
+        @Override
+        public void configure(Hello hello) {
+            hello.setName("END");
         }
+    }
 
-        @Import(HelloConfig.class)
-        @interface EnableConfig {
-        }
-        
-        // Configurer
-        interface NameConfigurer {
-            Hello configure(Hello hello);
-        }
+    @Import(HelloConfig.class)
+    @interface EnableConfig {
+    }
+    
+    // Configurer
+    interface NameConfigurer {
+        Hello configure(Hello hello);
+    }
 
-        @Configuration
-        class HelloConfig {
-            // AppConfig Bean이 주입이 된다. @Configuration도 Bean이다.
-            @Autowired 
-            NameConfigurer configurer; 
+    @Configuration
+    class HelloConfig {
+        // AppConfig Bean이 주입이 된다. @Configuration도 Bean이다.
+        @Autowired 
+        NameConfigurer configurer; 
 
-            @Bean
-            Hello hello() {
-                return configurer.configure(new Hello("TEST"));
-            }
+        @Bean
+        Hello hello() {
+            return configurer.configure(new Hello("TEST"));
         }
-    ~~~
+    }
+~~~
 
 ## 용어정리
 #### @Configuration
