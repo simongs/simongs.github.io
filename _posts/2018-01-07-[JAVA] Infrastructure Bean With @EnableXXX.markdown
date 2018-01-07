@@ -8,7 +8,7 @@ categories: JAVA SPRING
 * Table of Contents
 {:toc}
 
-# Infrastructure Bean
+## Infrastructure Bean
  - BeanDefinition.getRole()
     - Bean은 역할을 가지고 있다.
     - Application(0), Support, Infrastucture(2)
@@ -20,9 +20,7 @@ categories: JAVA SPRING
     - infrastucture를 의미를 모른 채 등록을 했어야 했다.
     - ex) <bean name="" class="TransactionAttributeSourceAdvisor" /> 
  - Spring 2.0 에는 네임스페이스와 커스텀 태그를 이용해서 인프라빈 정의를 단순하게 했다.
-    - 1.X 대처럼 하나하나 등록해주지 않았다.
-    - ex) <tx:annotation-driven /> <!-- 4가지 종류의 bean을 등록한다. -->
-    - ex) <aop:aspectj-autoproxy />
+    - 1.X 대처럼 하나하나 등록해주지 않았다. (<tx:annotation-driven />) <!-- 4가지 종류의 bean을 등록한다. -->
  - Spring 2.5 에는 XML과 @Component 의 분리
     - Application Bean을 XML에서 분리해냈다.
     - 그러나 InfraStructure Bean은 그대로 XML에 남아있었다.
@@ -38,8 +36,8 @@ categories: JAVA SPRING
         - 인프라 빈 커스텀 태그의 대부분에 적용
     - 스프링 사용자도 사용 가능하다.
 
-# @Configuration 
-## @Configuration 동작원리
+## @Configuration 
+#### @Configuration 동작원리
 - 기존 Bean의 생성 과정
     - <XML, Property File, DB> -> BeanDefinition -> Bean Instance
     - BeanDefinitionReader, BeanDefinitionParser를 통함
@@ -67,7 +65,7 @@ categories: JAVA SPRING
     - AnnotationConfigApplicationContext 는 해당 후처리기를 내장하고 있다.
         - Ex) new AnnotationConfigApplicationContext(Config.class);
 
-## @Configuration 빈 등록 방법
+#### @Configuration 빈 등록 방법
 - ConfigurationClassPostProcessor
     - XML <bean>
     - ComponentScan
@@ -77,7 +75,7 @@ categories: JAVA SPRING
         - contextClass = AnnotationConfigWebApplicationContext
         - contextConfigLocation = enable.config
 
-## @Configuration 에 사용하는 Annotation
+#### @Configuration 에 사용하는 Annotation
 - 3.0
     - @ImportResource
     - @ImportResource("classpath:context.xml")
@@ -90,16 +88,15 @@ categories: JAVA SPRING
         - @PropertySource("classpath:database.properties")
     - @Enable*
 
-## 특징
+#### 특징
 ~~~java
 public class Test {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(HelloConfig.class);
 
+        // hello1, hello2 는 동일한 인스턴스이다.
         Hello hello1 = ac.getBean(Hello.class).getHello();
         Hello hello2 = ac.getBean(HelloConfig.class).hello();
-
-        // hello1, hello2 는 동일한 인스턴스이다.
     }
 }
 ~~~
@@ -112,15 +109,15 @@ public class Test {
 - @Bean이 붙은 메소드는 private이면 안되고 final이 붙으면 안된다.
     - CGLIB이 처리를 할 수 없다.
 
-## @Configuration 단점
+#### @Configuration 단점
 - @Bean이 붙으면 모두 Spring Bean으로 등록한다.
 - 선별적으로 Bean들을 서로 다르게 구성할 수가 없다.
 
-## @Configuration 설정 확장 방법
- - Configuration 확장 (비추)
+#### @Configuration 설정 확장 방법
+##### Configuration 확장 (비추)
     - class AppConfig extends BaseConfig + @Override
     - 이 방식은 상속이 가지는 모든 단점을 가진다. 결합도가 높아진다.
- - @Import + Metadata/Registry
+##### @Import + Metadata/Registry
     - @ImportAware 어노테이션, ImportSelector 인터페이스, ImportBeanDefinitionRegistrar 인터페이스
     - 다른 Configuration 을 가져올 수 있다.
     - 확장포인트
@@ -204,7 +201,7 @@ public class Test {
                 }
             }
         ~~~
- - Configuration + 자바코드 (Configurer)
+##### Configuration + 자바코드 (Configurer)
     - 개념적으로 보면 3.1 새로운 스펙이 아니고 기존 자바를 활용한 방법이다.
     - EnableWebMvc 의 WebMvcConfigurer 가 해당 스타일로 작성이 되어 있다.
     - WebMvcConfigurer[] configurers; 으로 선언해서 Collection 형태로 받을 수 있다. 
@@ -241,14 +238,14 @@ public class Test {
     ~~~
 
 ## 용어정리
-### @Configuration
+#### @Configuration
  - @Bean 들을 정의한 Java Config 스펙의 제일 기본이 되는 설정파일
  
-### @Bean
+#### @Bean
  - 스프링 Bean이 되는 정보
  - 싱글톤을 유지한다.
 
-### @EnableXXX
+#### @EnableXXX
  - 직접적으로 @Import(A.class, B.class) 로 명시하지 않고 확장하는 스프링에서 가이드하는 방법
  - @EnableXXX 는 내부적으로 @Import를 수반한다.
  - @Configutaion 이 붙은 곳에 같이 붙인다.
@@ -259,19 +256,19 @@ public class Test {
     - @EnableCaching = <cache:*>
     - @EnableTransactionManagement = <tx:*>
 
-### Import Annotation
+#### Import Annotation
  - 다른 @Configuration 클래스를 Import 하기 위한 어노테이션이다.
  - Spring XML 에서는 <import /> 와 동일하다.
 
-### ImportAware
+#### ImportAware
  - 다른 설정(@Configuration) 을 가져와서 쓰면서 확장까지 할 수 있다.
  - AnnotationMetadata로 케이스별 옵션값을 받아 @Bean 생성 시 추가적인 정보를 세팅한다.
  - 위의 예제 설정
 
-### ImportSelector
+#### ImportSelector
  - AnnotationMetadata로 케이스별 옵션값을 받아 설정정보를 분기한다.
 
-### ImportBeanDefinitionRegistrar
+#### ImportBeanDefinitionRegistrar
  - @Bean 사용대신 직접 Bean 설정
  - 커스터마이징 레벨이 가장 높다.
  - BeanDefinition 과 BeanDefinitionRegistry 를 직접 코딩하여 Bean을 생성한다.
