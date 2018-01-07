@@ -18,9 +18,14 @@ categories: JAVA SPRING
         - 개발자가 직접 사용할 필요는 없지만 중요한 내부 역할을 담당한다.
  - Spring 1.X 에는 XML에 모두 등록해서 사용했었다.
     - infrastucture를 의미를 모른 채 등록을 했어야 했다.
-    - ex) <bean name="" class="TransactionAttributeSourceAdvisor" /> 
+    ~~~
+    <bean name="" class="TransactionAttributeSourceAdvisor" /> 
+    ~~~
  - Spring 2.0 에는 네임스페이스와 커스텀 태그를 이용해서 인프라빈 정의를 단순하게 했다.
-    - 1.X 대처럼 하나하나 등록해주지 않았다. (<tx:annotation-driven />) <!-- 4가지 종류의 bean을 등록한다. -->
+    - 1.X 대처럼 하나하나 등록해주지 않았다. 
+    ~~~
+    <tx:annotation-driven /> <!-- 4가지 종류의 bean을 등록한다. -->
+    ~~~
  - Spring 2.5 에는 XML과 @Component 의 분리
     - Application Bean을 XML에서 분리해냈다.
     - 그러나 InfraStructure Bean은 그대로 XML에 남아있었다.
@@ -59,15 +64,17 @@ categories: JAVA SPRING
         - @Bean 메소드
         - Annotation 메타 정보
 - XML에서 ConfigurationClassPostProcessor 후처리기 생성하기
-    - <context:annotation-config> 를 추가한다.
     - @Configuration 으로 등록된 내용을 해석하여 Bean을 생성한다.
     - method들을 찾아서 @Bean이 붙어 있으면 해석하여 스프링 Bean으로 등록한다.
     - AnnotationConfigApplicationContext 는 해당 후처리기를 내장하고 있다.
         - Ex) new AnnotationConfigApplicationContext(Config.class);
+    ~~~
+    <context:annotation-config> 를 추가한다.
+    ~~~
 
 #### @Configuration 빈 등록 방법
 - ConfigurationClassPostProcessor
-    - XML <bean>
+    - XML \<bean\>
     - ComponentScan
 - AnnotationConfigApplicationContext 직접 호출
 - AnnotationConfigWebApplicationContext 직접 호출
