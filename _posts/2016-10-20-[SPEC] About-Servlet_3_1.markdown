@@ -2,7 +2,7 @@
 layout: post
 title: "[Document] About servlet 3.1 9장 번역"
 date:   2016-10-20 09:00:00 +0900
-categories: etc spec document
+categories: ETC
 ---
 
 #### Document

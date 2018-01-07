@@ -2,7 +2,7 @@
 layout: post
 title: "[IDE] IntelliJ TIPS"
 date:   2016-10-25 09:00:00 +0900
-categories: etc ide
+categories: ETC IDE
 ---
 
  - 본 문서는 MAC 기준으로 작성한 문서입니다. 

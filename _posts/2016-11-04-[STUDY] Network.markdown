@@ -2,7 +2,7 @@
 layout: post
 title: "[STUDY] Network Overview"
 date:   2016-11-04 09:00:00 +0900
-categories: network study
+categories: NETWORK
 ---
 
 - TOC

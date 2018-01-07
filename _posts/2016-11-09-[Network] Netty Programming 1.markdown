@@ -2,7 +2,7 @@
 layout: post
 title: "[Netty] Start Netty Programming 1 - 개요"
 date:   2016-11-09 08:00:00 +0900
-categories: etc netty framework 
+categories: NETWORK JAVA
 ---
 
  - [본 글에 나오는 Source Github Link](https://github.com/krisjey/netty.book.kor)

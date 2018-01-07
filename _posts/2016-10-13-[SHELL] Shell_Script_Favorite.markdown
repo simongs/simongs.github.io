@@ -2,7 +2,7 @@
 layout: post
 title: "[SHELL] Favorite Linux Command & Shell Script"
 date: 2016-10-13 09:00:00 +0900
-categories: linux
+categories: LINUX
 ---
 
 {:toc}

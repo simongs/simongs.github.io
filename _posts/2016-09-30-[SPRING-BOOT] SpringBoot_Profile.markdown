@@ -2,7 +2,7 @@
 layout: post
 title: "[SPRING-BOOT] Spring-Boot Profile"
 date:   2016-10-01 17:45:49 +0900
-categories: spring-boot 
+categories: SPRING 
 ---
 
 # SPRING-BOOT PROFILE

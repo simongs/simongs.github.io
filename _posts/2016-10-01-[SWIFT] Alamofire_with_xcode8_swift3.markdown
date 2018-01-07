@@ -2,7 +2,7 @@
 layout: post
 title: "[SWIFT 3] Alamofire With Xcode8 + Swift 3 + SwiftyJSON"
 date:   2016-10-01 17:45:49 +0900
-categories: swift 
+categories: SWIFT 
 ---
 
 ## BASIC

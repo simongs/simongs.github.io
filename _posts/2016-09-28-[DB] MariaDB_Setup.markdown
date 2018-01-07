@@ -2,7 +2,7 @@
 layout: post
 title: "[DB] MariaDB (MySQL) 설치하기 - CentOS 7.3, MariaDB 10.1.XX"
 date:   2016-09-28 17:45:49 +0900
-categories: database 
+categories: DB 
 ---
 
 ## Version Info

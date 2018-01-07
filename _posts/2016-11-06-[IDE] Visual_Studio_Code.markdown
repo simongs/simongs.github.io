@@ -2,7 +2,7 @@
 layout: post
 title: "[TIP] Visual Studio Code TIPS"
 date:   2016-11-06 09:00:00 +0900
-categories: etc windows
+categories: ETC
 ---
 
 #### Reference

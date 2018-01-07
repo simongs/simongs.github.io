@@ -2,7 +2,7 @@
 layout: post
 title: "[TIP] MAC 사용팁과 XCODE 단축키"
 date:   2016-10-02 17:45:49 +0900
-categories: swift
+categories: ETC
 ---
 
 ## MAC 사용팁
