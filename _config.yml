@@ -44,6 +44,8 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  parse_block_html: true
+  toc_levels: 1..6
 
 # port
 # port: 1234

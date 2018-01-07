@@ -8,6 +8,9 @@ categories: ETC
 ## 관심사항 리스트
 - 하이퍼바이져란?
 
+## 정리하고 싶은 내용 목록
+### CGLIB이 어떻게 바이트코드를 변경하는가?
+### 스프링과 CGLIB은 어떻게 연관성을 띄고 있는가?
 
 ## ## Transaction Isolation Level
 트랜잭션 간의 격리를 의미
