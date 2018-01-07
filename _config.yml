@@ -7,7 +7,7 @@
 
 # Site settings
 title: Simongs NOTE
-brief-intro: Record
+brief-intro: 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://simongs.github.io" # the base hostname & protocol for your site
 
