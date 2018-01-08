@@ -2,18 +2,16 @@
 layout: post
 title: "[BUILD] GIT Branch 정보 가져오기."
 date:   2017-06-25 09:00:00 +0900
-categories: JAVA MAVEN
+categories: JAVA MAVEN 
 ---
 
 ## MAVEN에서 GIT Branch 정보 가져오는 법
-
-### 목적 : 배포 버젼에 따른 관리목록이 다를때. (ex. 캐쉬버젼 관리)
 
 #### MAVEN PLUG-IN
 
 URL : https://github.com/ktoso/maven-git-commit-id-plugin
 
-#### pom.xml 수정
+##### pom.xml 수정
  - 프로젝트 내부의 Resource 파일 중에 {git.branch} 같은 정의된 문자열을 치환한다.
 
 ~~~xml
@@ -57,7 +55,7 @@ URL : https://github.com/ktoso/maven-git-commit-id-plugin
 </project>
 ~~~
 
-#### common.properties 파일 수정
+##### common.properties 파일 수정
  - develop의 경우는 "origin/develop" 으로 들어온다.
  - tag 배포시에는 tag 명이 들어온다.
 
