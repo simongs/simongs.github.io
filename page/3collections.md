@@ -44,22 +44,9 @@ type: page
 [http://codingdojang.com/](http://codingdojang.com/)
 
 ## ARTICLE
-
-#### 개발블로그
-[https://github.com/sarojaba/awesome-devblog](https://github.com/sarojaba/awesome-devblog)
-
-#### 하마 블로그
- - 이 분의 생각을 따라가다보면 섬세해서 좋은 블로그
-[http://hamait.tistory.com/355](http://hamait.tistory.com/355)
-
-#### 머루 블로그
- - 경험이 녹아든 개발자의 블로그
-[http://wonwoo.ml](http://wonwoo.ml)
-
-#### taegon.kim 님 블로그
- - PHP, Javascript 달인
-* [https://taegon.kim](https://taegon.kim)
-
-## Comments
-
-{% include comments.html %}
+- [하마 블로그](http://hamait.tistory.com/355)
+    - 이 분의 생각을 따라가다보면 섬세해서 좋은 블로그
+- [머루 블로그](http://wonwoo.ml)
+    - 경험이 녹아든 개발자의 블로그
+- [taegon.kim 님 블로그](https://taegon.kim)
+- [허니몬(Honeymon)의 자바guru](http://java.ihoney.pe.kr)
