@@ -120,3 +120,4 @@ public class GitProperties extends BaseObject {
 
 ##### Reference
  - [[스프링부트] 빌드시 깃 커밋버전 정보 포함시키기](https://gist.github.com/ihoneymon/e1479fe11776eb545ac6)
+ - [baeldung.com/spring-git-information](http://www.baeldung.com/spring-git-information)
