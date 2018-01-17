@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[ETC] 관심사항"
+title: "[ETC] 작성하고 싶은 혹은 작성 중 문서 기록중"
 date:   2018-01-01 09:00:00 +0900
 categories: ETC
 ---
@@ -11,6 +11,7 @@ categories: ETC
 ## 정리하고 싶은 내용 목록
 ### CGLIB이 어떻게 바이트코드를 변경하는가?
 ### 스프링과 CGLIB은 어떻게 연관성을 띄고 있는가?
+### MyBatis 의 useCache="false" flushCache="true" 의 위험성
 
 ## ## Transaction Isolation Level
 트랜잭션 간의 격리를 의미

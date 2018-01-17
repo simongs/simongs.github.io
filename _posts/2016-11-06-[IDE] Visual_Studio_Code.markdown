@@ -25,18 +25,14 @@ Markdown Preview | Ctrl + Shift + B | Auto-Open Markdown Preview 플러그인
 편집기 TAB 닫기 | Ctrl + W | 현재 열린 편집기를 닫습니다.
 후행 Trim() | Ctrl + K, Ctrl + X | 선택된 문자열의 후행 공백을 제거합니다.
 
-#### Github 연동하기
+#### 특정 문자를 개행문자로 변경하기 (RegExp 체크)
+ - 선택된 영역만 해결 불가
 
-탐색기에서 폴더를 열 때 github에서 다운로드 받은 디렉토리를 엽니다.
-에디터에서 자동적으로 연결이 됩니다.
-VSC 에서 바로바로 Commit & Push 가 가능합니다.
-
-#### 특정 문자를 개행문자로 변경하기
 ![My helpful screenshot](/assets/img/2018/20161106_VSC_2018-01-17_14;48;48.PNG)
 
-#### 단축키 변경 (modify keybindings.json)
+#### 단축키 재정의 (modify keybindings.json)
 
-##### WINDOWS 
+##### WINDOWS (update 2017-01-17)
 파일 > 기본설정 > 바로가기 키 를 선택한 후 수정하면 `keybindings.json` 파일이 생성됩니다.
 아래와 같이 재정의를 합니다.
 
@@ -92,13 +88,36 @@ VSC 에서 바로바로 Commit & Push 가 가능합니다.
 ]
 ~~~
 
-~~~json
+~~~json 
 // 설정을 이 파일에 넣어서 기본 설정을 덮어씁니다.
 {
     "files.autoSave": "afterDelay",
     "git.confirmSync": false,
     "workbench.statusBar.visible": true,
     "window.zoomLevel": 0,
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
+
+    // Controls if the minimap is shown
+    "editor.minimap.enabled": false,
+    "git.enableSmartCommit": true,
+
+    // Controls whether the editor should render indent guides
+    "editor.renderIndentGuides": false,
+
+    // Should the project be opened using a New Window when you click the Status Bar?
+    "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
+
+    // 입력하는 동안 제안을 자동으로 표시할지 여부를 제어합니다.
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+
+    // 붙여넣은 콘텐츠의 서식을 편집기에서 자동으로 지정할지 여부를 제어합니다. 포맷터는 반드시 사용할 수 있어야 하며 문서에서 범위의 서식을 지정할 수 있어야 합니다.
+    "editor.formatOnPaste": true,
+    "extensions.ignoreRecommendations": false,
+    "git.autofetch": true
 }
 ~~~
