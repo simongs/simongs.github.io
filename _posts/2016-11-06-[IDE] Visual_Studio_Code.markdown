@@ -31,6 +31,8 @@ Markdown Preview | Ctrl + Shift + B | Auto-Open Markdown Preview 플러그인
 에디터에서 자동적으로 연결이 됩니다.
 VSC 에서 바로바로 Commit & Push 가 가능합니다.
 
+#### 특정 문자를 개행문자로 변경하기
+![Capture Image](img/2018/20161106_VSC_2018-01-17 14;48;48.PNG)
 
 
 #### 단축키 변경 (modify keybindings.json)
