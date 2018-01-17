@@ -5,7 +5,7 @@ date:   2017-05-31 09:00:00 +0900
 categories: ELASTIC_SEARCH
 ---
 
-- Table of Contents
+* Table of Contents
 {:toc}
 
 # Elastic Search

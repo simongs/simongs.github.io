@@ -5,6 +5,9 @@ date:   2017-04-29 09:00:00 +0900
 categories: IDE 
 ---
 
+* Table of Contents
+{:toc}
+
 # Lombok 설정
 
 ## Intellij 설정

@@ -5,6 +5,9 @@ date:   2017-05-26 09:00:00 +0900
 categories: JAVA 
 ---
 
+* Table of Contents
+{:toc}
+
 ## 시나리오
  - MAX 8개의 스레드로 각각 담당한 메시지 리스트를 동시에 처리한다.
  - 리스트를 8개로 분할하는 작업은 Guava 라이브러리를 통해서 처리하였다. (Lists.partition())

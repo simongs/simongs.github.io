@@ -5,6 +5,9 @@ date:   2017-06-29 09:00:00 +0900
 categories: JAVA
 ---
 
+* Table of Contents
+{:toc}
+
 ## enum - freemarker - javascript 연동
  - Javascipt에서 Enum 값을 참조하고 싶다.
  - Freemarker를 통해서 Javascipt의 배열로 Enum 정보를 미리 만들어 놓고

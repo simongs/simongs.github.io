@@ -5,6 +5,9 @@ date:   2018-01-02 09:00:00 +0900
 categories: JAVA SPRING
 ---
 
+* Table of Contents
+{:toc}
+
 # Aware Interface
 
  - 가끔 스프링 소스를 보다보면 반복되는 주요 용어들이 등장할 때가 있다.

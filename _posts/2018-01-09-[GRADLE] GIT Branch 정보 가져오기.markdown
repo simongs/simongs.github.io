@@ -5,6 +5,9 @@ date:   2018-01-09 09:00:00 +0900
 categories: JAVA GRADLE
 ---
 
+* Table of Contents
+{:toc}
+
 #### GRADLE PLUG-IN
  - 해당 플러그인은 build 시점에 git.properties 파일을 만들어냅니다.
  - build를 수행하는 환경에 따라 File의 encoding도 변합니다. (EUC-KR, UTF-8)
