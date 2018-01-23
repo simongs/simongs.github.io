@@ -10,6 +10,114 @@ categories: LINUX
 
 ## Linux Command
 
+### BASIC
+
+~~~
+문장의 처음/끝 이동
+    - Ctrl+A, Ctrl+E
+단어 단위 이동
+    - Ctrl+방향키
+화면정리 (Clear)        
+    - Ctrl+L
+스크롤 멈춤/재시작
+    - Ctrl+S, Ctrl+Q
+현재 디렉토리 위치 확인
+    - PWD
+자신의 ID 정보 확인
+    - ID    
+현재 접속해있는 서버의 이름/OS 정보 확인
+    - uname, uname -a
+    - hostname (서버 호스트명 ex.tebalp_web001)
+히스토리 보기
+    - history
+바로 직전 히스토리 재실행
+    - !!
+바로 직전 명령의 마지막 Argument
+    - !$
+파일의 종류를 판단하는 명령어
+    - file
+사용자변수
+    - 보통 소문자로 명명
+    - x=1
+    - x="hello"
+    - x=hello world
+사용자변수 가져오기
+    - echo x
+    - echo $x
+    - echo ${x}
+    - echo "$x"
+Evaluation (수학적 값을 연산)
+    - backquote(`) 또는 $( )로 둘러싸기
+    - date_str=`date +"%Y%m%d"`
+    - date_str=$(date +"%Y%m%d")
+    - cmd="ls –alF"
+    - eval $cmd
+환경변수 (export)
+    - 환경변수는 evn 명령어를 통해서 확인가능
+    - sub-shell에서 상속받아 사용할 수 있도록 변수를 공개
+    - 사용자 변수를 환경 변수로 전환
+    - export var1=2
+File Permission
+    - TYPE(1) + OWNER(3) + GROUP(3) + OTHERS(3)
+    - TYPE :: Directory, Symbolic Link 등등
+    - 3자리는 READ + WRITE + EXECUTE 권한 의미
+파일 소유자 변경하기
+    - chown 소유자ID 파일
+Comparison operator
+    - integer
+        - -eq -ne -gt -ge -lt -le
+    - string
+        - < <= > >= == = != -z –n
+        - zero length? null?
+        주의사항
+    - -eq 연산자는 정수 연산자
+    - ==, = 연산자는 문자열 연산자
+    - 변수가 정의되지 않았거나 공백을 포함할 수 있으므로 quotation 필요
+    - x=“he llo”
+    - if [ ”$x” == “he llo” ]; then echo $x; fi
+입출력 리다이렉트
+    - 표준 입력(standard input) – 0번
+        - 키보드 입력이 프로세스로 들어가는 통로
+    - 표준 출력(standard output) – 1번
+        - 프로세스가 출력한 내용이 화면으로 나오는 통로
+    - 표준 에러(standard error) – 2번
+        - 프로세스에서 발생한 에러가 화면으로 나오는 통로
+    - ex) ls /lkjfslfjds 2>&1 | sort
+
+Script File
+    - #!
+        - 어떤 인터프리터 프로그램을 사용할 것인가를 지정
+    - #!/bin/bash
+    - #!/usr/bin/env python
+        - 권장하는 방식
+    - command-line arguments
+        - $1, $2
+        - $#
+    - exit status
+        - $?
+사용자설정
+    - Bourne shell
+        - ~/.profile
+    - BASH
+        - login shell
+            - .bashrc
+        - non-login shell
+            - .bash_profile
+추천설정
+    export TERM=xterm-256color
+    export LC_ALL=ko_KR.utf8
+    export LANG=ko_KR.utf8
+    export GREP_OPTIONS=’--color=always’
+    export CLICOLOR=1
+    export LSCOLORS=GxFxCxDxBxegedabagaced
+    export PS1=“[\u@\h] \W\$ ”
+    export LESS=‘-EMR’
+    export EDITOR=vim
+    export PAGER=“less $LESS”
+    export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin    
+
+~~~
+
 ### NETWORK
 
 #### traceroute (Linux)
