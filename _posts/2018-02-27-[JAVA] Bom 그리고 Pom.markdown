@@ -140,6 +140,7 @@ configure(allprojects) {
  - 문서 앞에 Signature 바이트를 넣는다.
 
 ### BOM 정보
+
 | 인코딩 방식 | Byte Order Mark(BOM) |
 |---|---|
 | UTF-8 | EF BB BF |
