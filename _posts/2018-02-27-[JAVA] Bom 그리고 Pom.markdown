@@ -13,11 +13,13 @@ categories: JAVA SPRING
  - 일종의 특별한 POM 파일
  - 프로젝트에서 사용하는 Dependency들을 한 곳에서 관리하고 싶을 때 사용한다.
  - <dependencyManagement> 섹션을 사용함
+
 ## POM
  - 프로젝트의 정보 및 설정을 담고 있는 XML 파일
  - 프로젝트를 빌드하기 위한 Dependency 를 관리하는데 사용된다. 
 
 ## BOM Sample
+
 ~~~xml
 <project ...>
     <modelVersion>4.0.0</modelVersion>
@@ -46,7 +48,9 @@ categories: JAVA SPRING
 ~~~
 
 ## How to use BOM
+
 ▶ CASE 1
+
 ~~~xml
 <project ...>
     <parent>
@@ -58,6 +62,7 @@ categories: JAVA SPRING
 ~~~
 
 ▶ CASE 2
+
 ~~~xml
 <dependencyManagement>
     <dependencies>
@@ -90,6 +95,7 @@ categories: JAVA SPRING
 ## How to Use POM
  - POM에서는 기정의된 Dependency Version이 존재하므로 Version 정보없이 기입가능
  - BOM에 명시된 Version 정보를 가져온다.
+
 ~~~xml
 <dependencies>
     <dependency>
@@ -108,6 +114,7 @@ categories: JAVA SPRING
 ### io.spring.dependency-management
 
 ### build.properties
+
 ~~~bash
 buildscript {
     dependencies {
