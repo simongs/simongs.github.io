@@ -50,3 +50,4 @@ type: page
     - 경험이 녹아든 개발자의 블로그
 - [taegon.kim 님 블로그](https://taegon.kim)
 - [허니몬(Honeymon)의 자바guru](http://java.ihoney.pe.kr)
+- [homoefficio 님 블로그](http://homoefficio.github.io)
