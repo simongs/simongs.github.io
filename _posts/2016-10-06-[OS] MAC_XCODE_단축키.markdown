@@ -15,18 +15,18 @@ categories: ETC
 특정 단어를 focusing 한 후에 3 fingers touch를 수행
 ~~~
 
-#### screen Zoon in-out
+#### Screen Zoon in-out
 ~~~
 트랙패드에서 두 손가락으로 드래그하는 동안 Control(^) 키를 눌러 확대하십시오.
 트랙패드에서 두 손가락으로 아래로 드래그하는 동안 Control 키를 눌러 축소하십시오.
 ~~~
 
-#### safari address 창
+#### Safari address 창
 ~~~
 Command + L
 ~~~
 
-#### mac Mission Control
+#### MAC Mission Control
 ~~~
 How to Use Multi Desktop 
 http://zosolution.com/166
@@ -36,6 +36,11 @@ http://zosolution.com/191
 #### MAC window 전체화면
 ~~~
 Ctrl + Command + F
+~~~
+
+#### 프로그램 강제종료
+~~~
+Ctrl + Option + Esc
 ~~~
 
 #### Finder
@@ -81,9 +86,47 @@ advanced terminal program (with another setting)
  - zsh
  - solarized
  - oh-my-zsh
+
+#### 기타등등
+- 아래 Reference 를 통해서 주로 쓰는 프로그램 정보
+- 유용한 어플이 있는지 참조하자. 
+~~~
+alfred
+anaconda
+android-file-transfer
+android-studio
+atom
+bettertouchtool
+boostnote
+calibre
+clipy
+coconutbattery
+discord
+dropbox
+firefox
+google-chrome
+hyper
+iterm2
+karabiner-elements
+keka
+keyboard-maestro
+libreoffice
+mactex
+mamp
+microsoft-remote-desktop-beta
+nvalt
+owncloud
+skim
+skype
+speedcrunch
+upterm
+vagrant
+vlc
+~~~
  
 ##### Reference
  - [[MAC] 명령행 작업 좀더 편리하게 하기!](http://redgolems.tistory.com/30)
+ - [[맥 유틸리티] Brew Cask - 커맨드라인에서 어플을 설치하자!](https://busy.org/@paul9/brew-cask)
 
 ## MAC Evironment Setting
 
