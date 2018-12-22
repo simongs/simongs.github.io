@@ -58,27 +58,26 @@ killall Finder
 #### Jumpcut
 clip board (copy history)
 
-#### Spectacle
-Window move & arrange Program
-window Key + allow key 
+#### Magner
+- Window move & arrange Program
+- window Key + allow key 
+- 유료구매 필요
 
 #### alfred 3
 hot key
 
 #### BetterTouchTool (BTT)
-한영전환 , 유료구매 필요
-
-#### TextMate
-Text Editor
+ - 한영전환 , 유료구매 필요
+ - 터치바 개선
+    - BTT로 터치바 개선하기
+    - https://www.clien.net/service/board/cm_mac/12438693
 
 #### OneNote 
-shared Note
+ - shared Note
 
-#### MacDown
-MarkDown Editor
-
-#### Skitch
-화면 캡쳐 프로그램 (Command + Shift + 5)
+### LightShot
+ - 화면 캡쳐 프로그램
+ - 클라우드에 바로 업로드 후 Image Url 생성
 
 #### Iterm2
 advanced terminal program (with another setting)
@@ -91,7 +90,6 @@ advanced terminal program (with another setting)
 - 아래 Reference 를 통해서 주로 쓰는 프로그램 정보
 - 유용한 어플이 있는지 참조하자. 
 ~~~
-alfred
 anaconda
 android-file-transfer
 android-studio
@@ -127,6 +125,7 @@ vlc
 ##### Reference
  - [[MAC] 명령행 작업 좀더 편리하게 하기!](http://redgolems.tistory.com/30)
  - [[맥 유틸리티] Brew Cask - 커맨드라인에서 어플을 설치하자!](https://busy.org/@paul9/brew-cask)
+ - [Mac에 Python 3.x 설치 (package)](http://dejavuqa.tistory.com/60)
 
 ## MAC Evironment Setting
 
