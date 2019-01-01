@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "[MAC] AdoptOpenJdk 설치 및 Brew 활용법"
-date:   2018-06-26 09:00:00 +0900
-categories: MAC 
+date:   2018-11-12 09:00:00 +0900
+categories: JAVA
 ---
 
 ## Brew

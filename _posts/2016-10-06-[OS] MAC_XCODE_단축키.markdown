@@ -43,6 +43,11 @@ Ctrl + Command + F
 Ctrl + Option + Esc
 ~~~
 
+#### 특정 프로그램에서 터치바를 F1-F12를 노출하고 싶은 경우
+- How to use function keys on MacBook Pro with Touch Bar
+    기
+    - https://support.apple.com/el-gr/HT207240
+
 #### Finder
 
 ##### Command + Delete = File 삭제
