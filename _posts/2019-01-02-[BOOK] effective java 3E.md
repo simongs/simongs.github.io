@@ -262,7 +262,7 @@ public void test() {
  - 직접 만든 함수형 인터페이스에는 항상 @FunctionalInterface 어노테이션을 사용하라.
 
  인터페이스 | 함수 시그니처 | 설명 | 예시 
- --- | --- | --- | --- | 
+ --- | --- | --- | --- 
  UnaryOperation<T> | T apply(T t) | 반환값과 인수타입이 같다, 인수 1개 | String::toLowerCase
  BinaryOperation<T> | T apply<T t1, T t2> | 반환타입과 인수타입이 같다, 인수 2개 | BigInteger::add
  Predicate<T>| boolean test(T t) | 인수 하나를 받아 boolean을 반환하는 함수 | Collection::isEmpty
@@ -423,7 +423,9 @@ static int random(int n) {
 - 이펙티브 자바 3판
 
 # History
+
 날짜 | 정리 장수 
 --- | --- 
 2019-01-02 | 1~7장
 2019-01-04 | 8장
+2019-0106 | 제목만 일단 다 적는다.
