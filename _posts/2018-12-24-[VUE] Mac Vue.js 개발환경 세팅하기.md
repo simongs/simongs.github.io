@@ -13,6 +13,7 @@ categories: ETC DEV-TOOLS
     - 최신버젼 설치 
  - nvm istall v10
     - v10 버젼대의 LTS 버젼 설치. /(ex.v10.42.2)
+
 ~~~
 #가장최산버전 설치
 ➜  workspace-vue nvm install node
@@ -47,9 +48,9 @@ Now using node v10.14.2 (npm v6.4.1)
  - https://github.com/creationix/nvm
  - https://gist.github.com/TeddyH/57aadd2bd31edc2e7c6dc410b95548bc
 
-
 ## Visual Studio Code 세팅
  - Vue를 쉽게 사용하기 위한 플러그인 설치 (vetur//)
+ 
 ### Extension Program
  - https://vuejs.github.io/vetur/
     - Vue 하이라이팅, 
